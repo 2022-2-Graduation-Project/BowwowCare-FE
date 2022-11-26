@@ -19,7 +19,11 @@ function PreviewPage() {
     }
 
     const handleAnalysis = (e) => {
-        // TODO: navigate("/results");
+        navigate("/results", {
+			state: {
+				"file": file
+			}
+		})
     }
 
     return (
