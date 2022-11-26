@@ -1,15 +1,25 @@
 import React from "react";
+import { useNavigate } from 'react-router-dom';
 
 function HomePage() {
-  const fileInput = React.useRef(null);
+	const navigate = useNavigate();
+	const fileInput = React.useRef(null);
 
   const handleButtonClick = (e) => {
     fileInput.current.click();
   };
 
   const handleChange = (e) => {
-    console.log(e.target.files[0]);
+    const file = e.target.files[0];
+    if (file) {
+		navigate("/preview", {
+			state: {
+				"file": file
+			}
+		})
+    }
   };
+
   return <div className="mx-8">
   <div className="flex flex-row mt-20">
     <div className="basis-2/4 text-lg font-bold text-left text-main-color" >BowwowCare 🐾</div>
