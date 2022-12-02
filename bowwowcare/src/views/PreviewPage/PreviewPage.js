@@ -11,6 +11,7 @@ function PreviewPage() {
     useEffect(() => {
         if (location?.state?.file) {
             setFile(location.state.file);
+            console.log(file)
         }
     }, []);
 
