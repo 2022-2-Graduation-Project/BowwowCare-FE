@@ -8,7 +8,7 @@ function ResultsPage() {
     const location = useLocation();
 	const navigate = useNavigate();
     const [file, setFile] = useState();
-    const [results, setResults] = useState({ emotion: "HAPPY" });
+    const [results, setResults] = useState({ emotion: "SAD" });
 
     useEffect(() => {
         if (location?.state?.file) {
