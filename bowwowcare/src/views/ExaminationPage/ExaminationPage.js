@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { en2koDictEmotionVerb } from "../../utils/Dictionary";
 import Header from "../../components/Header";
-import Sad from "../../components/Examination/Sad";
+import Sad from "./Sad";
 
 function ExaminationPage() {
   const location = useLocation();
@@ -16,7 +16,7 @@ function ExaminationPage() {
   }, []);
 
   return (
-    <div className="mx-8">
+    <div className="container mx-auto w-screen h-screen px-8">
       <Header />
       <div className="mt-20 mb-6">아이가 왜 <span className="font-bold">{en2koDictEmotionVerb[results]}</span> 하고 있을까요?</div>
       <Examination emotion={results} />

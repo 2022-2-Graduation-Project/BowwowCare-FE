@@ -3,7 +3,7 @@ import React from "react";
 function Header() {
   return (
     <div>
-      <div className="flex flex-row mt-20">
+      <div className="flex flex-row my-10">
         <div className="basis-2/4 text-lg font-bold text-left text-main-color">
           BowwowCare 🐾
         </div>

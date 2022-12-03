@@ -12,7 +12,7 @@ function Sad() {
   });
   const navigate = useNavigate();
 
-  const handleSubmint = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     navigate("/solution", {
 			state: {
@@ -24,7 +24,7 @@ function Sad() {
 
   return (
     <div>
-      <form onSubmit={handleSubmint}>
+      <form onSubmit={handleSubmit}>
         <div className="shadow-lg rounded-2xl px-6 py-8">
           {questions.map((x) => {
             return (
@@ -56,10 +56,10 @@ function Sad() {
             );
           })}
         </div>
-        <div className="flex justify-center">
+        <div className="pt-2">
           <button
             type="submit"
-            className="h-12 mt-8 rounded-md bg-main-color text-white text-center px-4"
+            className="h-12 mt-28 w-full font-bold rounded-md bg-main-color text-white text-center"
           >
             제출하기
           </button>
