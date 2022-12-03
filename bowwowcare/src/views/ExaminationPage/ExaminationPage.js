@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { en2koDictEmotionVerb } from "../../utils/Dictionary";
 import Header from "../../components/Header";
-import Sad from "./Sad";
+import Sad from "../ExaminationPage/Sections/Sad"
 
 function ExaminationPage() {
   const location = useLocation();
@@ -28,7 +28,7 @@ function Examination(props) {
   let emotion = props.emotion;
   switch (emotion) {
     case "SAD":
-      return <Sad />;
+      return <Sad emotion={emotion}/>;
     case "HAPPY":
       return <h4>HAPPY</h4>;
     case "RELAXED":

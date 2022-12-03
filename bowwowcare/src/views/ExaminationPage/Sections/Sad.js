@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from 'react-router-dom';
-import { questions } from "./../../utils/Dictionary";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { questions } from "../../../utils/Dictionary";
 
-function Sad() {
+function Sad({ emotion }) {
   const [answer, setAnswer] = useState({
     1: "아니요",
     2: "아니요",
@@ -10,15 +10,17 @@ function Sad() {
     4: "아니요",
     5: "아니요",
   });
+
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     navigate("/solution", {
-			state: {
-				answer
-			}
-		})
+      state: {
+        answer,
+        emotion,
+      },
+    });
     console.log(answer);
   };
 
@@ -26,7 +28,7 @@ function Sad() {
     <div>
       <form onSubmit={handleSubmit}>
         <div className="shadow-lg rounded-2xl px-6 py-8">
-          {questions.map((x) => {
+          {questions[emotion]?.map((x) => {
             return (
               <div className="text-sm" key={x.id}>
                 <li className="mb-2">{x.question}</li>
@@ -67,7 +69,6 @@ function Sad() {
       </form>
     </div>
   );
-
 }
 
 export default Sad;
