@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from 'react-router-dom';
-import { questions } from "./../../utils/Dictionary";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { questions } from "../../../utils/Dictionary";
 
-function Sad() {
+function Sad({ emotion }) {
   const [answer, setAnswer] = useState({
     1: "아니요",
     2: "아니요",
@@ -10,23 +10,25 @@ function Sad() {
     4: "아니요",
     5: "아니요",
   });
+
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmint = (e) => {
     e.preventDefault();
     navigate("/solution", {
-			state: {
-				answer
-			}
-		})
+      state: {
+        answer,
+        emotion,
+      },
+    });
     console.log(answer);
   };
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmint}>
         <div className="shadow-lg rounded-2xl px-6 py-8">
-          {questions.map((x) => {
+          {questions[emotion]?.map((x) => {
             return (
               <div className="text-sm" key={x.id}>
                 <li className="mb-2">{x.question}</li>
@@ -56,10 +58,10 @@ function Sad() {
             );
           })}
         </div>
-        <div className="pt-2">
+        <div className="flex justify-center">
           <button
             type="submit"
-            className="h-12 mt-28 w-full font-bold rounded-md bg-main-color text-white text-center"
+            className="h-12 mt-8 rounded-md bg-main-color text-white text-center px-4"
           >
             제출하기
           </button>
@@ -67,7 +69,6 @@ function Sad() {
       </form>
     </div>
   );
-
 }
 
 export default Sad;
