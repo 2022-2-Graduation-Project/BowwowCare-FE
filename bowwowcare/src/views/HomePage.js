@@ -23,7 +23,7 @@ function HomePage() {
   };
 
   return (
-    <div className="mx-8">
+    <div className="container mx-auto px-8 w-screen h-screen">
       <Header />
 
       <p className="text-xl font-bold mt-20">
