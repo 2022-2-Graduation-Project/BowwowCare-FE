@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 
-import Modal from "../Modal/Modal";
-import YoutubeEmbed from "./YoutubeEmbed/YoutubeEmbed";
-import { solutions } from "../../utils/Dictionary";
+import Modal from "../../../components/Modal/Modal";
+import YoutubeEmbed from "../../../components/YoutubeEmbed/YoutubeEmbed";
+import { solutions } from "../../../utils/Dictionary";
 
-import "./YoutubeEmbed/youtube.css";
+import "../../../components/YoutubeEmbed/youtube.css";
 
 function Solution({ answer, emotion }) {
   const [popup, setPopup] = useState(false);
@@ -20,10 +20,12 @@ function Solution({ answer, emotion }) {
           return (
             <div
               key={answer}
-              className="w-64 text-center shadow-lg rounded-2xl px-6 py-8"
+              className="w-64 h-full text-center shadow-lg rounded-2xl flex flex-col justify-between px-8 pt-16 pb-8 mx-3"
             >
-              <div className="font-bold">{x.question}</div>
-              <div>{x.solution}</div>
+              <div>
+                <div className="font-bold pb-4">{x.question}</div>
+                <div>{x.solution}</div>
+              </div>
               <button
                 onClick={() => setPopup(true)}
                 className="h-12 mt-8 px-4 rounded-md text-center bg-white border border-main-color text-main-color hover:bg-main-color hover:text-white"
