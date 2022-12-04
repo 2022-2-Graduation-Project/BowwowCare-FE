@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 import Header from "../../components/Header";
-import Solution from "../../components/Solution/Solution";
-import { solutions } from "../../utils/Dictionary";
+import Solution from "./Sections/Solution";
+
 
 function SolutionPage() {
   const location = useLocation();
-  const navigate = useNavigate();
   const [answer, setAnswer] = useState({});
   const [emotion, setEmotion] = useState();
 
@@ -18,22 +17,31 @@ function SolutionPage() {
     }
   }, []);
 
+  const handleSaveResults = (e) => {
+    // TODO: POST results
+  }
+
   return (
-    <div className="mx-8">
+    <div className="container mx-auto px-8 w-screen h-screen">
       <Header />
-      <div className="grid justify-center">
-        {Object.entries(location?.state?.answer).map(([key, value]) => {
-          if (value === "예") {
-            return (
-              <div
-                key={key}
-                className="mb-10"
-              >
-                <Solution answer={key} emotion={emotion} />
-              </div>
-            );
-          }
-        })}
+      <div className="h-5/6 flex flex-col justify-between">
+        <div className="h-2/3 overflow-x-auto flex mt-10 px-2 py-8">
+          {Object.entries(location?.state?.answer)?.map(([key, value]) => {
+            if (value === "예") {
+              return (
+                <Solution key={key} answer={key} emotion={emotion} />
+              );
+            }
+          })}
+        </div>
+        <div className="w-full">
+            <button 
+                className="h-12 w-full font-bold rounded-md bg-main-color text-white text-center" 
+                onClick={handleSaveResults}
+            >
+                결과 저장하기
+            </button>
+        </div>
       </div>
     </div>
   );
