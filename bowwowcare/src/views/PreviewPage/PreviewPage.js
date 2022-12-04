@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { IoIosArrowBack } from "react-icons/io";
 import Header from "../../components/Header";
+import lens from '../../assets/images/lens.png';
 
 
 function PreviewPage() {
@@ -47,6 +48,9 @@ function PreviewPage() {
                         <img className="rounded-md" src={URL.createObjectURL(file)} width="100%" />
                     </div>
                     <div className="w-full">
+                        <div className="flex justify-center pb-8">
+                            <img src={lens} width="280x" />
+                        </div>
                         <button 
                             className="h-12 w-full font-bold rounded-md bg-main-color text-white text-center" 
                             onClick={handleAnalysis}
