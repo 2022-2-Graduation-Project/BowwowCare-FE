@@ -9,6 +9,10 @@ import "./YoutubeEmbed/youtube.css";
 function Solution({ answer, emotion }) {
   const [popup, setPopup] = useState(false);
 
+  const handleTrigger = () => {
+    setPopup(false);
+  };
+
   return (
     <div>
       {solutions[emotion]?.map((x) => {
@@ -28,7 +32,7 @@ function Solution({ answer, emotion }) {
               </button>
               <Modal
                 trigger={popup}
-                setTrigger={setPopup}
+                handleTrigger={handleTrigger}
                 solution={x.solution}
               >
                 <YoutubeEmbed embedId="w7aE4ihj7Ao" />

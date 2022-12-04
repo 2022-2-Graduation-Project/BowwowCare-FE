@@ -8,7 +8,7 @@ function Modal(props) {
         <div className="relative flex mx-4">
           <div className=" w-5/6 text-left">{props.solution}</div>
           <button className="absolute top-0 right-0" onClick={() => props.setTrigger(false)}>
-            <IoIosClose className="" size="2rem" />
+            <IoIosClose size="2rem" />
           </button>
         </div>
         <div className="m-4">{props.children}</div>
