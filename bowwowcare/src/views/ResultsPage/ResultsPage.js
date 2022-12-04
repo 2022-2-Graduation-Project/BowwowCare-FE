@@ -2,9 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { en2koDictEmotionVerb } from "../../utils/Dictionary";
+import Header from "../../components/Header";
 import HAPPY from "../../assets/images/happy.png";
 import SAD from "../../assets/images/sad.png";
-import Header from "../../components/Header";
+import instagram from "../../assets/images/instagram.png";
+import kakaotalk from "../../assets/images/kakaotalk.png";
+import facebook from "../../assets/images/facebook.png";
 
 
 function ResultsPage() {
@@ -62,7 +65,7 @@ function ResultsPage() {
                         </div>
                     </div>
                     <div className="w-full">
-                        <div className="flex justify-center pb-8">
+                        <div className="flex justify-center">
                             {emotion === "HAPPY" ? (
                                 <img src={HAPPY} width="280px" />
                             ) : (
@@ -70,12 +73,29 @@ function ResultsPage() {
                                 <img src={SAD} width="280px" />
                             ) : null)}
                         </div>
-                        <button 
-                            className="h-12 w-full font-bold rounded-md bg-main-color text-white text-center" 
-                            onClick={handleExamination}
-                        >
-                            문진하기
-                        </button>
+                        {emotion === "SAD" || emotion === "angry" ? (
+                            <button 
+                                className="mt-8 h-12 w-full font-bold rounded-md bg-main-color text-white text-center" 
+                                onClick={handleExamination}
+                            >
+                                문진하기
+                            </button>
+                        ) : (
+                            <div>
+                                <div className="text-center pb-1">{en2koDictEmotionVerb[emotion]}있는 아이의 모습을 공유해보세요 ✨</div>
+                                <div className="flex justify-around items-end px-16 h-12">
+                                    <button>
+                                        <img className="rounded-full" src={kakaotalk} width="32px" />
+                                    </button>
+                                    <button>
+                                        <img className="rounded-full" src={instagram} width="32px" />
+                                    </button>
+                                    <button>
+                                        <img className="rounded-full" src={facebook} width="32px" />
+                                    </button>
+                                </div>
+                            </div>
+                        )}
                     </div>
                 </div>
             ) : null}
