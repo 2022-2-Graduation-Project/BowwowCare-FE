@@ -53,7 +53,7 @@ export const solutions = {
         {
             id: "3",
             question:"차에 탔어요",
-            solution: "목욕을 싫어하지 않도록 먼저 샴푸를 쓰지 않는 목욕을 목표로 도전해보세요"
+            solution: "TTouch 마사지를 해보세요"
         },
         {
             id: "4",
