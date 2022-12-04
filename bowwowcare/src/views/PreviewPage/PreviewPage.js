@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { IoIosArrowBack } from "react-icons/io";
+import Header from "../../components/Header";
 
 
 function PreviewPage() {
@@ -11,6 +12,7 @@ function PreviewPage() {
     useEffect(() => {
         if (location?.state?.file) {
             setFile(location.state.file);
+            console.log(file)
         }
     }, []);
 
@@ -19,26 +21,34 @@ function PreviewPage() {
     }
 
     const handleAnalysis = (e) => {
-        // TODO: navigate("/results");
+        navigate("/results", {
+			state: {
+				"file": file
+			}
+		})
     }
 
     return (
-        <div>
+        <div className="container mx-auto w-screen h-screen px-8">
+          <Header />
+
             {file ? (
-                <div className="container mx-auto w-screen h-screen">
-                    <div className="my-4 px-2 flex justify-between items-center">
-                        <button onClick={handleGoBack}>
-                            <IoIosArrowBack size="2rem" />
-                        </button>
-                        <div>
-                            미리보기
-                        </div>
-                        <div className="w-8"></div>
+                <div className="h-5/6 flex flex-col justify-between">
+                    <div>
+                        {/* <div className="my-4 flex justify-between items-center">
+                            <button onClick={handleGoBack}>
+                                <IoIosArrowBack size="2rem" />
+                            </button>
+                            <div>
+                                미리보기
+                            </div>
+                            <div className="w-8"></div>
+                        </div> */}
+                        <img className="rounded-md" src={URL.createObjectURL(file)} width="100%" />
                     </div>
-                    <img src={URL.createObjectURL(file)} width="100%" />
-                    <div className="fixed bottom-10 flex justify-center w-screen">
+                    <div className="w-full">
                         <button 
-                            className="h-12 mt-8 w-full mx-8 font-bold rounded-md bg-main-color text-white text-center px-4" 
+                            className="h-12 w-full font-bold rounded-md bg-main-color text-white text-center" 
                             onClick={handleAnalysis}
                         >
                             분석하기
