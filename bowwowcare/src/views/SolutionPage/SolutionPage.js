@@ -3,12 +3,15 @@ import { useLocation } from "react-router-dom";
 
 import Header from "../../components/Header";
 import Solution from "./Sections/Solution";
+import Alert from "../../components/Alert";
 
 
 function SolutionPage() {
   const location = useLocation();
   const [answer, setAnswer] = useState({});
   const [emotion, setEmotion] = useState();
+  const [open, setOpen] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
 
   useEffect(() => {
     if (location?.state?.answer) {
@@ -17,7 +20,13 @@ function SolutionPage() {
     }
   }, []);
 
+  const handleOpen = (e) => {
+    setOpen(!open);
+  }
+
   const handleSaveResults = (e) => {
+    setAlertMessage("로그인이 필요한 서비스입니다");
+    handleOpen();
     // TODO: POST results
   }
 
@@ -43,6 +52,7 @@ function SolutionPage() {
             </button>
         </div>
       </div>
+      <Alert open={open} handleOpen={handleOpen} content={alertMessage} />
     </div>
   );
 }
