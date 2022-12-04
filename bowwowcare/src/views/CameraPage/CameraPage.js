@@ -2,6 +2,8 @@ import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import Webcam from "react-webcam";
 import { IoIosArrowBack, IoIosRadioButtonOn } from "react-icons/io";
+import Header from "../../components/Header";
+
 
 const videoConstraints = {
   width: "100%",
@@ -43,24 +45,28 @@ function CameraPage() {
   };
 
   return (
-    <div className="container mx-auto w-screen h-full">
-      <div className="my-4 px-2 flex justify-between items-center">
+    <div className="container mx-auto px-8 w-screen h-screen">
+      <Header />
+
+      {/* <div className="my-4 px-2 flex justify-between items-center">
         <button onClick={handleGoBack}>
           <IoIosArrowBack size="2rem" />
         </button>
-      </div>
-      <div className="flex justify-center">
-        <Webcam className="align-middle"
-          ref={webcamRef}
-          audio={false}
-          screenshotFormat="image/jpeg"
-          onUserMedia={onUserMedia}
-          mirrored={true}
-          videoConstraints={videoConstraints}
-        />
-      </div>
-      <div className="text-center fixed bottom-10 w-screen">
-      <button onClick={capturePhoto}><IoIosRadioButtonOn size="4rem" className="text-main-color"/></button>
+      </div> */}
+      <div className="h-5/6 flex flex-col justify-between items-center">
+        <div className="flex justify-center">
+          <Webcam className="align-middle"
+            ref={webcamRef}
+            audio={false}
+            screenshotFormat="image/jpeg"
+            onUserMedia={onUserMedia}
+            mirrored={true}
+            videoConstraints={videoConstraints}
+          />
+        </div>
+        <div className="w-screen text-center">
+          <button onClick={capturePhoto}><IoIosRadioButtonOn size="4rem" className="text-main-color"/></button>
+        </div>
       </div>
     </div>
   );
