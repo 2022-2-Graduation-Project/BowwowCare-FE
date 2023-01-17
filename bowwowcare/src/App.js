@@ -12,6 +12,8 @@ import ExaminationPage from './views/ExaminationPage/ExaminationPage';
 import SolutionPage from './views/SolutionPage/SolutionPage';
 import LoginPage from './views/LoginPage/LoginPage';
 import SignupPage from './views/SignupPage/SignupPage';
+import AdditionPage from "./views/AdditionPage/AdditionPage";
+import PrivateRoute from "./PrivateRoute";
 
 import { logout } from "./slices/auth";
 
@@ -21,6 +23,7 @@ import EventBus from "./common/EventBus";
 function App() {
 	const { user: currentUser } = useSelector((state) => state.auth);
 	const dispatch = useDispatch();
+	const token = window.localStorage.getItem("user")
 
 	const logOut = useCallback(() => {
 		dispatch(logout());
@@ -46,6 +49,8 @@ function App() {
 			<Route path="/solution" element={ <SolutionPage /> } />
 			<Route path="/login" element={ <LoginPage /> } />
 			<Route path="/signup" element={ <SignupPage /> } />
+			<Route path="addition" element={<AdditionPage/>} />
+			{/* <Route path="/addition" element={<PrivateRoute component={<AdditionPage />} authenticated={token}/>} /> */}
 		</Routes>
   	);
 }
