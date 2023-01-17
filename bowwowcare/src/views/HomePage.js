@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 import Header from "../components/Header";
 
@@ -31,27 +32,33 @@ function HomePage() {
       </p>
 
       <div className="flex justify-around">
-      <button
-        className="w-full h-14 mt-8 mr-4 font-bold rounded-md bg-main-color text-white text-left p-4"
-        onClick={handleButtonClick}
-      >
-        사진 선택
-      </button>
-      <input
-        type="file"
-        id="avatar"
-        name="avatar"
-        accept="image/jpg, image/png, image/jpeg"
-        ref={fileInput}
-        onChange={handleChange}
-        style={{ display: "none" }}
-      />
-      <button className="w-full h-14 mt-8 font-bold rounded-md bg-main-color text-white text-left p-4"
-      onClick={() => navigate("/camera")}>사진 찍기</button>
-
+        <button
+          className="w-full h-14 mt-8 mr-4 font-bold rounded-md bg-main-color text-white text-left p-4"
+          onClick={handleButtonClick}
+        >
+          사진 선택
+        </button>
+        <input
+          type="file"
+          id="avatar"
+          name="avatar"
+          accept="image/jpg, image/png, image/jpeg"
+          ref={fileInput}
+          onChange={handleChange}
+          style={{ display: "none" }}
+        />
+        <button
+          className="w-full h-14 mt-8 font-bold rounded-md bg-main-color text-white text-left p-4"
+          onClick={() => navigate("/camera")}
+        >
+          사진 찍기
+        </button>
       </div>
-      
-      <button className="w-full h-32 mt-6 text-center rounded-md border border-gray-300 hover:border-main-color text-gray-300 bg-transparent pl-4">
+
+      <button
+        className="w-full h-32 mt-6 text-center rounded-md border border-gray-300 hover:border-main-color text-gray-300 bg-transparent pl-4"
+        onClick={() => navigate("/addition")}
+      >
         <p>+</p>가족을 추가해주세요
       </button>
     </div>
