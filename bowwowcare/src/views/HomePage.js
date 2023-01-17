@@ -51,7 +51,8 @@ function HomePage() {
 
       </div>
       
-      <button className="w-full h-32 mt-6 text-center rounded-md border border-gray-300 hover:border-main-color text-gray-300 bg-transparent pl-4">
+      <button className="w-full h-32 mt-6 text-center rounded-md border border-gray-300 hover:border-main-color text-gray-300 bg-transparent pl-4"
+      onClick={()=>navigate("/addition")}>
         <p>+</p>가족을 추가해주세요
       </button>
     </div>
