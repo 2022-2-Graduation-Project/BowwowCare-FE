@@ -5,6 +5,7 @@ import Header from "../../components/Header";
 import Solution from "./Sections/Solution";
 import Alert from "../../components/Alert";
 
+
 function SolutionPage() {
   const location = useLocation();
   const [answer, setAnswer] = useState({});
