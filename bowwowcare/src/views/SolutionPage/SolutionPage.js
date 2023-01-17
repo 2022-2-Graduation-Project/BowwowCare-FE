@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import Header from "../../components/Header";
 import Solution from "./Sections/Solution";
@@ -8,6 +8,7 @@ import Alert from "../../components/Alert";
 
 function SolutionPage() {
   const location = useLocation();
+  const navigate = useNavigate();
   const [answer, setAnswer] = useState({});
   const [emotion, setEmotion] = useState();
   const [open, setOpen] = useState(false);
@@ -25,10 +26,14 @@ function SolutionPage() {
   }
 
   const handleSaveResults = (e) => {
-    setAlertMessage("로그인이 필요한 서비스입니다");
+    setAlertMessage("로그인이 필요한 서비스입니다.\n로그인 하시겠습니까?");
     handleOpen();
     // TODO: POST results
   }
+
+  const handleLogin = (e) => {
+		navigate("/login");
+	}
 
   return (
     <div className="container mx-auto px-8 w-screen h-screen">
@@ -45,14 +50,14 @@ function SolutionPage() {
         </div>
         <div className="w-full">
             <button 
-                className="h-12 w-full font-bold rounded-md bg-main-color text-white text-center" 
-                onClick={handleSaveResults}
+              className="h-12 w-full font-bold rounded-md bg-main-color text-white text-center" 
+              onClick={handleSaveResults}
             >
-                결과 저장하기
+              결과 저장하기
             </button>
         </div>
       </div>
-      <Alert open={open} handleOpen={handleOpen} content={alertMessage} />
+      <Alert open={open} handleOpen={handleOpen} content={alertMessage} handleSubmit={handleLogin} />
     </div>
   );
 }
