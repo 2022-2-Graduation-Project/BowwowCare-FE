@@ -13,7 +13,7 @@ import SolutionPage from './views/SolutionPage/SolutionPage';
 import LoginPage from './views/LoginPage/LoginPage';
 import SignupPage from './views/SignupPage/SignupPage';
 import AdditionPage from "./views/AdditionPage/AdditionPage";
-import PrivateRoute from "./views/PrivateRoute";
+import PrivateRoute from "./PrivateRoute";
 
 import { logout } from "./slices/auth";
 
@@ -49,7 +49,8 @@ function App() {
 			<Route path="/solution" element={ <SolutionPage /> } />
 			<Route path="/login" element={ <LoginPage /> } />
 			<Route path="/signup" element={ <SignupPage /> } />
-			<Route path="/addition" element={<PrivateRoute component={<AdditionPage />} authenticated={token}/>} />
+			<Route path="addition" element={<AdditionPage/>} />
+			{/* <Route path="/addition" element={<PrivateRoute component={<AdditionPage />} authenticated={token}/>} /> */}
 		</Routes>
   	);
 }

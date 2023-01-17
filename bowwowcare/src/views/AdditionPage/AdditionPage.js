@@ -18,7 +18,8 @@ function AdditionPage() {
   const fileInput = React.useRef();
 
   const handleChange = (e) => {
-    setFileImg(URL.createObjectURL(e.target.files[0]));
+    setFileImg(e.target.files[0]);
+    // setFileImg(URL.createObjectURL(e.target.files[0]));
     // const reader = new FileReader();
     // reader.readAsDataURL(file);
     // reader.onloadend = () => {
@@ -33,12 +34,14 @@ function AdditionPage() {
     let body = {
       petname: petname,
       gender: gender,
-      petImgUrl: fileImg,
+      // petImgUrl: fileImg,
       birthDate: birthDate,
       adoptDate: adoptDate,
     };
 
+
     formData.append("pet", JSON.stringify(body));
+    formData.append("file", fileImg);
 
     for (let key of formData.keys()) {
       console.log(key, ":", formData.get(key));
@@ -72,7 +75,7 @@ function AdditionPage() {
               <div className="rounded-full border w-20 h-20 ml-4">
                 {fileImg && (
                   <img
-                    src={fileImg}
+                    src={URL.createObjectURL(fileImg)}
                     alt="프로필 이미지"
                     className="rounded-full w-20 h-20"
                   ></img>
