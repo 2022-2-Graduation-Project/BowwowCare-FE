@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
 import Solution from "./Sections/Solution";
 import Alert from "../../components/Alert";
+import Button from "../../components/Button";
 
 
 function SolutionPage() {
@@ -49,12 +50,7 @@ function SolutionPage() {
           })}
         </div>
         <div className="w-full">
-            <button 
-              className="h-12 w-full font-bold rounded-md bg-main-color text-white text-center" 
-              onClick={handleSaveResults}
-            >
-              결과 저장하기
-            </button>
+            <Button onClick={handleSaveResults}>결과 저장하기</Button>
         </div>
       </div>
       <Alert open={open} handleOpen={handleOpen} content={alertMessage} handleSubmit={handleLogin} />
