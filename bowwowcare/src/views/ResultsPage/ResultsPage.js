@@ -29,7 +29,7 @@ function ResultsPage() {
 
             axios({
                 method: 'post',
-                url: `http://0.0.0.0:8080/api/v1/predict`,  // fastapi
+                url: `http://127.0.0.1:8000/api/v1/predict`,  // fastapi
                 data: formData
             })
             .then(response => {
@@ -49,6 +49,19 @@ function ResultsPage() {
 				"emotion": emotion
 			}
 		})   
+    }
+
+    if (!Kakao.isInitialized()) {
+        Kakao.init(process.env.REACT_APP_KAKAO_JAVASCRIPT_KEY);
+    }
+
+    const shareKakao = () => {
+        Kakao.Share.sendCustom({
+            templateId: 89326,
+            templateArgs: {
+                THUMBNAIL: "https://avatars.githubusercontent.com/u/114976846?s=400&u=824ed2d4eeebf3791105a171e4e70709269792ae&v=4",
+            },
+          });
     }
 
     return (
@@ -84,7 +97,7 @@ function ResultsPage() {
                             <div>
                                 <div className="text-center pb-1">{en2koDictEmotionVerb[emotion]}있는 아이의 모습을 공유해보세요 ✨</div>
                                 <div className="flex justify-around items-end px-16 h-12">
-                                    <button>
+                                    <button onClick={shareKakao}>
                                         <img className="rounded-full" src={kakaotalk} width="32px" />
                                     </button>
                                     <button>
