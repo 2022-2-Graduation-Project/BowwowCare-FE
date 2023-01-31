@@ -99,7 +99,7 @@ function HomePage() {
       onClick={() => navigate("/camera")}>사진 찍기</button>
 
       </div>
-      {pet && <PetList pet={pet}/>}
+      {pet && <PetList pets={pet}/>}
       
       <button className="w-full h-32 mt-6 text-center rounded-md border border-gray-300 hover:border-main-color text-gray-300 bg-transparent pl-4"
       onClick={()=>navigate("/addition")}>

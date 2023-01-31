@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { getAge } from '../../../../utils/Calculator';
-import { getBwDate } from '../../../../utils/Calculator';
+import { getDurationDate } from '../../../../utils/Calculator';
 
 function PetInfo(props) {
 
@@ -9,7 +9,7 @@ function PetInfo(props) {
   const adoptDate = new Date( Date.parse(props.pet.adoptDate) );
 
   const age = getAge(birthDate);
-  const day = getBwDate(adoptDate);
+  const day = getDurationDate(adoptDate);
 
   return (
     <div className='flex shadow-lg mt-6 p-8 rounded-lg'>

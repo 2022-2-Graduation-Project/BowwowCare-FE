@@ -8,13 +8,13 @@ export const getAge = (date) => {
     return age;
 };
 
-export const getBwDate = (date) => {
+export const getDurationDate = (date) => {
     const now = new Date();
-    const stDate = new Date(date.getFullYear(), date.getMonth() + 1, date.getDate());
+    const startDate = new Date(date.getFullYear(), date.getMonth() + 1, date.getDate());
     const endDate = new Date(now.getFullYear(), now.getMonth() + 1, now.getDate());
 
-    const btMs = endDate.getTime() - stDate.getTime() ;
-    const btDay = btMs / (1000*60*60*24);
+    const ms = endDate.getTime() - startDate.getTime() ;
+    const durationDate = ms / (1000*60*60*24);
 
-    return btDay;
+    return durationDate;
 }

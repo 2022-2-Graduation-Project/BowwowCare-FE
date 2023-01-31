@@ -14,7 +14,6 @@ import LoginPage from './views/LoginPage/LoginPage';
 import SignupPage from './views/SignupPage/SignupPage';
 import AdditionPage from "./views/AdditionPage/AdditionPage";
 import PrivateRoute from "./PrivateRoute";
-import PetInfo from "./views/HomePage/PetList/PetInfo/PetInfo";
 import PetInfoPage from "./views/PetInfoPage/PetInfoPage";
 
 import { logout } from "./slices/auth";
