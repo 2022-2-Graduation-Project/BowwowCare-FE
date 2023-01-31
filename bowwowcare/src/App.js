@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import "tailwindcss/tailwind.css";
 
-import HomePage from "./views/HomePage";
+import HomePage from "./views/HomePage/HomePage";
 import PreviewPage from "./views/PreviewPage/PreviewPage";
 import ResultsPage from "./views/ResultsPage/ResultsPage";
 import CameraPage from "./views/CameraPage/CameraPage";
