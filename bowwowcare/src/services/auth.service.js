@@ -1,33 +1,31 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8080/users/";
+const API_URL = "http://localhost:8080/api/v1";
 
-const signup = (username, email, password) => {
-    return axios.post(API_URL + "signup", {
-        username,
-        email,
-        password,
-    });
+const signup = (data) => {
+    return axios({
+        method: 'post',
+        url: `${API_URL}/sign/join`,
+        data: data
+    })
+    .then(response => {
+        return response.data;
+    })
 };
 
-const login = (email, password) => {
-    return axios
-        .post(API_URL + "login", {
-            email,
-            password,
-        })
-        .then((response) => {
-            if (response.data.token) {
-                localStorage.setItem("user", JSON.stringify(response.data));
-            }
+const login = (data) => {
+    return axios({
+        method: 'post',
+        url: `${API_URL}/sign/login`,
+        data: data
+    })
+    .then(response => {
+        if (response.data.data.token) {
+            localStorage.setItem("user", JSON.stringify(response.data));
+        }
 
-            return response.data;
-        })
-        // .catch((error) => {
-        //     if (error?.response?.data?.details) {
-        //         return error.response.data.details
-        //     }
-        // })
+        return response.data;
+    })
 };
 
 const logout = () => {
