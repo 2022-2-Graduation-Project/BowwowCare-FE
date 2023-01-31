@@ -7,9 +7,9 @@ const user = JSON.parse(localStorage.getItem("user"));
 
 export const signup = createAsyncThunk(
     "auth/signup",
-    async ({ username, email, password }, thunkAPI) => {
+    async (data, thunkAPI) => {
         try {
-            const response = await AuthService.signup(username, email, password);
+            const response = await AuthService.signup(data);
             thunkAPI.dispatch(setMessage(response.data.message));
             return response.data;
         } catch (error) {
@@ -27,10 +27,10 @@ export const signup = createAsyncThunk(
 
 export const login = createAsyncThunk(
     "auth/login",
-    async ({ email, password }, thunkAPI) => {
+    async (data, thunkAPI) => {
         try {
-            const data = await AuthService.login(email, password);
-            return { user: data };
+            const userData = await AuthService.login(data);
+            return { user: userData };
         } catch (error) {
             const message =
                 (error.response &&
