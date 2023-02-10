@@ -71,7 +71,8 @@ function ResultsPage() {
         window.Kakao.Share.sendCustom({
             templateId: 89326,
             templateArgs: {
-                THUMBNAIL: "https://avatars.githubusercontent.com/u/114976846?s=400&u=824ed2d4eeebf3791105a171e4e70709269792ae&v=4",
+                PROFILE_NAME: `아이가 ${en2koDictEmotionVerb[emotion]} 있어요 💕`,
+                THUMBNAIL: "https://user-images.githubusercontent.com/53266682/215945871-af699ec9-22b6-443e-9982-4f594de8ee0a.png", // TODO: image url from s3
             },
         });
     }
