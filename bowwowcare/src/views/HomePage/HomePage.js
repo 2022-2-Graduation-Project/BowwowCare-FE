@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from "react-router-dom";
 
-import Header from "../components/Header";
+import Header from "../../components/Header";
+import PetList from "./PetList/PetList"
 
 function HomePage() {
+  const [pet, setPet] = useState([]);
   const navigate = useNavigate();
   const fileInput = React.useRef(null);
 
@@ -21,6 +23,53 @@ function HomePage() {
       });
     }
   };
+
+  const res = [{
+    id: 0,
+    petname: "강쥐",
+    gender: "남",
+    birthDate: "2020-01-30T08:13:57.980Z",
+    adoptDate: "2020-01-30T08:13:57.980Z",
+    fileImg: ""
+  }, {
+    id: 1,
+    petname: "강쥐2",
+    gender: "여",
+    birthDate: "2019-01-30T08:13:57.980Z",
+    adoptDate: "2019-01-30T08:13:57.980Z",
+    fileImg: ""
+  }, {
+    id: 2,
+    petname: "강쥐3",
+    gender: "남",
+    birthDate: "2010-01-30T08:13:57.980Z",
+    adoptDate: "2010-01-30T08:13:57.980Z",
+    fileImg: ""
+  }]
+
+  useEffect(() => {
+    setPet(res);
+    console.log(pet);
+  }, [])
+  
+  // 펫 데이터 불러오기
+  // useEffect(async() => {
+  //   try{
+  //     const res = await axios.get('/api/v1/pets');
+  //     const input = await res.map((x) => ({
+  //           id: x.idx,
+  //           petname: x.name,
+  //           gender: x.gender,
+  //           birthDate: x.birthDate,
+  //           adopDate: x.adopday,
+  //           fileImg: x.fileImg
+  //           })
+  //     )
+  //     setPet(pet.concat(input))
+  //   } catch(e){
+  //     console.error(e.message)
+  //   }
+  // },[])
 
   return (
     <div className="container mx-auto px-8 w-screen h-screen">
@@ -50,6 +99,7 @@ function HomePage() {
       onClick={() => navigate("/camera")}>사진 찍기</button>
 
       </div>
+      {pet && <PetList pets={pet}/>}
       
       <button className="w-full h-32 mt-6 text-center rounded-md border border-gray-300 hover:border-main-color text-gray-300 bg-transparent pl-4"
       onClick={()=>navigate("/addition")}>
