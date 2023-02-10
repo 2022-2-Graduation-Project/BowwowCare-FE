@@ -1,3 +1,4 @@
+/*global kakao*/ 
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -15,6 +16,7 @@ function ResultsPage() {
 	const navigate = useNavigate();
     const [file, setFile] = useState();
     const [emotion, setEmotion] = useState();
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         if (location?.state?.file) {
@@ -29,7 +31,7 @@ function ResultsPage() {
 
             axios({
                 method: 'post',
-                url: `http://0.0.0.0:8080/api/v1/predict`,  // fastapi
+                url: `http://127.0.0.1:8000/api/v1/predict`,  // fastapi
                 data: formData
             })
             .then(response => {
@@ -42,6 +44,38 @@ function ResultsPage() {
             });
         }
     }, [file]);
+
+    useEffect(() => {
+        const script = document.createElement('script');
+        
+        script.src = "https://t1.kakaocdn.net/kakao_js_sdk/2.1.0/kakao.min.js";
+        script.async = true;
+        script.onload = () => setLoading(false);
+        
+        document.body.appendChild(script);
+
+        return () => {
+            document.body.removeChild(script);
+        };
+    }, [emotion]);
+
+    useEffect(() => {
+        if (!loading) {
+            if (!window.Kakao.isInitialized()) {
+                window.Kakao.init(process.env.REACT_APP_KAKAO_JAVASCRIPT_KEY);
+            }
+        }
+    }, [loading]);
+
+    const shareKakao = () => {
+        window.Kakao.Share.sendCustom({
+            templateId: 89326,
+            templateArgs: {
+                PROFILE_NAME: `아이가 ${en2koDictEmotionVerb[emotion]} 있어요 💕`,
+                THUMBNAIL: "https://user-images.githubusercontent.com/53266682/215945871-af699ec9-22b6-443e-9982-4f594de8ee0a.png", // TODO: image url from s3
+            },
+        });
+    }
 
     const handleExamination = () => {
         navigate("/examination", {
@@ -81,20 +115,26 @@ function ResultsPage() {
                                 문진하기
                             </button>
                         ) : (
-                            <div>
-                                <div className="text-center pb-1">{en2koDictEmotionVerb[emotion]}있는 아이의 모습을 공유해보세요 ✨</div>
-                                <div className="flex justify-around items-end px-16 h-12">
-                                    <button>
-                                        <img className="rounded-full" src={kakaotalk} width="32px" />
-                                    </button>
-                                    <button>
-                                        <img className="rounded-full" src={instagram} width="32px" />
-                                    </button>
-                                    <button>
-                                        <img className="rounded-full" src={facebook} width="32px" />
-                                    </button>
+                            loading ? (
+                                <div>
+                                    <p>...</p>
                                 </div>
-                            </div>
+                            ) : (
+                                <div>
+                                    <div className="text-center pb-1">{en2koDictEmotionVerb[emotion]}있는 아이의 모습을 공유해보세요 ✨</div>
+                                    <div className="flex justify-around items-end px-16 h-12">
+                                        <button onClick={shareKakao}>
+                                            <img className="rounded-full" src={kakaotalk} width="32px" />
+                                        </button>
+                                        <button>
+                                            <img className="rounded-full" src={instagram} width="32px" />
+                                        </button>
+                                        <button>
+                                            <img className="rounded-full" src={facebook} width="32px" />
+                                        </button>
+                                    </div>
+                                </div>
+                            )
                         )}
                     </div>
                 </div>
