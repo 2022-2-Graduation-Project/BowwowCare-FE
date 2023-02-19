@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Header from "../../components/Header";
-import SelectBox from "./Sections/SelectBox";
+import SelectMenu from "./Sections/SelectMenu";
 import HAPPY from "../../assets/images/happy.png";
 
 function BehaviorSelectionPage() {
@@ -28,7 +28,7 @@ function BehaviorSelectionPage() {
         <div className="container mx-auto w-screen h-screen px-8">
             <Header />
             <div className="mt-12 mb-6">어떤 아이의 이상행동을 확인하는 건가요?</div>
-            <SelectBox pets={pets} selectedPet={selectedPet} setSelectedPet={setSelectedPet} />
+            <SelectMenu pets={pets} selectedPet={selectedPet} setSelectedPet={setSelectedPet} />
         </div>
     )
 }

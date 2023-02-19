@@ -1,23 +1,23 @@
 import React, { useState } from 'react';
 import HAPPY from "../../../assets/images/happy.png";
 
-function SelectBox({ pets, selectedPet, setSelectedPet }) {
+function SelectMenu({ pets, selectedPet, setSelectedPet }) {
     const [show, setShow] = useState(false);
 
-    const showSelectBox = (e) => {
+    const showSelectMenu = (e) => {
         setShow(!show);
     }
 
     const handleSelected = (pet) => (e) => {
         setSelectedPet(pet);
-        showSelectBox();
+        showSelectMenu();
     }
 
     return (
         <div>
             <div class="relative mt-1">
                 {selectedPet ? (
-                    <button onClick={showSelectBox} type="button" class="relative w-full cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-main-color focus:outline-none focus:ring-1 focus:ring-main-color sm:text-sm" aria-haspopup="listbox" aria-expanded="true" aria-labelledby="listbox-label">
+                    <button onClick={showSelectMenu} type="button" class="relative w-full cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-main-color focus:outline-none focus:ring-1 focus:ring-main-color sm:text-sm" aria-haspopup="listbox" aria-expanded="true" aria-labelledby="listbox-label">
                         <span class="flex items-center">
                             <img src={HAPPY} alt="" class="h-6 w-6 flex-shrink-0 rounded-full" />
                             <span class="ml-3 block truncate">{selectedPet.petName}</span>
@@ -56,4 +56,4 @@ function SelectBox({ pets, selectedPet, setSelectedPet }) {
     )
 }
 
-export default SelectBox
+export default SelectMenu
