@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import HAPPY from "../../../assets/images/happy.png";
 
-function SelectMenu({ pets, selectedPet, setSelectedPet }) {
+function SelectMenu({ pets, selectedPet, setSelectedPet, abnormal }) {
     const [show, setShow] = useState(false);
 
     const showSelectMenu = (e) => {
-        setShow(!show);
+        if (!abnormal) {
+            setShow(!show);
+        }
     }
 
     const handleSelected = (pet) => (e) => {

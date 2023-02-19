@@ -78,9 +78,9 @@ function BehaviorSelectionPage({ type }) {  // type: aggression || anxiety
             <div className="h-5/6 flex flex-col justify-between">
                 <div className="h-2/3">
                     <div className="mt-4 mb-2">어떤 아이의 이상행동을 확인하는 건가요?</div>
-                    <SelectMenu pets={pets} selectedPet={selectedPet} setSelectedPet={setSelectedPet} />
+                    <SelectMenu abnormal={abnormal} pets={pets} selectedPet={selectedPet} setSelectedPet={setSelectedPet} />
                     <div className="mt-4 mb-2">아이가 어떤 <span className="font-bold">행동</span>을 보이고 있나요?</div>
-                    <ButtonGroups behaviors={behaviors} selectedBehaviors={selectedBehaviors} setSelectedBehaviors={setSelectedBehaviors} abnormal={abnormal} />
+                    <ButtonGroups abnormal={abnormal} behaviors={behaviors} selectedBehaviors={selectedBehaviors} setSelectedBehaviors={setSelectedBehaviors} />
                 </div>
                 <div className="w-full">
                     {abnormal ? (
