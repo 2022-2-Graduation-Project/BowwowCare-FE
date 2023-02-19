@@ -59,12 +59,12 @@ function BehaviorSelectionPage({ type }) {  // type: aggression || anxiety
     }
 
     const handleExamination = () => {
-        // navigate("/examination", {
-		// 	state: {
-		// 		// "type": type,
-		// 		"type": "anxiety",  // TEST
-		// 	}
-		// })   
+        navigate("/examination", {
+			state: {
+				"type": type,
+				// "type": "anxiety",  // TEST
+			}
+		})   
     }
 
     const sendBehaviors = (e) => {
