@@ -5,7 +5,7 @@ import Header from "../../components/Header";
 import PetList from "./PetList/PetList";
 
 import anxiety from "../../assets/images/anxiety.png";
-import angry from "../../assets/images/angry.png";
+import aggression from "../../assets/images/aggression.png";
 
 function HomePage() {
   const [pet, setPet] = useState([]);
@@ -26,6 +26,15 @@ function HomePage() {
       });
     }
   };
+
+  const handleBehaviorSelection = (type) => {
+    navigate("/behavior-selection", {
+      state: {
+        type: type
+      }
+    })
+
+  }
 
   const res = [
     {
@@ -56,7 +65,7 @@ function HomePage() {
 
   useEffect(() => {
     setPet(res);
-    console.log(pet);
+    // console.log(pet);
   }, []);
 
   // TODO: 펫 데이터 불러오기
@@ -81,15 +90,18 @@ function HomePage() {
   return (
     <div className="container mx-auto px-8 w-screen h-screen">
       <Header />
-      <div className="flex">
-        {pet && <PetList pets={pet} />}
-        
-      </div>
+      <div className="flex">{pet && <PetList pets={pet} />}</div>
+
       <p className="text-xl font-bold mt-16">우리 아이 이상행동 확인해보기</p>
-      <div className="flex justify-center mt-6 text-gray-500">
-        <div><img src={anxiety}></img><p className="text-center text-sm">불안에 떨고 있어요</p></div>
-        <div><img src={angry}></img><p className="text-center text-sm">으르렁 거리고 있어요</p></div>
-        
+      <div className="flex justify-center mt-6 text-gray-500 text-center text-sm">
+        <button onClick={() => handleBehaviorSelection("anxiety")}>
+          <img src={anxiety}></img>
+          <p>불안에 떨고 있어요</p>
+        </button>
+        <button onClick={() => handleBehaviorSelection("aggression")}>
+          <img src={aggression}></img>
+          <p>으르렁 거리고 있어요</p>
+        </button>
       </div>
 
       <p className="text-xl font-bold mt-16">

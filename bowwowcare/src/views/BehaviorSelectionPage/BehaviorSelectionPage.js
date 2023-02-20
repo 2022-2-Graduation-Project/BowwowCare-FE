@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Header from "../../components/Header";
 import SelectMenu from "./Sections/SelectMenu";
 import ButtonGroups from "./Sections/ButtonGroups";
@@ -7,13 +7,16 @@ import HAPPY from "../../assets/images/happy.png";
 import Button from "../../components/Button";
 
 
-function BehaviorSelectionPage({ type }) {  // type: aggression || anxiety
+function BehaviorSelectionPage() {  // type: aggression || anxiety
 	const navigate = useNavigate();
+    const location = useLocation();
     const [pets, setPets] = useState([]);
+    const [type, setType] = useState([]);
     const [selectedPet, setSelectedPet] = useState({});
     const [behaviors, setBehaviors] = useState([]);
     const [selectedBehaviors, setSelectedBehaviors] = useState([]);
     const [abnormal, setAbnormal] = useState(false);
+    
 
     useEffect(() => {
         // TEST: Mockup Data
@@ -39,6 +42,12 @@ function BehaviorSelectionPage({ type }) {  // type: aggression || anxiety
         // TODO: GET behaviors
 
     }, []);
+
+    useEffect(() => {
+        if (location?.state?.type) {
+            setType(location.state.type);
+        }
+    },[])
 
     useEffect(() => {
         if (pets) {
