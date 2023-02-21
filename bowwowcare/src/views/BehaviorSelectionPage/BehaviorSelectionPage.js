@@ -91,7 +91,7 @@ function BehaviorSelectionPage() {  // type: aggression || anxiety
     const handleExamination = () => {
         navigate("/examination", {
 			state: {
-				"aggressionType": location.state.type,
+				"type": location.state.type,
 			}
 		})   
     }
