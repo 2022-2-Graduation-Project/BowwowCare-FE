@@ -10,16 +10,12 @@ import Button from "../../components/Button";
 function SolutionPage() {
   const location = useLocation();
   const navigate = useNavigate();
-  const [answer, setAnswer] = useState({});
-  const [emotion, setEmotion] = useState();
   const [open, setOpen] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
 
+
   useEffect(() => {
-    if (location?.state?.answer) {
-      setAnswer(location?.state?.answer);
-      setEmotion(location?.state?.emotion);
-    }
+    // TODO: POST location.state.responses and get { situation : solution }{} 
   }, []);
 
   const handleOpen = (e) => {
@@ -41,10 +37,10 @@ function SolutionPage() {
       <Header />
       <div className="h-5/6 flex flex-col justify-between">
         <div className="h-2/3 overflow-x-auto flex mt-10 px-2 py-8">
-          {Object.entries(location?.state?.answer)?.map(([key, value]) => {
+          {Object.entries(location?.state?.responses)?.map(([response, value]) => {
             if (value === "예") {
               return (
-                <Solution key={key} answer={key} emotion={emotion} />
+                <Solution key={response} response={response} emotion={location?.state?.emotion} />
               );
             }
           })}
