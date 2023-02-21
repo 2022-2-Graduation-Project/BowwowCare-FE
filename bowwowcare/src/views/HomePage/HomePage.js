@@ -27,13 +27,21 @@ function HomePage() {
     }
   };
 
-  const handleBehaviorSelection = (type) => {
-    navigate("/behavior-selection", {
-      state: {
-        type: type
-      }
-    })
-
+  const handleNavigation = (type) => {
+    if (type==="aggression") {
+      navigate("/behavior-selection", {
+        state: {
+          "type": type
+        }
+      })
+    }
+    else if (type==="anxiety") {
+      navigate("/examination", {
+        state: {
+          "type": type
+        }
+      })   
+    }
   }
 
   const res = [
@@ -94,11 +102,11 @@ function HomePage() {
 
       <p className="text-xl font-bold mt-16">우리 아이 이상행동 확인해보기</p>
       <div className="flex justify-center mt-6 text-gray-500 text-center text-sm">
-        <button onClick={() => handleBehaviorSelection("anxiety")}>
+        <button onClick={() => handleNavigation("anxiety")}>
           <img src={anxiety}></img>
           <p>불안에 떨고 있어요</p>
         </button>
-        <button onClick={() => handleBehaviorSelection("aggression")}>
+        <button onClick={() => handleNavigation("aggression")}>
           <img src={aggression}></img>
           <p>으르렁 거리고 있어요</p>
         </button>
