@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
+import { API_URL } from "../../../Config";
 import Button from "../../../components/Button";
 
 
@@ -22,6 +24,18 @@ function Examination({ type }) {
       ])
 
       // TODO: GET questions
+      axios({
+          method: 'get',
+          url: `${API_URL}/questions/${type}`,
+      })
+      .then(response => {
+          if (response.status === 200) {
+            setQuestions(response.data);
+          }
+      })
+      .catch(error => {
+          console.log(error?.response);
+      });
     }
   }, [type]);
 
