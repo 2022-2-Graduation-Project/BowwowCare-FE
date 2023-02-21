@@ -1,7 +1,8 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
-import Examination from "./Sections/Examination"
+import Examination from "./Sections/Examination";
+
 
 function ExaminationPage() {
   const location = useLocation();
