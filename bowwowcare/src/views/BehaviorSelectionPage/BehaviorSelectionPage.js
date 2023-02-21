@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import axios from 'axios';
+import { API_URL } from "../../Config";
+import authHeader from "../../services/auth-header";
 import Header from "../../components/Header";
 import SelectMenu from "./Sections/SelectMenu";
 import ButtonGroups from "./Sections/ButtonGroups";
@@ -24,22 +27,47 @@ function BehaviorSelectionPage() {  // type: aggression || anxiety
             {"petId": 2, "petName": "두 번째 강쥐", "petImage": HAPPY},
         ]);
         setBehaviors([
-            {"id": 1, "type": 0, "content": "헐떡이며 숨쉬기"},
-            {"id": 2, "type": 0, "content": "동공확장"},
-            {"id": 3, "type": 0, "content": "몸 떨기"},
-            {"id": 4, "type": 0, "content": "털 세우기"},
-            {"id": 5, "type": 1, "content": "입 다물기"},
-            {"id": 6, "type": 1, "content": "경직되기"},
-            {"id": 7, "type": 1, "content": "짖기"},
-            {"id": 8, "type": 1, "content": "응시하기"},
-            {"id": 9, "type": 2, "content": "이빨 보이기"},
-            {"id": 10, "type": 2, "content": "도망/철수"},
-            {"id": 11, "type": 2, "content": "달려들기 & 한 번 물기"},
+            {"aggressionId": 1, "aggressionType": 0, "content": "헐떡이며 숨쉬기"},
+            {"aggressionId": 2, "aggressionType": 0, "content": "동공확장"},
+            {"aggressionId": 3, "aggressionType": 0, "content": "몸 떨기"},
+            {"aggressionId": 4, "aggressionType": 0, "content": "털 세우기"},
+            {"aggressionId": 5, "aggressionType": 1, "content": "입 다물기"},
+            {"aggressionId": 6, "aggressionType": 1, "content": "경직되기"},
+            {"aggressionId": 7, "aggressionType": 1, "content": "짖기"},
+            {"aggressionId": 8, "aggressionType": 1, "content": "응시하기"},
+            {"aggressionId": 9, "aggressionType": 2, "content": "이빨 보이기"},
+            {"aggressionId": 10, "aggressionType": 2, "content": "도망/철수"},
+            {"aggressionId": 11, "aggressionType": 2, "content": "달려들기 & 한 번 물기"},
         ]);
 
-        // TODO: GET pets
-        // TODO: GET behaviors
+        axios({
+            method: 'get',
+            url: `${API_URL}/pets`,
+            headers: authHeader()
+        })
+        .then(response => {
+            if (response.status === 200) {
+                if (response.data?.length) {
+                    setPets(response.data);
+                }
+            }
+        })
+        .catch(error => {
+            console.log(error?.response);
+        });
 
+        axios({
+            method: 'get',
+            url: `${API_URL}/behaviors`,
+        })
+        .then(response => {
+            if (response.status === 200) {
+                setBehaviors(response.data);
+            }
+        })
+        .catch(error => {
+            console.log(error?.response);
+        });
     }, []);
 
     useEffect(() => {
@@ -63,8 +91,7 @@ function BehaviorSelectionPage() {  // type: aggression || anxiety
     const handleExamination = () => {
         navigate("/examination", {
 			state: {
-				"type": location.state.type,
-				// "type": "anxiety",  // TEST
+				"aggressionType": location.state.type,
 			}
 		})   
     }
