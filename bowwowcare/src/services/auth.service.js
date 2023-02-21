@@ -20,7 +20,7 @@ const login = (data) => {
         data: data
     })
     .then(response => {
-        if (response.data.data.token) {
+        if (response.data.token) {
             localStorage.setItem("user", JSON.stringify(response.data));
         }
 
