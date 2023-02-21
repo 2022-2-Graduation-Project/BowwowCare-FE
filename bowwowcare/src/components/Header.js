@@ -28,7 +28,7 @@ function Header() {
 			{window.location.pathname==="/login" ? (
 				null
 			) : (
-				window.localStorage.getItem("user") ? (
+				JSON.parse(localStorage.getItem("user")) ? (
 					<button className="text-right" onClick={() => dispatch(logout())}>로그아웃</button>
 				) : (
 					<button className="text-right" onClick={handleLogin}>로그인</button>
