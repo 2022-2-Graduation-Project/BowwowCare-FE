@@ -11,7 +11,6 @@ function BehaviorSelectionPage() {  // type: aggression || anxiety
 	const navigate = useNavigate();
     const location = useLocation();
     const [pets, setPets] = useState([]);
-    const [type, setType] = useState([]);
     const [selectedPet, setSelectedPet] = useState({});
     const [behaviors, setBehaviors] = useState([]);
     const [selectedBehaviors, setSelectedBehaviors] = useState([]);
@@ -44,12 +43,6 @@ function BehaviorSelectionPage() {  // type: aggression || anxiety
     }, []);
 
     useEffect(() => {
-        if (location?.state?.type) {
-            setType(location.state.type);
-        }
-    },[])
-
-    useEffect(() => {
         if (pets) {
             setSelectedPet(pets[0]);
         }
@@ -70,7 +63,7 @@ function BehaviorSelectionPage() {  // type: aggression || anxiety
     const handleExamination = () => {
         navigate("/examination", {
 			state: {
-				"type": type,
+				"type": location.state.type,
 				// "type": "anxiety",  // TEST
 			}
 		})   
