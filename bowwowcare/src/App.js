@@ -26,7 +26,7 @@ import EventBus from "./common/EventBus";
 function App() {
 	const { user: currentUser } = useSelector((state) => state.auth);
 	const dispatch = useDispatch();
-	const token = window.localStorage.getItem("user")
+	const token = JSON.parse(localStorage.getItem("user"))?.token
 
 	const logOut = useCallback(() => {
 		dispatch(logout());

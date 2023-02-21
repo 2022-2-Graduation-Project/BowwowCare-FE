@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import PetInfo from "./Sections/PetInfo";
 
 function PetList(props) {
-  const user = window.localStorage.getItem("user");
+  const user = JSON.parse(localStorage.getItem("user"));
   const navigate = useNavigate();
   return user ? (
     <div className="flex overflow-x-scroll">
