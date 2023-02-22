@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
+import authHeader from "../../services/auth-header";
 
 import "react-datepicker/dist/react-datepicker.css";
 import Header from "../../components/Header";
@@ -17,6 +18,18 @@ function AdditionPage() {
 
   const fileInput = React.useRef();
 
+  const changeFormat = (date) => {
+    return (
+      date.getFullYear() +
+      "-" +
+      (date.getMonth() + 1 < 9
+        ? "0" + (date.getMonth() + 1)
+        : date.getMonth() + 1) +
+      "-" +
+      (date.getDate() < 9 ? "0" + date.getDate() : date.getDate())
+    );
+  };
+  
   const handleChange = (e) => {
     setFileImg(e.target.files[0]);
     // setFileImg(URL.createObjectURL(e.target.files[0]));
@@ -29,35 +42,31 @@ function AdditionPage() {
 
   const handleAdd = (e) => {
     e.preventDefault();
-    const formData = new FormData();
-
     let body = {
-      petname: petname,
+      name: petname,
       gender: gender,
-      // petImgUrl: fileImg,
-      birthDate: birthDate,
-      adoptDate: adoptDate,
+      petImg: fileImg.name,
+      birthDate: changeFormat(birthDate),
+      adoptionDate: changeFormat(adoptDate),
     };
 
+    console.log(body);
 
-    formData.append("pet", JSON.stringify(body));
-    formData.append("file", fileImg);
-
-    for (let key of formData.keys()) {
-      console.log(key, ":", formData.get(key));
-    }
 
     if (petname && gender && fileImg && birthDate && adoptDate) {
-      // console.log(data);
-      axios
-        .post("http://localhost:8080/api/v1/pets/", formData)
+      axios({
+        method: "post",
+        url: "http://localhost:8080/api/v1/pets",
+        data: body,
+        headers: authHeader(),
+      })
         .then((res) => {
           console.log(res);
           navigate("/");
           window.location.reload();
         })
         .catch((error) => {
-          console.log(error);
+          console.log(error.response);
         });
     } else {
       alert("모든 항목을 입력하세요.");
@@ -116,13 +125,13 @@ function AdditionPage() {
               <input
                 type="button"
                 value="남"
-                onClick={() => setGender("남")}
+                onClick={() => setGender("male")}
                 className="w-full h-10 mt-3 text-center rounded-md border border-gray-300 hover:bg-main-color hover:text-white text-gray-300 bg-transparent"
               />
               <input
                 type="button"
                 value="여"
-                onClick={() => setGender("여")}
+                onClick={() => setGender("female")}
                 className="w-full h-10 mt-3 text-center rounded-md border border-gray-300 hover:bg-main-color hover:text-white text-gray-300 bg-transparent"
               />
             </div>
