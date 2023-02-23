@@ -2,6 +2,8 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
+import { API_URL } from "../../Config";
+import authHeader from "../../services/auth-header";
 
 import "react-datepicker/dist/react-datepicker.css";
 import Header from "../../components/Header";
@@ -17,52 +19,51 @@ function AdditionPage() {
 
   const fileInput = React.useRef();
 
+  const changeFormat = (date) => {
+    return (
+      date.getFullYear() +
+      "-" +
+      (date.getMonth() + 1 < 9
+        ? "0" + (date.getMonth() + 1)
+        : date.getMonth() + 1) +
+      "-" +
+      (date.getDate() < 9 ? "0" + date.getDate() : date.getDate())
+    );
+  };
+  
   const handleChange = (e) => {
     setFileImg(e.target.files[0]);
-    // setFileImg(URL.createObjectURL(e.target.files[0]));
-    // const reader = new FileReader();
-    // reader.readAsDataURL(file);
-    // reader.onloadend = () => {
-    //   setFileImg(reader.result);
-    // };
   };
 
-  const handleAdd = (e) => {
-    e.preventDefault();
-    const formData = new FormData();
-
+  const handleAdd = () => {
     let body = {
-      petname: petname,
+      name: petname,
       gender: gender,
-      // petImgUrl: fileImg,
-      birthDate: birthDate,
-      adoptDate: adoptDate,
+      petImg: fileImg.name,
+      birthDate: changeFormat(birthDate),
+      adoptionDate: changeFormat(adoptDate),
     };
 
-
-    formData.append("pet", JSON.stringify(body));
-    formData.append("file", fileImg);
-
-    for (let key of formData.keys()) {
-      console.log(key, ":", formData.get(key));
-    }
-
+    // TODO: 모든 항목을 입력 안했을 때 갑자기 alert 안뜸 나중에 고칠 것임 ...
     if (petname && gender && fileImg && birthDate && adoptDate) {
-      // console.log(data);
-      axios
-        .post("http://localhost:8080/api/v1/pets/", formData)
+      axios({
+        method: "POST",
+        url: `${API_URL}/pets`,
+        data: body,
+        headers: authHeader(),
+      })
         .then((res) => {
-          console.log(res);
-          navigate("/");
           window.location.reload();
+          navigate("/");
         })
         .catch((error) => {
-          console.log(error);
+          console.log(error.response);
         });
     } else {
       alert("모든 항목을 입력하세요.");
-      console.log(body);
     }
+
+    navigate("/");
   };
 
   return (
@@ -102,7 +103,7 @@ function AdditionPage() {
           <div className="mb-10">
             <p>이름</p>
             <input
-              className="w-full mt-3"
+              className="w-full mt-3 border-b"
               value={petname}
               onChange={(e) => {
                 setPetName(e.target.value);
@@ -116,13 +117,13 @@ function AdditionPage() {
               <input
                 type="button"
                 value="남"
-                onClick={() => setGender("남")}
+                onClick={() => setGender("male")}
                 className="w-full h-10 mt-3 text-center rounded-md border border-gray-300 hover:bg-main-color hover:text-white text-gray-300 bg-transparent"
               />
               <input
                 type="button"
                 value="여"
-                onClick={() => setGender("여")}
+                onClick={() => setGender("female")}
                 className="w-full h-10 mt-3 text-center rounded-md border border-gray-300 hover:bg-main-color hover:text-white text-gray-300 bg-transparent"
               />
             </div>
@@ -148,8 +149,7 @@ function AdditionPage() {
           <div className="flex flex-row-reverse">
             <button
               onClick={handleAdd}
-              className="w-16 h-8 mt-24 bg-gray-400 rounded-full text-white"
-            >
+              className="w-16 h-8 mt-24 bg-gray-400 rounded-full text-white">
               추가
             </button>
           </div>
