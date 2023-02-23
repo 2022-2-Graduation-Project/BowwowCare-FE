@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { API_URL } from "../../Config";
 
 import Header from "../../components/Header";
 import Solution from "./Sections/Solution";
@@ -12,10 +14,25 @@ function SolutionPage() {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
+  const [solutions, setSolutions] = useState([]);
 
 
   useEffect(() => {
-    // TODO: POST location.state.responses and get { situation : solution }{} 
+    if (location?.state?.responses) {
+      axios({
+          method: 'post',
+          url: `${API_URL}/survey/${location?.state?.type}`,
+          data: location.state.responses
+      })
+      .then(response => {
+          if (response.status === 200) {
+            setSolutions(response.data);
+          }
+      })
+      .catch(error => {
+          console.log(error?.response);
+      });
+    }
   }, []);
 
   const handleOpen = (e) => {
@@ -37,12 +54,10 @@ function SolutionPage() {
       <Header />
       <div className="h-5/6 flex flex-col justify-between">
         <div className="h-2/3 overflow-x-auto flex mt-10 px-2 py-8">
-          {Object.entries(location?.state?.responses)?.map(([response, value]) => {
-            if (value === "예") {
-              return (
-                <Solution key={response} response={response} emotion={location?.state?.emotion} />
-              );
-            }
+          {solutions?.map(solution => {
+            return (
+              <Solution key={solution.id} solution={solution} emotion={location?.state?.emotion} />
+            );
           })}
         </div>
         <div className="w-full">
