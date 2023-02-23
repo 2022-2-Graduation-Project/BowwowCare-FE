@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import HAPPY from "../../../assets/images/happy.png";
+import HAPPY from "../assets/images/happy.png";
 
-function SelectMenu({ pets, selectedPet, setSelectedPet, abnormal }) {
+function SelectPet({ pets, selectedPet, setSelectedPet, abnormal }) {
     const [show, setShow] = useState(false);
 
     const showSelectMenu = (e) => {
@@ -58,4 +58,4 @@ function SelectMenu({ pets, selectedPet, setSelectedPet, abnormal }) {
     )
 }
 
-export default SelectMenu
+export default SelectPet

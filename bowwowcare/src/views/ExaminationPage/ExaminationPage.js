@@ -1,12 +1,11 @@
 import React from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import Header from "../../components/Header";
 import Examination from "./Sections/Examination";
 
 
 function ExaminationPage() {
   const location = useLocation();
-  const navigate = useNavigate(); 
 
   return (
     <div className="container mx-auto w-screen h-screen px-8">
@@ -18,7 +17,7 @@ function ExaminationPage() {
           ) : (
             <div className="mt-20 mb-6">아이가 어떤 <span className="font-bold">행동</span>을 보이고 있나요?</div>
           )}
-          <Examination type={location.state.type} /> 
+          <Examination type={location.state.type} petId={location.state.petId} /> 
         </div>
       : null}
     </div>
