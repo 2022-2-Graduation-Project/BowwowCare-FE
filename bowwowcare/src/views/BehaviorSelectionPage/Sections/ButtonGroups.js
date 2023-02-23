@@ -8,9 +8,9 @@ function ButtonGroups({ behaviors, selectedBehaviors, setSelectedBehaviors, abno
     const handleSelected = (behavior) => (e) => {
         if (!abnormal) {
             let arr = [...selectedBehaviors];
-            let obj = arr[behavior.id-1];
+            let obj = arr[behavior.aggressionId-1];
             obj.isDeleted = !obj.isDeleted;
-            arr[behavior.id-1] = obj;
+            arr[behavior.aggressionId-1] = obj;
     
             setSelectedBehaviors(arr);
         }
@@ -19,17 +19,17 @@ function ButtonGroups({ behaviors, selectedBehaviors, setSelectedBehaviors, abno
     return (
         <div className="shadow-md rounded-md p-4">
             {behaviors?.map(behavior =>
-                <span key={behavior?.id}>
-                    <div className={abnormal && (behavior?.id-1) % 4 == 0 ? "block" : "hidden"}>
-                        <span className={`text-sm font-bold ml-2 text-[${colors[behavior?.type]}]`}>{behaviorType[behavior?.type]}</span>
+                <span key={behavior?.aggressionId}>
+                    <div className={abnormal && (behavior?.aggressionId-1) % 4 == 0 ? "block" : "hidden"}>
+                        <span className={`text-sm font-bold ml-2 text-[${colors[behavior?.aggressionType]}]`}>{behaviorType[behavior?.aggressionType]}</span>
                     </div>
                     <button 
-                        className={`px-4 py-1 m-2 border-2 rounded-md border-[${colors[behavior?.type]}] ${selectedBehaviors[behavior.id-1]?.isDeleted===false ? 'bg-['+colors[behavior?.type]+'] text-white' : null}`}
+                        className={`px-4 py-1 m-2 border-2 rounded-md border-[${colors[behavior?.aggressionType]}] ${selectedBehaviors[behavior.aggressionId-1]?.isDeleted===false ? 'bg-['+colors[behavior?.aggressionType]+'] text-white' : null}`}
                         onClick={handleSelected(behavior)}    
                     >
                         <span>{behavior?.content}</span>
                     </button>  
-                    <div className={behavior?.id % 4 === 0 ? "block" : "hidden"} />  
+                    <div className={behavior?.aggressionId % 4 === 0 ? "block" : "hidden"} />  
                 </span>
             )}
         </div>

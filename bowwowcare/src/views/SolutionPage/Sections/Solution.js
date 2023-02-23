@@ -6,7 +6,7 @@ import { solutions } from "../../../utils/Dictionary";
 
 import "../../../components/YoutubeEmbed/youtube.css";
 
-function Solution({ answer, emotion }) {
+function Solution({ response, emotion }) {
   const [popup, setPopup] = useState(false);
 
   const handleTrigger = () => {
@@ -16,10 +16,10 @@ function Solution({ answer, emotion }) {
   return (
     <div>
       {solutions[emotion]?.map((x) => {
-        if (answer === x.id) {
+        if (response === x.id) {
           return (
             <div
-              key={answer}
+              key={response}
               className="w-64 h-full text-center shadow-lg rounded-2xl flex flex-col justify-between px-8 pt-16 pb-8 mx-3"
             >
               <div>

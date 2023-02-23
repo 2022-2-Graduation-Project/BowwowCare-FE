@@ -68,8 +68,6 @@ function HomePage() {
       }).catch((e) => {
         console.log(e.message);
       })
-
-      
     };
 
   const getPetDetail = async () => {
