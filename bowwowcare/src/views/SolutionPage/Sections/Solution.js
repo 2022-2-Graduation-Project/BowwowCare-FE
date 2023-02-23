@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import Modal from "../../../components/Modal/Modal";
 import YoutubeEmbed from "../../../components/YoutubeEmbed/YoutubeEmbed";
-import { solutions } from "../../../utils/Dictionary";
+import Button from "../../../components/Button";
 
 import "../../../components/YoutubeEmbed/youtube.css";
 
@@ -17,18 +17,16 @@ function Solution({ solution, emotion }) {
     <div>
         <div
           key={solution}
-          className="w-64 h-full text-center shadow-lg rounded-2xl flex flex-col justify-between px-8 pt-16 pb-8 mx-3"
+          className="w-72 h-full text-center shadow-lg rounded-2xl flex flex-col justify-between px-10 pt-12 pb-8 mx-2"
         >
-          <div>
-            <div className="font-bold pb-4">{solution.situation}</div>
-            <div>{solution.solution}</div>
-          </div>
-          <button
+          <div className="font-bold pb-2">{solution.situation}</div>
+          <div className="h-1/2 overflow-y-auto">{solution.solution}</div>
+          <Button
             onClick={() => setPopup(true)}
-            className="h-12 mt-8 px-4 rounded-md text-center bg-white border border-main-color text-main-color hover:bg-main-color hover:text-white"
+            bgColor="white" borderColor="main-color" textColor="main-color"
           >
-            <div className="hover:text-white">실천하기</div>
-          </button>
+            <div>자세히 보기</div>
+          </Button>
           <Modal
             trigger={popup}
             handleTrigger={handleTrigger}
