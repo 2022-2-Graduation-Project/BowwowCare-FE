@@ -8,6 +8,7 @@ import Solution from "./Sections/Solution";
 import Alert from "../../components/Alert";
 import Button from "../../components/Button";
 
+import lens from "../../assets/images/lens.png";
 
 function SolutionPage() {
   const location = useLocation();
@@ -53,15 +54,18 @@ function SolutionPage() {
     <div className="container mx-auto px-8 w-screen h-screen">
       <Header />
       <div className="h-5/6 flex flex-col justify-between">
-        <div className="h-2/3 overflow-x-auto flex mt-10 px-2 py-8">
+        <div className="h-2/3 overflow-x-auto flex px-2 py-4">
           {solutions?.map(solution => {
             return (
               <Solution key={solution.id} solution={solution} emotion={location?.state?.emotion} />
             );
           })}
         </div>
+        <div className="flex flex-col items-center">
+          <img src={lens} width="200px" />
+        </div>
         <div className="w-full">
-            <Button onClick={handleSaveResults}>결과 저장하기</Button>
+            <Button onClick={handleSaveResults}>멍멍케어 시작하기</Button>
         </div>
       </div>
       <Alert open={open} handleOpen={handleOpen} content={alertMessage} handleSubmit={handleLogin} />
