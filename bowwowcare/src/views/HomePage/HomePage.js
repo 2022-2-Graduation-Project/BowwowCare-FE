@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { API_URL } from "../../Config";
+import authHeader from "../../services/auth-header";
 
 import Header from "../../components/Header";
 import PetList from "./PetList/PetList";
@@ -8,6 +11,7 @@ import anxiety from "../../assets/images/anxiety.png";
 import aggression from "../../assets/images/aggression.png";
 
 function HomePage() {
+  const [petlist, setPetlist] = useState([]);
   const [pet, setPet] = useState([]);
   const navigate = useNavigate();
   const fileInput = React.useRef(null);
@@ -27,78 +31,69 @@ function HomePage() {
     }
   };
 
+  const handleNavigation = (type) => {
+    if (type === "aggression") {
+      navigate("/behavior-selection", {
+        state: {
+          type: type,
+        },
+      });
+    } else if (type === "anxiety") {
+      navigate("/examination", {
+        state: {
+          type: type,
+        },
+      });
+    }
+  };
+
   const handleBehaviorSelection = (type) => {
     navigate("/behavior-selection", {
       state: {
-        type: type
-      }
-    })
+        type: type,
+      },
+    });
+  };
 
-  }
+  const getPetList = async () => {
+      axios({
+        method: "GET",
+        url: `${API_URL}/pets`,
+        headers: authHeader(),
+      }).then((res) => {
+        if (res.status === 200) {
+          console.log(res);
+          setPetlist(res.data);
+        }
+      }).catch((e) => {
+        console.log(e.message);
+      })
+    };
 
-  const res = [
-    {
-      id: 0,
-      petname: "강쥐",
-      gender: "남",
-      birthDate: "2020-01-30T08:13:57.980Z",
-      adoptDate: "2020-01-30T08:13:57.980Z",
-      fileImg: "",
-    },
-    {
-      id: 1,
-      petname: "강쥐2",
-      gender: "여",
-      birthDate: "2019-01-30T08:13:57.980Z",
-      adoptDate: "2019-01-30T08:13:57.980Z",
-      fileImg: "",
-    },
-    {
-      id: 2,
-      petname: "강쥐3",
-      gender: "남",
-      birthDate: "2010-01-30T08:13:57.980Z",
-      adoptDate: "2010-01-30T08:13:57.980Z",
-      fileImg: "",
-    },
-  ];
-
+  const getPetDetail = async () => {
+    const promise = petlist.map(async (v) => {
+      const res = await axios.get(`${API_URL}/pets/${v.petId}`);
+      return res.data;
+    });
+    return Promise.all(promise).then((result) => setPet(result));
+  };
   useEffect(() => {
-    setPet(res);
-    // console.log(pet);
+    getPetList();
+    getPetDetail();
   }, []);
-
-  // TODO: 펫 데이터 불러오기
-  // useEffect(async() => {
-  //   try{
-  //     const res = await axios.get('/api/v1/pets');
-  //     const input = await res.map((x) => ({
-  //           id: x.idx,
-  //           petname: x.name,
-  //           gender: x.gender,
-  //           birthDate: x.birthDate,
-  //           adopDate: x.adopday,
-  //           fileImg: x.fileImg
-  //           })
-  //     )
-  //     setPet(pet.concat(input))
-  //   } catch(e){
-  //     console.error(e.message)
-  //   }
-  // },[])
 
   return (
     <div className="container mx-auto px-8 w-screen h-screen">
       <Header />
       <div className="flex">{pet && <PetList pets={pet} />}</div>
-
+      
       <p className="text-xl font-bold mt-16">우리 아이 이상행동 확인해보기</p>
       <div className="flex justify-center mt-6 text-gray-500 text-center text-sm">
-        <button onClick={() => handleBehaviorSelection("anxiety")}>
+        <button onClick={() => handleNavigation("anxiety")}>
           <img src={anxiety}></img>
           <p>불안에 떨고 있어요</p>
         </button>
-        <button onClick={() => handleBehaviorSelection("aggression")}>
+        <button onClick={() => handleNavigation("aggression")}>
           <img src={aggression}></img>
           <p>으르렁 거리고 있어요</p>
         </button>
