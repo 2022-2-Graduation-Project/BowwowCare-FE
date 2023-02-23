@@ -9,13 +9,12 @@ function PetInfoPage() {
   const navigate = useNavigate();
   const location = useLocation();
   const params = useParams();
-  //console.log(location.state.pet)
   const pet = location.state.pet;
-  const petname = location.state.pet.petname;
+  const petname = location.state.pet.name;
   const gender = location.state.pet.gender;
   const birthDate = location.state.pet.birthDate.substring(0,10).split('-').join('.');
-  const adoptDate = location.state.pet.adoptDate.substring(0,10).split('-').join('.');
-  const fileImg = location.state.pet.fileImg;
+  const adoptDate = location.state.pet.adoptionDate.substring(0,10).split('-').join('.');
+  const fileImg = location.state.pet.petImg;
 
   return (
     <div className="px-8">
@@ -27,7 +26,7 @@ function PetInfoPage() {
             <div className="rounded-full border w-14 h-14 mb-5">
                     {fileImg && (
                       <img
-                        src={URL.createObjectURL(fileImg)}
+                        src={fileImg}
                         alt="프로필 이미지"
                         className="rounded-full w-14 h-14"
                       ></img>
