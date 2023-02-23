@@ -23,7 +23,6 @@ function Examination({ type }) {
         { "id": 7, "content": "보호자가 아이를 힘으로 통제하였나요?" }
       ])
 
-      // TODO: GET questions
       axios({
           method: 'get',
           url: `${API_URL}/questions/${type}`,
@@ -41,13 +40,13 @@ function Examination({ type }) {
 
   useEffect(() => {
     if (questions) {
-      setResponses(questions?.map(question => ({ [`aggression${question.id}`]: false })));
+      setResponses(questions?.map(question => ({ "id": question.id, "checked": false })));
     }
   }, [questions]);
 
   const handleChangeResponse = (index, id) => (e) => {
     let array = [...responses];
-    array[index][`aggression${id}`] = JSON.parse(e.target.value);
+    array[index].checked = JSON.parse(e.target.value);
     setResponses(array);
   }
 
@@ -81,7 +80,7 @@ function Examination({ type }) {
                             name={`${question.id}`}
                             onChange={handleChangeResponse(index, question.id)}
                             className="mr-2 accent-main-color"
-                            checked={responses[index][`aggression${question.id}`]}
+                            checked={responses[index].checked}
                           />
                           {`예`}
                         </label>
@@ -95,7 +94,7 @@ function Examination({ type }) {
                             name={`${question.id}`}
                             onChange={handleChangeResponse(index, question.id)}
                             className="mr-2 accent-main-color"
-                            checked={responses[index][`aggression${question.id}`] === false}
+                            checked={responses[index].checked === false}
                           />
                           {`아니요`}
                         </label>
