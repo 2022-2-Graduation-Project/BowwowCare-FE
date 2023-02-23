@@ -32,27 +32,13 @@ function HomePage() {
   };
 
   const handleNavigation = (type) => {
-    if (type === "aggression") {
-      navigate("/behavior-selection", {
-        state: {
-          type: type,
-        },
-      });
-    } else if (type === "anxiety") {
-      navigate("/examination", {
+    if (type) {
+      navigate("/selection", {
         state: {
           type: type,
         },
       });
     }
-  };
-
-  const handleBehaviorSelection = (type) => {
-    navigate("/behavior-selection", {
-      state: {
-        type: type,
-      },
-    });
   };
 
   const getPetList = async () => {

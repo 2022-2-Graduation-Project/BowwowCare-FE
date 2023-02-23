@@ -17,7 +17,6 @@ function SolutionPage() {
   const [alertMessage, setAlertMessage] = useState("");
   const [solutions, setSolutions] = useState([]);
 
-
   useEffect(() => {
     if (location?.state?.responses) {
       axios({
@@ -44,6 +43,7 @@ function SolutionPage() {
     setAlertMessage("로그인이 필요한 서비스입니다.\n로그인 하시겠습니까?");
     handleOpen();
     // TODO: POST results
+    // location.state.petId
   }
 
   const handleLogin = (e) => {
