@@ -5,7 +5,7 @@ import { getDurationDate } from "../../../../utils/Calculator";
 
 function PetInfo(props) {
   const birthDate = new Date(Date.parse(props.pet.birthDate));
-  const adoptDate = new Date(Date.parse(props.pet.adoptDate));
+  const adoptDate = new Date(Date.parse(props.pet.adoptionDate));
 
   const age = getAge(birthDate);
   const day = getDurationDate(adoptDate);
@@ -22,7 +22,7 @@ function PetInfo(props) {
         )}
       </div>
       <div className="ml-5">
-        <span className="text-xl">{props.pet.petname}</span>
+        <span className="text-xl">{props.pet.name}</span>
         <span className="text-sm"> {age}살</span>
         <div>함께한지 {day}일째</div>
       </div>
