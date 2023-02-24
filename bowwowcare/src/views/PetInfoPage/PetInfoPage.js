@@ -1,20 +1,45 @@
-import React from 'react'
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { API_URL } from '../../Config';
+import { useLocation, useNavigate, useParams} from "react-router-dom";
 
 import Header from '../../components/Header';
 import Button from '../../components/Button';
 
 function PetInfoPage() {
-
   const navigate = useNavigate();
   const location = useLocation();
   const params = useParams();
+  const [petname, setPetname] = useState('')
+  const [gender, setGender] = useState('')
+  const [birthDate, setBirthDate] = useState('');
+  const [adoptDate, setAdoptDate] = useState('');
+  const [fileImg, setFileImg] = useState('')
+
   const pet = location.state.pet;
-  const petname = location.state.pet.name;
-  const gender = location.state.pet.gender;
-  const birthDate = location.state.pet.birthDate.substring(0,10).split('-').join('.');
-  const adoptDate = location.state.pet.adoptionDate.substring(0,10).split('-').join('.');
-  const fileImg = location.state.pet.petImg;
+
+  useEffect(() => {
+    getPetDetail();
+  }, []);
+
+  const getPetDetail = () => {
+    axios({
+      method: 'get',
+      url: `${API_URL}/pets/${pet.petId}`
+    })
+    .then(response => {
+      if (response.status===200) {
+        const pet = response.data;
+        setPetname(pet.name)
+        if(pet.gender === 'FEMALE') setGender('여')
+        else if(pet.gender === 'MALE') setGender('남')
+        else setGender('중성')
+        setBirthDate(pet.birthDate)
+        setAdoptDate(pet.adoptionDate)
+        setFileImg(pet.petImg)
+      }
+    })
+  };
 
   return (
     <div className="px-8">
