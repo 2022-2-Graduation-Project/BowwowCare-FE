@@ -13,22 +13,6 @@ import aggression from "../../assets/images/aggression.png";
 function HomePage() {
   const [petList, setPetList] = useState([]);
   const navigate = useNavigate();
-  const fileInput = React.useRef(null);
-
-  const handleButtonClick = (e) => {
-    fileInput.current.click();
-  };
-
-  const handleChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      navigate("/preview", {
-        state: {
-          file: file,
-        },
-      });
-    }
-  };
 
   const handleNavigation = (type) => {
     if (type) {
@@ -50,7 +34,7 @@ function HomePage() {
           setPetList(res.data);
         }
       }).catch((e) => {
-        console.log(e.message);
+        console.log(e.response.data);
       })
     };
 
@@ -61,7 +45,7 @@ function HomePage() {
   return (
     <div className="container mx-auto px-8 w-screen h-screen">
       <Header />
-      <div className="flex">{petList?.length && <PetList pets={petList} />}</div>
+      <div className="flex">{<PetList pets={petList} />}</div>
 
       <div className="mt-14 py-8 shadow-lg rounded-lg">
 
