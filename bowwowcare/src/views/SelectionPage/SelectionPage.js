@@ -4,13 +4,13 @@ import axios from 'axios';
 import { API_URL } from "../../Config";
 import authHeader from "../../services/auth-header";
 import Header from "../../components/Header";
-import SelectMenu from "./Sections/SelectMenu";
+import SelectPet from "../../components/SelectPet";
 import ButtonGroups from "./Sections/ButtonGroups";
 import HAPPY from "../../assets/images/happy.png";
 import Button from "../../components/Button";
 
 
-function BehaviorSelectionPage() {  // type: aggression || anxiety
+function SelectionPage() {  
 	const navigate = useNavigate();
     const location = useLocation();
     const [pets, setPets] = useState([]);
@@ -92,6 +92,7 @@ function BehaviorSelectionPage() {  // type: aggression || anxiety
         navigate("/examination", {
 			state: {
 				"type": location.state.type,
+                "petId": selectedPet?.petId
 			}
 		})   
     }
@@ -104,25 +105,37 @@ function BehaviorSelectionPage() {  // type: aggression || anxiety
     return (
         <div className="container mx-auto w-screen h-screen px-8">
             <Header />
-            <div className="h-5/6 flex flex-col justify-between">
-                <div className="h-2/3">
-                    <div className="mt-4 mb-2">어떤 아이의 이상행동을 확인하는 건가요?</div>
-                    <SelectMenu abnormal={abnormal} pets={pets} selectedPet={selectedPet} setSelectedPet={setSelectedPet} />
-                    <div className="mt-4 mb-2">아이가 어떤 <span className="font-bold">행동</span>을 보이고 있나요?</div>
-                    <ButtonGroups abnormal={abnormal} behaviors={behaviors} selectedBehaviors={selectedBehaviors} setSelectedBehaviors={setSelectedBehaviors} />
-                </div>
-                <div className="w-full">
-                    {abnormal ? (
-                        <div className="text-center mb-4">
-                            <span>문진을 통해 공격 행동 교정을 위한 <br/></span>
-                            <span>솔루션을 얻어볼까요?</span>
+            {location?.state?.type ? (
+                <div className="h-5/6 flex flex-col justify-between">
+                    <div className="h-2/3">
+                        <div className="mt-4 mb-2">어떤 아이의 이상행동을 확인하는 건가요?</div>
+                        <SelectPet abnormal={abnormal} pets={pets} selectedPet={selectedPet} setSelectedPet={setSelectedPet} />
+                        {location.state.type==="aggression" ? (
+                            <div>
+                                <div className="mt-4 mb-2">아이가 어떤 <span className="font-bold">행동</span>을 보이고 있나요?</div>
+                                <ButtonGroups abnormal={abnormal} behaviors={behaviors} selectedBehaviors={selectedBehaviors} setSelectedBehaviors={setSelectedBehaviors} />
+                            </div>
+                        ) : null}
+                    </div>
+                    {location.state.type==="aggression" ? (
+                        <div className="w-full">
+                            {abnormal ? (
+                                <div className="text-center mb-4">
+                                    <span>문진을 통해 공격 행동 교정을 위한 <br/></span>
+                                    <span>솔루션을 얻어볼까요?</span>
+                                </div>
+                            ) : null}
+                            <Button onClick={!abnormal ? showBehaviors : handleExamination}>다음</Button>
                         </div>
-                    ) : null}
-                    <Button onClick={!abnormal ? showBehaviors : handleExamination}>다음</Button>
+                    ) : (
+                        location.state.type==="anxiety" ? (
+                            <Button onClick={handleExamination}>다음</Button>
+                        ) : null
+                    )}
                 </div>
-            </div>
+            ) : null}
         </div>
     )
 }
 
-export default BehaviorSelectionPage
+export default SelectionPage

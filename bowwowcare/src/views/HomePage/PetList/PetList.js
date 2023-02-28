@@ -10,9 +10,11 @@ function PetList(props) {
     <div className="flex overflow-x-scroll">
       {props.pets.map((pet, i) => {
         return (
-          <Link to={`/petinfo/${pet.id}`} state={{ pet: pet }}>
-            <PetInfo pet={pet} key={i} />
-          </Link>
+          <div key={i}>
+            <Link to={`/petinfo/${pet.petId}`} state={{ pet: pet }}>
+              <PetInfo pet={pet} />
+            </Link>
+          </div>
         );
       })}
       <div>

@@ -1,21 +1,45 @@
-import React from 'react'
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { API_URL } from '../../Config';
+import { useLocation, useNavigate, useParams} from "react-router-dom";
 
 import Header from '../../components/Header';
 import Button from '../../components/Button';
 
 function PetInfoPage() {
-
   const navigate = useNavigate();
   const location = useLocation();
   const params = useParams();
-  //console.log(location.state.pet)
+  const [petname, setPetname] = useState('')
+  const [gender, setGender] = useState('')
+  const [birthDate, setBirthDate] = useState('');
+  const [adoptDate, setAdoptDate] = useState('');
+  const [fileImg, setFileImg] = useState('')
+
   const pet = location.state.pet;
-  const petname = location.state.pet.petname;
-  const gender = location.state.pet.gender;
-  const birthDate = location.state.pet.birthDate.substring(0,10).split('-').join('.');
-  const adoptDate = location.state.pet.adoptDate.substring(0,10).split('-').join('.');
-  const fileImg = location.state.pet.fileImg;
+
+  useEffect(() => {
+    getPetDetail();
+  }, []);
+
+  const getPetDetail = () => {
+    axios({
+      method: 'get',
+      url: `${API_URL}/pets/${pet.petId}`
+    })
+    .then(response => {
+      if (response.status===200) {
+        const pet = response.data;
+        setPetname(pet.name)
+        if(pet.gender === 'FEMALE') setGender('여')
+        else if(pet.gender === 'MALE') setGender('남')
+        else setGender('중성')
+        setBirthDate(pet.birthDate)
+        setAdoptDate(pet.adoptionDate)
+        setFileImg(pet.petImg)
+      }
+    })
+  };
 
   return (
     <div className="px-8">
@@ -27,7 +51,7 @@ function PetInfoPage() {
             <div className="rounded-full border w-14 h-14 mb-5">
                     {fileImg && (
                       <img
-                        src={URL.createObjectURL(fileImg)}
+                        src={fileImg}
                         alt="프로필 이미지"
                         className="rounded-full w-14 h-14"
                       ></img>
