@@ -84,39 +84,10 @@ function HomePage() {
       </div>
 
       <div className="mt-8 p-8 shadow-lg rounded-lg">
-        <button>
+        <button onClick={() => navigate("/emotion")}>
           <p className=" text-lg">우리 아이의 감정을 확인해보세요</p>
           <p className=" text-xs text-left">사진 한 장으로 간편하게 알아보세요</p>
-        </button>
-      </div>
-      
-
-      <p className="text-xl font-bold mt-16">
-        우리 아이 표정으로 감정 알아보기
-      </p>
-
-      <div className="flex justify-around">
-        <button
-          className="w-full h-14 mt-8 mr-4 font-bold rounded-md bg-main-color text-white text-left p-4"
-          onClick={handleButtonClick}
-        >
-          사진 선택
-        </button>
-        <input
-          type="file"
-          id="avatar"
-          name="avatar"
-          accept="image/jpg, image/png, image/jpeg"
-          ref={fileInput}
-          onChange={handleChange}
-          style={{ display: "none" }}
-        />
-        <button
-          className="w-full h-14 mt-8 font-bold rounded-md bg-main-color text-white text-left p-4"
-          onClick={() => navigate("/camera")}
-        >
-          사진 찍기
-        </button>
+          </button>
       </div>
     </div>
   );
