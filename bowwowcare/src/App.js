@@ -15,6 +15,7 @@ import SignupPage from './views/SignupPage/SignupPage';
 import AdditionPage from "./views/AdditionPage/AdditionPage";
 import PetInfoPage from "./views/PetInfoPage/PetInfoPage";
 import SelectionPage from './views/SelectionPage/SelectionPage';
+import EmotionPage from "./views/EmotionPage/EmotionPage";
 
 import PrivateRoute from "./PrivateRoute";
 
@@ -55,6 +56,7 @@ function App() {
 			<Route path="/addition" element={<AdditionPage/>} />
 			<Route path="/petinfo/:id" element={<PetInfoPage/>} />
 			<Route path="/selection" element={<SelectionPage />} />
+			<Route path="/emotion" element={<EmotionPage />} />
 			{/* <Route path="/addition" element={<PrivateRoute component={<AdditionPage />} authenticated={token}/>} /> */}
 		</Routes>
   	);
