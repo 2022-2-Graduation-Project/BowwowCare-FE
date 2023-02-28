@@ -64,7 +64,6 @@ function AdditionPage() {
             headers: authHeader(),
           })
             .then((res) => {
-              window.location.reload();
               navigate("/");
             })
             .catch((error) => {
