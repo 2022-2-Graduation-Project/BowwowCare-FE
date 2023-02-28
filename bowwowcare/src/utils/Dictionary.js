@@ -71,3 +71,4 @@ export const solutions = {
     ]
 };
 
+export const behaviorType = ["행동 준비 단계 : 스트레스 반응", "행동 준비 단계 : 집중하기", "극단적 행동 단계 : 방어준비"];
