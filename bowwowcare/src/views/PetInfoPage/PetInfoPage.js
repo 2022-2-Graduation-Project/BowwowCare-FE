@@ -5,11 +5,13 @@ import { useLocation, useNavigate, useParams} from "react-router-dom";
 
 import Header from '../../components/Header';
 import Button from '../../components/Button';
+import lens from '../../assets/images/lens.png'
 
 function PetInfoPage() {
   const navigate = useNavigate();
   const location = useLocation();
   const params = useParams();
+  const [petInfo, setPetInfo] = useState('')
   const [petname, setPetname] = useState('')
   const [gender, setGender] = useState('')
   const [birthDate, setBirthDate] = useState('');
@@ -30,6 +32,7 @@ function PetInfoPage() {
     .then(response => {
       if (response.status===200) {
         const pet = response.data;
+        setPetInfo(pet);
         setPetname(pet.name)
         if(pet.gender === 'FEMALE') setGender('여')
         else if(pet.gender === 'MALE') setGender('남')
@@ -69,22 +72,32 @@ function PetInfoPage() {
       <div className='mb-10'>
         <div className='flex justify-center'>
           <table className='border-separate border-spacing-3'>
-          <tr>
-            <td>태어난 날</td>
-            <td>{birthDate}</td>
-          </tr>
-          <tr>
-            <td>가족이 된 날</td>
-            <td>{adoptDate}</td>
-          </tr>
+            <tbody>
+              <tr>
+                <td>태어난 날</td>
+                <td>{birthDate}</td>
+              </tr>
+              <tr>
+                <td>가족이 된 날</td>
+                <td>{adoptDate}</td>
+              </tr>
+          </tbody>
         </table>
         </div>
         </div>
-          
-      <div className='shadow-lg p-10 h-60 mb-10'>
-        <span>기록</span>
+        {
+          // TODO: 편집 버튼 위치&모양 조정 ...?
+        }
+        <div className="text-center">
+          <p onClick={()=>navigate(`/edit/${params.id}`, { state: petInfo })}>편집</p>
+        </div>
+
+      <div className=" absolute bottom-8 w-5/6">
+        <div className="flex justify-center">
+            <img src={lens} width="100px"></img>
+        </div>
+        <Button children="멍멍케어 시작하기" ></Button>
       </div>
-      <Button children="편집" onClick={()=>navigate(`/edit/${params.id}`, { state: pet })}></Button>
     </div>
     </div>
     </div>
