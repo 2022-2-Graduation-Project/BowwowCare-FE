@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import { API_URL } from "../../Config";
 import authHeader from "../../services/auth-header";
@@ -12,12 +12,15 @@ import Button from "../../components/Button";
 
 function AdditionPage() {
   let navigate = useNavigate();
+  let location = useLocation();
 
-  const [petname, setPetName] = useState("");
-  const [gender, setGender] = useState("male");
-  const [birthDate, setBirthDate] = useState(new Date());
-  const [adoptDate, setAdoptDate] = useState(new Date());
-  const [fileImg, setFileImg] = useState();
+  const pet = location.state;
+  const [petname, setPetName] = useState(pet ? pet.name : "");
+  const [gender, setGender] = useState(pet ? pet.gender.toLowerCase() : "male");
+  const [birthDate, setBirthDate] = useState(pet?Date.parse(pet.birthDate) : new Date());
+  const [adoptDate, setAdoptDate] = useState(pet? Date.parse(pet.adoptionDate) : new Date());
+  const [fileImg, setFileImg] = useState(pet? pet.petImg : null);
+
 
   const fileInput = React.useRef();
 
@@ -34,47 +37,51 @@ function AdditionPage() {
   };
   
   const handleChange = (e) => {
-    setFileImg(e.target.files[0]);
+    setFileImg(URL.createObjectURL(e.target.files[0]));
   };
 
-  const handleAdd = (e) => {
-    if (petname && gender && fileImg && birthDate && adoptDate) {
-      const formData = new FormData();
-      formData.append("file", fileImg);
-
-      axios({
-        method: "POST",
-        url: `${API_URL}/image`,
-        data: formData
-      })
-      .then((response => {
-        if (response.status === 200) {
-          let body = {
-            name: petname,
-            gender: gender,
-            petImg: response.data.url,
-            birthDate: changeFormat(birthDate),
-            adoptionDate: changeFormat(adoptDate),
-          };
-
-          axios({
-            method: "POST",
-            url: `${API_URL}/pets`,
-            data: body,
-            headers: authHeader(),
-          })
-            .then((res) => {
-              navigate("/");
+  const handleSubmit = (e) => {
+    if(petname && gender && fileImg && birthDate && adoptDate){
+      if(pet){
+        const formData = new FormData();
+        formData.append("file", fileImg);
+  
+        axios({
+          method: "POST",
+          url: `${API_URL}/image`,
+          data: formData
+        })
+        .then((response => {
+          if (response.status === 200) {
+            let body = {
+              name: petname,
+              gender: gender,
+              petImg: response.data.url,
+              birthDate: changeFormat(birthDate),
+              adoptionDate: changeFormat(adoptDate),
+            };
+  
+            axios({
+              method: "POST",
+              url: `${API_URL}/pets`,
+              data: body,
+              headers: authHeader(),
             })
-            .catch((error) => {
-              console.log(error.response);
-            });
-        }
-      }))
-    } else {
+              .then((res) => {
+                navigate("/");
+              })
+              .catch((error) => {
+                console.log(error.response);
+              });
+          }
+        }))
+      }else{
+        // TODO: 수정 API 추가
+      }
+    }else{
       alert("모든 항목을 입력하세요.");
     }
-  };
+  }
 
   return (
     <div className="container mx-auto px-8 w-screen h-screen">
@@ -85,7 +92,7 @@ function AdditionPage() {
             <div className="rounded-full border w-20 h-20 ml-4">
               {fileImg && (
                 <img
-                  src={URL.createObjectURL(fileImg)}
+                  src={fileImg}
                   alt="프로필 이미지"
                   className="rounded-full w-20 h-20"
                 ></img>
@@ -94,7 +101,7 @@ function AdditionPage() {
 
             <div className="mt-3">
               <label className="font-bold " htmlFor="profileImg">
-                프로필 이미지 추가
+                프로필 이미지 {pet ? "변경" : "추가"}
               </label>
               <input
                 type="file"
@@ -184,8 +191,8 @@ function AdditionPage() {
         </div>
       </div>
       <div className="absolute bottom-8 w-5/6">
-        <Button onClick={handleAdd}>
-          추가
+        <Button onClick={handleSubmit}>
+          {pet? "변경":"추가"}
         </Button>
       </div>
     </div>
