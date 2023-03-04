@@ -55,7 +55,7 @@ function App() {
 			<Route path="/login" element={ <LoginPage /> } />
 			<Route path="/signup" element={ <SignupPage /> } />
 			<Route path="/addition" element={<PrivateRoute component={<AdditionPage />} authenticated={token}/>} />
-			<Route path="/addition/:id" element={<AdditionPage/>} />
+			<Route path="/edit/:id" element={<AdditionPage/>} />
 			<Route path="/petinfo/:id" element={<PetInfoPage/>} />
 			<Route path="/selection" element={<SelectionPage />} />
 			<Route path="/emotion" element={<EmotionPage />} />

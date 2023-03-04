@@ -42,7 +42,7 @@ function AdditionPage() {
 
   const handleSubmit = (e) => {
     if(petname && gender && fileImg && birthDate && adoptDate){
-      if(pet){
+      if(!pet){
         const formData = new FormData();
         formData.append("file", fileImg);
   

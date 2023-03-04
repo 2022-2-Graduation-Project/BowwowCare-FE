@@ -89,7 +89,7 @@ function PetInfoPage() {
           // TODO: 편집 버튼 위치&모양 조정 ...?
         }
         <div className="text-center">
-          <p onClick={()=>navigate(`/addition/${params.id}`, { state: petInfo })}>편집</p>
+          <p onClick={()=>navigate(`/edit/${params.id}`, { state: petInfo })}>편집</p>
         </div>
 
       <div className=" absolute bottom-8 w-5/6">
