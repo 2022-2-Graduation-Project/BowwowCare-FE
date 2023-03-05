@@ -17,7 +17,7 @@ function ExaminationPage() {
           ) : (
             <div className="mt-20 mb-6">아이가 어떤 <span className="font-bold">행동</span>을 보이고 있나요?</div>
           )}
-          <Examination type={location.state.type} petId={location.state.petId} /> 
+          <Examination type={location.state.type} petId={location.state.petId} aggressionType={location.state.aggressionType} /> 
         </div>
       : null}
     </div>

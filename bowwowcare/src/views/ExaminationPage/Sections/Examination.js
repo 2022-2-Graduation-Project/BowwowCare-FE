@@ -5,7 +5,7 @@ import { API_URL } from "../../../Config";
 import Button from "../../../components/Button";
 
 
-function Examination({ type, petId }) {
+function Examination({ type, petId, aggressionType=undefined }) {
   const navigate = useNavigate();
   const [questions, setQuestions] = useState([]);
   const [responses, setResponses] = useState([]);
@@ -56,10 +56,10 @@ function Examination({ type, petId }) {
       state: {
         responses,
         type,
-        petId
+        petId,
+        aggressionType
       },
     });
-    console.log(responses);
   };
 
   return (
