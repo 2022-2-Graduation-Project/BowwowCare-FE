@@ -18,7 +18,7 @@ function SelectionPage() {
     const [behaviors, setBehaviors] = useState([]);
     const [selectedBehaviors, setSelectedBehaviors] = useState([]);
     const [abnormal, setAbnormal] = useState(false);
-    
+    const [aggressionType, setAggressionType] = useState([]);
 
     useEffect(() => {
         // TEST: Mockup Data
@@ -83,22 +83,27 @@ function SelectionPage() {
     }, [behaviors]);
 
     const showBehaviors = (e) => {
-        if (selectedBehaviors.some(item => item.isDeleted === false)) {
+        if (selectedBehaviors.some(item => item.isDeleted===false)) {
             setAbnormal(true);
+            let selected = selectedBehaviors
+                            .filter(item => item.isDeleted===false)
+                            .map(item => item.aggressionType);
+            let unique = [...new Set(selected)];
+            setAggressionType(unique);
         }
     }
 
     const handleExamination = () => {
+        let state = {
+            "type": location.state.type,
+            "petId": selectedPet?.petId
+        }
+        if (location?.state?.type==="aggression") {
+            state.aggressionType = aggressionType
+        }
         navigate("/examination", {
-			state: {
-				"type": location.state.type,
-                "petId": selectedPet?.petId
-			}
+			state: state
 		})   
-    }
-
-    const sendBehaviors = (e) => {
-        // POST behaviors   
     }
     
 
