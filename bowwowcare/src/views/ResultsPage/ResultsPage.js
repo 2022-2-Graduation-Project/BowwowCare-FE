@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { API_URL } from '../../Config';
 import { en2koDictEmotionVerb } from "../../utils/Dictionary";
 import Header from "../../components/Header";
 import HAPPY from "../../assets/images/happy.png";
@@ -67,12 +68,28 @@ function ResultsPage() {
         }
     }, [loading]);
 
-    const shareKakao = () => {
-        window.Kakao.Share.sendCustom({
+    const shareKakao = async () => {
+        let thumbnail = "";
+
+        const formData = new FormData();
+        formData.append("file", file);
+
+        await axios({
+            method: "POST",
+            url: `${API_URL}/image`,
+            data: formData
+        })
+        .then((response => {
+            if (response.status === 200) {
+                thumbnail = response.data.url;
+            }
+        }));
+
+        await window.Kakao.Share.sendCustom({
             templateId: 89326,
             templateArgs: {
                 PROFILE_NAME: `아이가 ${en2koDictEmotionVerb[emotion]} 있어요 💕`,
-                THUMBNAIL: "https://user-images.githubusercontent.com/53266682/215945871-af699ec9-22b6-443e-9982-4f594de8ee0a.png", // TODO: image url from s3
+                THUMBNAIL: thumbnail,
             },
         });
     }
