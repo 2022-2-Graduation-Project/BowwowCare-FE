@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { IoIosArrowBack } from "react-icons/io";
 import Header from "../../components/Header";
 import lens from '../../assets/images/lens.png';
+import Button from '../../components/Button';
 
 
 function PreviewPage() {
@@ -51,12 +52,14 @@ function PreviewPage() {
                         <div className="flex justify-center pb-8">
                             <img src={lens} width="280x" />
                         </div>
-                        <button 
+
+                        {/* <button 
                             className="h-12 w-full font-bold rounded-md bg-main-color text-white text-center" 
                             onClick={handleAnalysis}
                         >
                             분석하기
-                        </button>
+                        </button> */}
+                        <Button onClick={handleAnalysis}>분석하기</Button>
                     </div>
                 </div>
             ) : null}

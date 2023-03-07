@@ -1,9 +1,15 @@
+import styled from "styled-components";
+
 function Button ({size, bgColor="main-color", textColor="white", borderColor="none", children, onClick}) {
     return (
-        <button onClick={onClick} className={`h-12 w-full font-bold rounded-md bg-${bgColor} border border-${borderColor} text-${textColor} text-center`}>
+        <StyledButton onClick={onClick} className={`h-12 w-full font-bold rounded-md border border-${borderColor} text-${textColor} text-center`}>
             {children}
-        </button>
+        </StyledButton>
     )
 };
+
+const StyledButton = styled.button`
+    background: ${({theme}) => theme.primary};
+`;
 
 export default Button;

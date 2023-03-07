@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
+import Button from "../../components/Button";
 
 function EmotionPage() {
     const navigate = useNavigate();
@@ -27,12 +28,7 @@ function EmotionPage() {
         우리 아이 표정으로 감정 알아보기
       </p>
     <div className="flex justify-around">
-        <button
-          className="w-full h-14 mt-8 mr-4 font-bold rounded-md bg-main-color text-white text-left p-4"
-          onClick={handleButtonClick}
-        >
-          사진 선택
-        </button>
+    <Button onClick={handleButtonClick}>사진 선택</Button>
         <input
           type="file"
           id="avatar"
@@ -42,12 +38,7 @@ function EmotionPage() {
           onChange={handleChange}
           style={{ display: "none" }}
         />
-        <button
-          className="w-full h-14 mt-8 font-bold rounded-md bg-main-color text-white text-left p-4"
-          onClick={() => navigate("/camera")}
-        >
-          사진 찍기
-        </button>
+        <Button onClick={() => navigate("/camera")}>사진 찍기</Button>
       </div>
       </div>
   )

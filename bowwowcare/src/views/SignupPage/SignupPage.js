@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
 import { IoAlertCircleOutline } from "react-icons/io5";
@@ -7,6 +7,8 @@ import { IconContext } from "react-icons";
 import { signup } from "../../slices/auth";
 import { clearMessage } from "../../slices/message";
 import Header from "../../components/Header";
+import Button from "../../components/Button";
+import { ThemeContext } from "../../context/ThemeProvider";
 import { emailValidator, passwordValidator, nameValidator } from '../../utils/Validator';
 
 
@@ -22,6 +24,7 @@ const SignupPage = () => {
     const [emailValid, setEmailValid] = useState("");
     const [passwordValid, setPasswordValid] = useState("");
     const [confirmPasswordValid, setConfirmPasswordValid] = useState(false);
+    const [themeMode, setThemeMode] = useContext(ThemeContext);
 
     const { isLoggedIn } = useSelector((state) => state.auth);
     const { message } = useSelector((state) => state.message);
@@ -166,17 +169,22 @@ const SignupPage = () => {
                             <input type="password" id="confirm-password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:outline-none focus:border-2 focus:border-main-color block w-full p-2.5" required />
                         </div> 
                         <div className="mb-6">
-                            <button onClick={handleSignup} className="h-12 w-full font-bold rounded-md bg-main-color text-white text-center" disabled={loading || !confirmPasswordValid}>
+                            <Button onClick={handleSignup}>{loading && (
+                                    <span className="spinner-border spinner-border-sm"></span>
+                                )}
+                                <span>회원가입</span>
+                            </Button>
+                            {/* <button onClick={handleSignup} className="h-12 w-full font-bold rounded-md bg-main-color text-white text-center" disabled={loading || !confirmPasswordValid}>
                                 {loading && (
                                     <span className="spinner-border spinner-border-sm"></span>
                                 )}
                                 <span>회원가입</span>
-                            </button>
+                            </button> */}
                         </div>
                     </form>
                     <div className="flex justify-end">
                         <div className="mr-2">이미 멍멍케어에 가입했나요? </div>
-                        <button className="text-main-color font-bold" onClick={handleLogin}>로그인</button>
+                        <button className={themeMode === `primary`?`text-primary-theme` : themeMode === `secondary` ? `text-secondary-theme` : `text-third-theme`} onClick={handleLogin}><span className="font-bold">로그인</span></button>
                     </div>
                     {/* {message && (
                         <div className="alert alert-danger">
