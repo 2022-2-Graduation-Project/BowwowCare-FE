@@ -1,6 +1,13 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./src/**/*.{html,js}"],
+  content: {
+    relative: true,
+    files: [
+      "./public/index.html",
+      "./src/**/*.{html,js,jsx}"
+    ]
+  },
+  safelist: "./safelist.txt",
   theme: {
     extend: {
       colors: {
@@ -12,5 +19,14 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require('tailwind-safelist-generator')({
+      patterns: [
+        'text-{colors}',
+        'border-{borderWidth}',
+        'bg-{colors}',
+        '{screens}:gap-{gap}',
+      ],
+    }),
+  ],
 }

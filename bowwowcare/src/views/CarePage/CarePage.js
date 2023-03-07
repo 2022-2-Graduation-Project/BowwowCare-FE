@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Header from '../../components/Header'
 import Lens from '../../assets/images/lens.png'
 import dayjs from 'dayjs';
-import { behaviorType } from '../../utils/Dictionary';
+import { behaviorType, colorVariants } from '../../utils/Dictionary';
 
 function CarePage({ type="aggression" }) {
     const [cards, setCards] = useState([]);
@@ -33,6 +33,25 @@ function CarePage({ type="aggression" }) {
     const handleMission = (e) => {
         // TODO: POST mission
         alert("오늘 미션에 성공하였습니다!");
+        // TEST
+        setCards([
+            {
+                "id": 1,
+                "count": 3,
+                "missionDate": "2023-03-05",
+                "solution": "아이만의 공간을 만들어 그곳에서 편히 먹거나 쉬도록 켄넬교육을 시켜보세요.",
+                "aggressionType": [0],
+                "modifiedAt": "2023-02-28"
+            },
+            {
+                "id": 1,
+                "count": 4,
+                "missionDate": "2023-02-28",
+                "solution": "사회화 시기에 사람, 다른 동물 등에 대한 사회화의 기회가 없는 경우에 발생할 수 있습니다. 낯선 사람이 간식을 줘보도록 해보세요.",
+                "aggressionType": [1, 2],
+                "modifiedAt": "2023-02-24"
+            },
+        ]);
     }
 
     return (
@@ -64,7 +83,7 @@ function CarePage({ type="aggression" }) {
                                 <div class="flex justify-between overflow-x-hidden w-full">
                                     <div class="flex w-full overflow-x-auto [&>div]:flex-shrink-0 pb-2">
                                         {card.aggressionType?.map(aggressionType => 
-                                            <div className={`rounded-md px-2 bg-aggression${aggressionType}`}>{behaviorType[aggressionType]}</div>
+                                            <div className={`rounded-md px-2 ${colorVariants['bg'+aggressionType]}`}>{behaviorType[aggressionType]}</div>
                                         )}
                                     </div>
                                 </div>

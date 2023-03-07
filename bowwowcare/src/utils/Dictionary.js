@@ -71,4 +71,20 @@ export const solutions = {
     ]
 };
 
-export const behaviorType = ["행동 준비 단계 : 스트레스 반응", "행동 준비 단계 : 집중하기", "극단적 행동 단계 : 방어준비"];
+export const behaviorType = [
+    "행동 준비 단계 : 스트레스 반응", 
+    "행동 준비 단계 : 집중하기", 
+    "극단적 행동 단계 : 방어준비"
+];
+
+export const colorVariants = {
+    text0: 'text-aggression0',
+    bg0: 'bg-aggression0',
+    border0: 'border-aggression0',
+    text1: 'text-aggression1',
+    bg1: 'bg-aggression1',
+    border1: 'border-aggression1',
+    text2: 'text-aggression2',
+    bg2: 'bg-aggression2',
+    border2: 'border-aggression2',
+}
