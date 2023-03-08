@@ -169,7 +169,8 @@ const SignupPage = () => {
                             <input type="password" id="confirm-password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:outline-none focus:border-2 focus:border-main-color block w-full p-2.5" required />
                         </div> 
                         <div className="mb-6">
-                            <Button onClick={handleSignup}>{loading && (
+                            <Button onClick={handleSignup} disabled={loading}>
+                                {loading && (
                                     <span className="spinner-border spinner-border-sm"></span>
                                 )}
                                 <span>회원가입</span>

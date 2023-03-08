@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-function Button ({size, bgColor="main-color", textColor="white", borderColor="none", children, onClick}) {
+function Button ({size, bgColor="main-color", textColor="white", borderColor="none", children, onClick, disabled}) {
     return (
-        <StyledButton onClick={onClick} className={`h-12 w-full font-bold rounded-md border border-${borderColor} text-${textColor} text-center`}>
+        <StyledButton disabled={disabled} onClick={onClick} className={`h-12 w-full font-bold rounded-md border border-${borderColor} text-${textColor} text-center`}>
             {children}
         </StyledButton>
     )

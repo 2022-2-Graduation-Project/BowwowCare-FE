@@ -60,7 +60,7 @@ const LoginPage = () => {
         }
 
         setLoading(true);
-
+console.log("ff")
         dispatch(login(dataToSubmit))
         .unwrap()
         .then(() => {
@@ -120,7 +120,8 @@ const LoginPage = () => {
                             <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:outline-none focus:border-2 focus:border-main-color block w-full p-2.5" required />
                         </div> 
                         <div className="mb-8">
-                            <Button onClick={handleLogin} disabled={loading}>{loading && (
+                            <Button onClick={handleLogin} disabled={loading}>
+                                {loading && (
                                     <span className="spinner-border spinner-border-sm"></span>
                                 )}
                                 <span>로그인</span>
