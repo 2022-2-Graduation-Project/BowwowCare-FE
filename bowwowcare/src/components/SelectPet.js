@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import HAPPY from "../assets/images/happy.png";
+
+import { ThemeContext } from './../context/ThemeProvider.js';
+import { colorVariants } from '../utils/Dictionary';
 
 function SelectPet({ pets, selectedPet, setSelectedPet, abnormal }) {
     const [show, setShow] = useState(false);
+    const [themeMode, setThemeMode] = useContext(ThemeContext);
 
     const showSelectMenu = (e) => {
         if (!abnormal) {
@@ -19,7 +23,7 @@ function SelectPet({ pets, selectedPet, setSelectedPet, abnormal }) {
         <div>
             <div class="relative mt-1">
                 {selectedPet ? (
-                    <button onClick={showSelectMenu} type="button" class="relative w-full cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-main-color focus:outline-none focus:ring-1 focus:ring-main-color sm:text-sm" aria-haspopup="listbox" aria-expanded="true" aria-labelledby="listbox-label">
+                    <button onClick={showSelectMenu} type="button" class={`relative w-full cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm  focus:${colorVariants['border'+themeMode]} ${colorVariants['ring'+themeMode]} focus:outline-none focus:ring-1`} aria-haspopup="listbox" aria-expanded="true" aria-labelledby="listbox-label">
                         <span class="flex items-center">
                             <img src={HAPPY} alt="" class="h-6 w-6 flex-shrink-0 rounded-full" />
                             <span class="ml-3 block truncate">{selectedPet.petName}</span>
@@ -36,7 +40,7 @@ function SelectPet({ pets, selectedPet, setSelectedPet, abnormal }) {
                         {pets?.map(pet => 
                             <li 
                                 key={pet?.petId} 
-                                class={`${pet?.petId === selectedPet?.petId ? "text-white bg-main-color" : "text-gray-900"} relative cursor-default select-none py-2 pl-3 pr-9`} 
+                                class={`${pet?.petId === selectedPet?.petId ? colorVariants['bg'+themeMode] + ` text-white` : "text-gray-900"} relative cursor-default select-none py-2 pl-3 pr-9`} 
                                 id="listbox-option-0" role="option"
                                 onClick={handleSelected(pet)}
                             >

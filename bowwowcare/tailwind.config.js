@@ -19,7 +19,7 @@ module.exports = {
         'aggression2': '#FF1192',
         'primary-theme': '#38A8AC',
         'secondary-theme': '#7E57C2',
-        'third-theme': '#424242'
+        'third-theme': '#424242',
       },
     },
   },
@@ -29,6 +29,7 @@ module.exports = {
         'text-{colors}',
         'border-{borderWidth}',
         'bg-{colors}',
+        'ring-{colors}',
         '{screens}:gap-{gap}',
       ],
     }),

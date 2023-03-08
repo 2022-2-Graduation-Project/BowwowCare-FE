@@ -10,7 +10,7 @@ import Header from "../../components/Header";
 import Button from "../../components/Button";
 import { ThemeContext } from "../../context/ThemeProvider";
 import { emailValidator, passwordValidator, nameValidator } from '../../utils/Validator';
-
+import { colorVariants } from "../../utils/Dictionary";
 
 const SignupPage = () => {
     let navigate = useNavigate();
@@ -185,7 +185,7 @@ const SignupPage = () => {
                     </form>
                     <div className="flex justify-end">
                         <div className="mr-2">이미 멍멍케어에 가입했나요? </div>
-                        <button className={themeMode === `primary`?`text-primary-theme` : themeMode === `secondary` ? `text-secondary-theme` : `text-third-theme`} onClick={handleLogin}><span className="font-bold">로그인</span></button>
+                        <button className={`${colorVariants['text'+themeMode]}`} onClick={handleLogin}><span className="font-bold">로그인</span></button>
                     </div>
                     {/* {message && (
                         <div className="alert alert-danger">

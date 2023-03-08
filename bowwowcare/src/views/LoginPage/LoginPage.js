@@ -10,6 +10,7 @@ import Header from "../../components/Header";
 import { emailValidator, passwordValidator } from '../../utils/Validator';
 import Button from "../../components/Button";
 import { ThemeContext } from "../../context/ThemeProvider";
+import { colorVariants } from "../../utils/Dictionary";
 
 const LoginPage = () => {
     let navigate = useNavigate();
@@ -136,7 +137,7 @@ console.log("ff")
                     </form>
                     <div className="flex justify-end">
                         <div className="mr-2">멍멍케어가 처음이세요? </div>
-                        <button className={themeMode === `primary`?`text-primary-theme` : themeMode === `secondary` ? `text-secondary-theme` : `text-third-theme`} onClick={handleSignup}>
+                        <button className={`${colorVariants['text'+themeMode]}`} onClick={handleSignup}>
                             <span className="font-bold">회원가입</span>
                         </button>
                     </div>

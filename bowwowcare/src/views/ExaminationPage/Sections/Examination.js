@@ -1,14 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { API_URL } from "../../../Config";
 import Button from "../../../components/Button";
 
+import { ThemeContext } from "../../../context/ThemeProvider";
+import { colorVariants } from '../../../utils/Dictionary';
 
 function Examination({ type, petId, aggressionType=undefined }) {
   const navigate = useNavigate();
   const [questions, setQuestions] = useState([]);
   const [responses, setResponses] = useState([]);
+  const [themeMode, setThemeMode] = useContext(ThemeContext);
 
   useEffect(() => {
     if (type) {
@@ -80,7 +83,7 @@ function Examination({ type, petId, aggressionType=undefined }) {
                             value={true}
                             name={`${question.id}`}
                             onChange={handleChangeResponse(index, question.id)}
-                            className="mr-2 accent-main-color"
+                            className={`mr-2 ${colorVariants['accent'+themeMode]}`}
                             checked={responses[index].checked}
                           />
                           {`예`}
@@ -94,7 +97,7 @@ function Examination({ type, petId, aggressionType=undefined }) {
                             value={false}
                             name={`${question.id}`}
                             onChange={handleChangeResponse(index, question.id)}
-                            className="mr-2 accent-main-color"
+                            className={`mr-2 ${colorVariants['accent'+themeMode]}`}
                             checked={responses[index].checked === false}
                           />
                           {`아니요`}

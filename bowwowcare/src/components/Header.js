@@ -7,7 +7,7 @@ import { logout } from "../slices/auth";
 import "../font.css";
 
 import { ThemeContext } from './../context/ThemeProvider.js';
-
+import { colorVariants } from '../utils/Dictionary';
 
 function Header() {
 	const [themeMode, setThemeMode] = useContext(ThemeContext);
@@ -21,12 +21,12 @@ function Header() {
 	const handleLogin = (e) => {
 		navigate("/login");
 	}
-
+	
 	return (
 		<div>
 		<div className="flex flex-row justify-between items-center my-10">
 			<div className={`text-xl font-bold text-left`} onClick={handleGoHome}>
-			<span style={{ fontFamily: "Tenada" }} className={themeMode === `primary`?`text-primary-theme` : themeMode === `secondary` ? `text-secondary-theme` : `text-third-theme`}>멍멍케어</span>
+			<span style={{ fontFamily: "Tenada" }} className={`${colorVariants['text'+themeMode]}`}>멍멍케어</span>
 			</div>
 			{window.location.pathname==="/login" ? (
 				null
