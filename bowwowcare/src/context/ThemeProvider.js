@@ -1,11 +1,12 @@
-import { createContext, useState, useContext, useCallback } from "react";
+import { createContext, useState } from "react";
 import { primaryTheme, secondaryTheme, thirdTheme } from "../theme/theme";
 import { ThemeProvider as StyledProvider } from 'styled-components';
 
 export const ThemeContext = createContext({});
 
 function ThemeProvider({ children }) {
-  const [ThemeMode, setThemeMode] = useState("primary");
+  const localTheme = window.localStorage.getItem("theme") || "primary"
+  const [ThemeMode, setThemeMode] = useState(localTheme);
   const themeObject = ThemeMode === "primary" ? primaryTheme : ThemeMode === "secondary" ? secondaryTheme : thirdTheme;
 
   return (
