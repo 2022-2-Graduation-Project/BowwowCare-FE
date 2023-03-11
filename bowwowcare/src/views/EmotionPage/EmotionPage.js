@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
 import Button from "../../components/Button";
+import { ThemeContext } from "../../context/ThemeProvider";
 
 function EmotionPage() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const fileInput = React.useRef(null);
+  const [themeMode, setThemeMode] = useContext(ThemeContext)
     const handleButtonClick = (e) => {
         fileInput.current.click();
       };
@@ -28,7 +30,7 @@ function EmotionPage() {
         우리 아이 표정으로 감정 알아보기
       </p>
     <div className="flex justify-around">
-    <Button onClick={handleButtonClick}>사진 선택</Button>
+    <Button onClick={handleButtonClick} bgColor={themeMode}>사진 선택</Button>
         <input
           type="file"
           id="avatar"
@@ -38,7 +40,7 @@ function EmotionPage() {
           onChange={handleChange}
           style={{ display: "none" }}
         />
-        <Button onClick={() => navigate("/camera")}>사진 찍기</Button>
+        <Button onClick={() => navigate("/camera")} bgColor={themeMode}>사진 찍기</Button>
       </div>
       </div>
   )

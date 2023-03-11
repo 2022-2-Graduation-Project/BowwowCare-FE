@@ -16,7 +16,7 @@ function ThemeBox({onClick, title, status, rewards, mainColor, subColor}) {
             <div className={`bg-${mainColor} rounded-full w-12 h-12`} />
             <div className={`bg-${subColor} rounded-full w-12 h-12`} />
           </div>
-          <span className={`grid content-center w-1/4 text-main-color ${status ? colorVariants['text'+themeMode]: 'text-black'}`}>X {rewards}</span>
+          <span className={`grid content-center w-1/4 ${status ? colorVariants['text'+themeMode]: 'text-black'}`}>X {rewards}</span>
         </div>  
       </button>
   )

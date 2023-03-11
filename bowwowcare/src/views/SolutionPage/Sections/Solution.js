@@ -26,7 +26,7 @@ function Solution({ solution, emotion }) {
           <div className="h-1/2 overflow-y-auto">{solution.solution}</div>
           <Button
             onClick={() => setPopup(true)}
-            bgColor="white" borderColor={colorVariants['border'+themeMode]} textColor="white"
+            bgColor="white" borderColor={themeMode} textColor={themeMode}
           >
             <div>자세히 보기</div>
           </Button>

@@ -1,5 +1,5 @@
 /*global kakao*/ 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { API_URL } from '../../Config';
@@ -10,6 +10,8 @@ import SAD from "../../assets/images/sad.png";
 import instagram from "../../assets/images/instagram.png";
 import kakaotalk from "../../assets/images/kakaotalk.png";
 import facebook from "../../assets/images/facebook.png";
+import { ThemeContext } from '../../context/ThemeProvider';
+import { colorVariants } from '../../utils/Dictionary';
 
 
 function ResultsPage() {
@@ -18,6 +20,7 @@ function ResultsPage() {
     const [file, setFile] = useState();
     const [emotion, setEmotion] = useState();
     const [loading, setLoading] = useState(true);
+    const [themeMode, setThemeMode] = useContext(ThemeContext)
 
     useEffect(() => {
         if (location?.state?.file) {
@@ -126,7 +129,7 @@ function ResultsPage() {
                         </div>
                         {emotion === "SAD" || emotion === "angry" ? (
                             <button 
-                                className="mt-8 h-12 w-full font-bold rounded-md bg-main-color text-white text-center" 
+                                className={`mt-8 h-12 w-full font-bold rounded-md ${colorVariants['bg'+themeMode]} text-white text-center`}
                                 onClick={handleExamination}
                             >
                                 문진하기

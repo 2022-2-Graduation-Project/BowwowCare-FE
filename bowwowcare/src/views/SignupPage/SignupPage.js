@@ -154,22 +154,22 @@ const SignupPage = () => {
                     <form>
                         <div className="mb-6">
                             <label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">이름</label>
-                            <input type="username" id="username" value={username} onChange={(e) => setUsername(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:outline-none focus:border-2 focus:border-main-color block w-full p-2.5" required />
+                            <input type="username" id="username" value={username} onChange={(e) => setUsername(e.target.value)} className={`bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:outline-none focus:border-2 focus:${colorVariants['border'+themeMode]} block w-full p-2.5`} required />
                         </div> 
                         <div className="mb-6">
                             <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">이메일</label>
-                            <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:outline-none focus:border-2 focus:border-main-color block w-full p-2.5" required />
+                            <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} className={`bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:outline-none focus:border-2 focus:${colorVariants['border'+themeMode]} block w-full p-2.5`} required />
                         </div> 
                         <div className="mb-6">
                             <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">비밀번호</label>
-                            <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:outline-none focus:border-2 focus:border-main-color block w-full p-2.5" required />
+                            <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} className={`bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:outline-none focus:border-2 focus:${colorVariants['border'+themeMode]} block w-full p-2.5`} required />
                         </div>
                         <div className="mb-8">
                             <label htmlFor="confirm-password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">비밀번호 확인</label>
-                            <input type="password" id="confirm-password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:outline-none focus:border-2 focus:border-main-color block w-full p-2.5" required />
+                            <input type="password" id="confirm-password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} className={`bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:outline-none focus:border-2 focus:${colorVariants['border'+themeMode]} block w-full p-2.5`} required />
                         </div> 
                         <div className="mb-6">
-                            <Button onClick={handleSignup} disabled={loading}>
+                            <Button onClick={handleSignup} disabled={loading} bgColor={themeMode}>
                                 {loading && (
                                     <span className="spinner-border spinner-border-sm"></span>
                                 )}

@@ -1,8 +1,10 @@
-import React, { useRef } from "react";
+import React, { useContext, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import Webcam from "react-webcam";
 import { IoIosArrowBack, IoIosRadioButtonOn } from "react-icons/io";
 import Header from "../../components/Header";
+import { ThemeContext } from "../../context/ThemeProvider";
+import { colorVariants } from "../../utils/Dictionary";
 
 
 const videoConstraints = {
@@ -13,6 +15,7 @@ const videoConstraints = {
 function CameraPage() {
   const navigate = useNavigate();
   const webcamRef = useRef(null);
+  const[themeMode, setThemeMode] = useContext(ThemeContext)
 
   const capturePhoto = React.useCallback(async () => {
     const imageSrc = webcamRef.current.getScreenshot();
@@ -65,7 +68,7 @@ function CameraPage() {
           />
         </div>
         <div className="w-screen text-center">
-          <button onClick={capturePhoto}><IoIosRadioButtonOn size="4rem" className="text-main-color"/></button>
+          <button onClick={capturePhoto}><IoIosRadioButtonOn size="4rem" className={colorVariants['text'+themeMode]}/></button>
         </div>
       </div>
     </div>

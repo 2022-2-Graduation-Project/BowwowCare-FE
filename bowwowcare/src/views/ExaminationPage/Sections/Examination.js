@@ -113,6 +113,7 @@ function Examination({ type, petId, aggressionType=undefined }) {
         <div className="absolute bottom-8 w-5/6">
           <Button
             type="submit"
+            bgColor={themeMode}
           >
             제출하기
           </Button>

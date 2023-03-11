@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { API_URL } from "../../Config";
@@ -10,6 +10,7 @@ import Header from "../../components/Header";
 import Solution from "./Sections/Solution";
 import Alert from "../../components/Alert";
 import Button from "../../components/Button";
+import { ThemeContext } from "../../context/ThemeProvider";
 
 import lens from "../../assets/images/lens.png";
 
@@ -19,6 +20,7 @@ function SolutionPage() {
   const [open, setOpen] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const [solutions, setSolutions] = useState([]);
+  const [themeMode, setThemeMode] = useContext(ThemeContext)
 
   useEffect(() => {
     if (location?.state?.responses) {
@@ -95,7 +97,7 @@ function SolutionPage() {
           <img src={lens} width="200px" />
         </div>
         <div className="w-full">
-            <Button onClick={handleSaveResults}>멍멍케어 시작하기</Button>
+            <Button onClick={handleSaveResults} bgColor={themeMode}>멍멍케어 시작하기</Button>
         </div>
       </div>
       <Alert open={open} handleOpen={handleOpen} content={alertMessage} handleSubmit={handleLogin} />

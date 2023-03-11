@@ -104,5 +104,6 @@ export const colorVariants = {
     ringthird:'ring-third-theme',
     accentprimary:'accent-primary-theme',
     accentsecondary:'accent-secondary-theme',
-    accentthird:'accent-third-theme'
+    accentthird:'accent-third-theme',
+    textwhite: 'text-white'
 }

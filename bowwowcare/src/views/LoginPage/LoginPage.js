@@ -21,7 +21,6 @@ const LoginPage = () => {
     const [emailValid, setEmailValid] = useState("");
     const [passwordValid, setPasswordValid] = useState("");
     const [themeMode, setThemeMode] = useContext(ThemeContext);
-    console.log(colorVariants["border"+themeMode])
 
     const { isLoggedIn } = useSelector((state) => state.auth);
     const { message } = useSelector((state) => state.message);
@@ -122,18 +121,12 @@ console.log("ff")
                             <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} className={`bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:outline-none focus:border-2 focus:${colorVariants['border'+themeMode]} block w-full p-2.5`} required />
                         </div> 
                         <div className="mb-8">
-                            <Button onClick={handleLogin} disabled={loading}>
+                            <Button onClick={handleLogin} disabled={loading} bgColor={themeMode}>
                                 {loading && (
                                     <span className="spinner-border spinner-border-sm"></span>
                                 )}
                                 <span>로그인</span>
                             </Button>
-                            {/* <button onClick={handleLogin} className="h-12 w-full font-bold rounded-md bg-main-color text-white text-center" disabled={loading}>
-                                {loading && (
-                                    <span className="spinner-border spinner-border-sm"></span>
-                                )}
-                                <span>로그인</span>
-                            </button> */}
                         </div>
                     </form>
                     <div className="flex justify-end">
