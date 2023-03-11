@@ -17,10 +17,13 @@ function AdditionPage() {
   const pet = location.state;
   const [petname, setPetName] = useState(pet ? pet.name : "");
   const [gender, setGender] = useState(pet ? pet.gender.toLowerCase() : "male");
-  const [birthDate, setBirthDate] = useState(pet?Date.parse(pet.birthDate) : new Date());
-  const [adoptDate, setAdoptDate] = useState(pet? Date.parse(pet.adoptionDate) : new Date());
-  const [fileImg, setFileImg] = useState(pet? pet.petImg : null);
-
+  const [birthDate, setBirthDate] = useState(
+    pet ? Date.parse(pet.birthDate) : new Date()
+  );
+  const [adoptDate, setAdoptDate] = useState(
+    pet ? Date.parse(pet.adoptionDate) : new Date()
+  );
+  const [fileImg, setFileImg] = useState(pet ? pet.petImg : null);
 
   const fileInput = React.useRef();
 
@@ -35,23 +38,22 @@ function AdditionPage() {
       (date.getDate() < 9 ? "0" + date.getDate() : date.getDate())
     );
   };
-  
+
   const handleChange = (e) => {
-    setFileImg(URL.createObjectURL(e.target.files[0]));
+    setFileImg(e.target.files[0]);
   };
 
   const handleSubmit = (e) => {
-    if(petname && gender && fileImg && birthDate && adoptDate){
-      if(!pet){
+    if (petname && gender && fileImg && birthDate && adoptDate) {
+      if (!pet) {
         const formData = new FormData();
         formData.append("file", fileImg);
-  
+
         axios({
           method: "POST",
           url: `${API_URL}/image`,
-          data: formData
-        })
-        .then((response => {
+          data: formData,
+        }).then((response) => {
           if (response.status === 200) {
             let body = {
               name: petname,
@@ -60,7 +62,7 @@ function AdditionPage() {
               birthDate: changeFormat(birthDate),
               adoptionDate: changeFormat(adoptDate),
             };
-  
+
             axios({
               method: "POST",
               url: `${API_URL}/pets`,
@@ -74,14 +76,14 @@ function AdditionPage() {
                 console.log(error.response);
               });
           }
-        }))
-      }else{
+        });
+      } else {
         // TODO: 수정 API 추가
       }
-    }else{
+    } else {
       alert("모든 항목을 입력하세요.");
     }
-  }
+  };
 
   return (
     <div className="container mx-auto px-8 w-screen h-screen">
@@ -92,7 +94,7 @@ function AdditionPage() {
             <div className="rounded-full border w-20 h-20 ml-4">
               {fileImg && (
                 <img
-                  src={fileImg}
+                  src={URL.createObjectURL(fileImg)}
                   alt="프로필 이미지"
                   className="rounded-full w-20 h-20"
                 ></img>
@@ -191,9 +193,7 @@ function AdditionPage() {
         </div>
       </div>
       <div className="absolute bottom-8 w-5/6">
-        <Button onClick={handleSubmit}>
-          {pet? "변경":"추가"}
-        </Button>
+        <Button onClick={handleSubmit}>{pet ? "변경" : "추가"}</Button>
       </div>
     </div>
   );
