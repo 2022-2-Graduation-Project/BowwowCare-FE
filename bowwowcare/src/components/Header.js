@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { useNavigate } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import { logout } from "../slices/auth";
@@ -21,6 +21,15 @@ function Header() {
 	const handleLogin = (e) => {
 		navigate("/login");
 	}
+
+	const handleLogout = (e) => {
+		dispatch(logout());
+		navigate("/");
+	}
+
+	const handleUser = (e) => {
+		navigate("user");
+	}
 	
 	return (
 		<div>
@@ -32,7 +41,7 @@ function Header() {
 				null
 			) : (
 				JSON.parse(localStorage.getItem("user")) ? (
-					<button className="text-right" onClick={() => dispatch(logout())}>로그아웃</button>
+					window.location.pathname === "/user" ? <button className="text-right" onClick={handleLogout}>로그아웃</button> : <button onClick={handleUser}>개인페이지</button>
 				) : (
 					<button className="text-right" onClick={handleLogin}>로그인</button>
 				)

@@ -1,13 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import Modal from "../../../components/Modal/Modal";
 import YoutubeEmbed from "../../../components/YoutubeEmbed/YoutubeEmbed";
 import Button from "../../../components/Button";
+import { colorVariants } from "../../../utils/Dictionary";
+import { ThemeContext } from "../../../context/ThemeProvider";
 
 import "../../../components/YoutubeEmbed/youtube.css";
 
 function Solution({ solution, emotion }) {
   const [popup, setPopup] = useState(false);
+  const [themeMode, setThemeMode] = useContext(ThemeContext);
 
   const handleTrigger = () => {
     setPopup(false);
@@ -23,7 +26,7 @@ function Solution({ solution, emotion }) {
           <div className="h-1/2 overflow-y-auto">{solution.solution}</div>
           <Button
             onClick={() => setPopup(true)}
-            bgColor="white" borderColor="main-color" textColor="main-color"
+            bgColor="white" borderColor={colorVariants['border'+themeMode]} textColor="white"
           >
             <div>자세히 보기</div>
           </Button>

@@ -21,6 +21,7 @@ const LoginPage = () => {
     const [emailValid, setEmailValid] = useState("");
     const [passwordValid, setPasswordValid] = useState("");
     const [themeMode, setThemeMode] = useContext(ThemeContext);
+    console.log(colorVariants["border"+themeMode])
 
     const { isLoggedIn } = useSelector((state) => state.auth);
     const { message } = useSelector((state) => state.message);
@@ -114,11 +115,11 @@ console.log("ff")
                     <form>
                         <div className="mb-8">
                             <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">이메일</label>
-                            <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:outline-none focus:border-2 focus:border-main-color block w-full p-2.5" required />
+                            <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} className={`bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:outline-none focus:border-2 focus:${colorVariants['border'+themeMode]} block w-full p-2.5`} required />
                         </div> 
                         <div className="mb-8">
                             <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">비밀번호</label>
-                            <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:outline-none focus:border-2 focus:border-main-color block w-full p-2.5" required />
+                            <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} className={`bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:outline-none focus:border-2 focus:${colorVariants['border'+themeMode]} block w-full p-2.5`} required />
                         </div> 
                         <div className="mb-8">
                             <Button onClick={handleLogin} disabled={loading}>

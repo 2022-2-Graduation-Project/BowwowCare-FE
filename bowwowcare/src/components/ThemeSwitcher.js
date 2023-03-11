@@ -1,8 +1,10 @@
 import React, { useContext } from 'react';
 import { ThemeContext } from '../context/ThemeProvider.js';
+import ThemeBox from './ThemeBox.js';
 
 function ThemeSwitcher() {
   const [themeMode, setThemeMode] = useContext(ThemeContext);
+  
 
   const switchPrimary = () => {
     setThemeMode("primary");
@@ -20,17 +22,11 @@ function ThemeSwitcher() {
   }
 
   return (
-    <div className='flex justify-between'>
-      <button onClick={switchPrimary} className="bg-primary-theme">
-        기본
-      </button>
-      <button onClick={switchSecondary} className="bg-secondary-theme">
-      두번째 테마
-      </button>
-      <button onClick={switchThird} className="bg-third-theme">
-      세번째 테마
-      </button>
-  </div>
+      <div className='flex flex-col gap-6'>
+        <ThemeBox onClick={switchPrimary} title={"Theme 1"} status={themeMode === 'primary' ? '적용중' : null} rewards={10} mainColor={"primary-theme"} subColor={"primary-theme-s"}></ThemeBox>
+        <ThemeBox onClick={switchSecondary} title={"Theme 2"} status={themeMode === 'secondary' ? '적용중' : null} rewards={20} mainColor={"secondary-theme"} subColor={"secondary-theme-s"}></ThemeBox>
+        <ThemeBox onClick={switchThird} title={"Theme 3"} status={themeMode === 'third' ? '적용중' : null} rewards={30} mainColor={"third-theme"} subColor={"third-theme-s"}></ThemeBox>
+      </div>
   );
 }
 
