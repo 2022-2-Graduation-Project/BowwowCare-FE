@@ -94,7 +94,11 @@ function AdditionPage() {
             <div className="rounded-full border w-20 h-20 ml-4">
               {fileImg && (
                 <img
-                  src={URL.createObjectURL(fileImg)}
+                  src={
+                    typeof fileImg === "string"
+                      ? fileImg
+                      : URL.createObjectURL(fileImg)
+                  }
                   alt="프로필 이미지"
                   className="rounded-full w-20 h-20"
                 ></img>
