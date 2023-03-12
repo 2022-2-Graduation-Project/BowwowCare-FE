@@ -1,11 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useLocation } from "react-router-dom";
+
 import axios from "axios";
 import { API_URL } from "../../Config";
 import authHeader from "../../services/auth-header";
+
+import dayjs from "dayjs";
+
 import Header from "../../components/Header";
 import Lens from "../../assets/images/lens.png";
-import dayjs from "dayjs";
 import { behaviorType, colorVariants } from "../../utils/Dictionary";
 import { ThemeContext } from "../../context/ThemeProvider";
 
@@ -14,12 +17,19 @@ function CarePage() {
   const today = dayjs().format("YYYY-MM-DD");
   const [cards, setCards] = useState([]);
   const [themeMode, setThemeMode] = useContext(ThemeContext);
+  const [careType, setCareType] = useState("aggression");
+
+  useEffect(() => {
+    if (location?.state?.type) {
+      setCareType(location.state.type);
+    }
+  }, [location?.state?.type]);
 
   const getCards = () => {
-    if (location?.state?.type && location?.state?.petId) {
+    if (location?.state?.petId) {
       axios({
         method: "GET",
-        url: `${API_URL}/care/${location.state.type}/${location.state.petId}`,
+        url: `${API_URL}/care/${careType}/${location.state.petId}`,
         headers: authHeader(),
       }).then((response) => {
         if (response.status === 200) {
@@ -30,14 +40,16 @@ function CarePage() {
   };
 
   useEffect(() => {
-    getCards();
-  }, []);
+    if (careType) {
+      getCards();
+    }
+  }, [careType]);
 
   const handleMission = (cardId) => (e) => {
-    if (location?.state?.type && location?.state?.petId) {
+    if (careType && location?.state?.petId) {
       axios({
         method: "POST",
-        url: `${API_URL}/care/mission/${location.state.type}`,
+        url: `${API_URL}/care/mission/${careType}`,
         headers: authHeader(),
         data: {
           id: cardId,
@@ -53,6 +65,14 @@ function CarePage() {
           }
         }
       });
+    }
+  };
+
+  const handleChangeCareType = (e) => {
+    if (careType === "aggression") {
+      setCareType("anxiety");
+    } else {
+      setCareType("aggression");
     }
   };
 
@@ -75,6 +95,43 @@ function CarePage() {
           className="absolute bottom-0 right-0"
           alt="Lens"
         />
+      </div>
+      <div>
+        <div className="shadow-md rounded-md bg-slate-50 w-full mt-8 z-0">
+          {careType === "aggression" ? (
+            <div>
+              <button
+                className={`shadow-md rounded-l-md ${
+                  colorVariants["bg" + themeMode + "s"]
+                } px-4 py-2 w-1/2 z-20`}
+              >
+                공격 행동
+              </button>
+              <button
+                className="px-4 py-2 w-1/2"
+                onClick={handleChangeCareType}
+              >
+                분리 불안
+              </button>
+            </div>
+          ) : (
+            <div className="z-10 w-full">
+              <button
+                className="px-4 py-2 w-1/2"
+                onClick={handleChangeCareType}
+              >
+                공격 행동
+              </button>
+              <button
+                className={`shadow-md rounded-r-md ${
+                  colorVariants["bg" + themeMode + "s"]
+                } px-4 py-2 w-1/2 z-20`}
+              >
+                분리 불안
+              </button>
+            </div>
+          )}
+        </div>
       </div>
       <div className="flex flex-col gap-6 mt-8">
         {cards?.length
@@ -110,7 +167,7 @@ function CarePage() {
                     )}
                   </div>
                   <div className="py-4">{card.solution}</div>
-                  {location?.state?.type === "aggression" ? (
+                  {careType === "aggression" ? (
                     <div class="flex justify-between overflow-x-hidden w-full">
                       <div class="flex w-full overflow-x-auto [&>div]:flex-shrink-0 pb-2">
                         {card.aggressionType?.map((aggressionType) => (
