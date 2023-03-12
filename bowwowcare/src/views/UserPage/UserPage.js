@@ -1,12 +1,36 @@
-import React ,{ useState }from "react";
+import React ,{ useEffect, useState }from "react";
+import axios from "axios";
 import Header from "../../components/Header";
 import ThemeSwitcher from "../../components/ThemeSwitcher";
 import HAPPY from "../../assets/images/happy.png"
+import { API_URL } from "../../Config";
+import authHeader from "../../services/auth-header";
 
 function UserPage() {
   const [rewards, setRewards] = useState(0);
-  const [fileImg, setFileImg] = useState("string");
-  const [userName, setUserName] = useState("짱구");
+  const [fileImg, setFileImg] = useState("");
+  const [userName, setUserName] = useState("");
+
+  useEffect(() => {
+    getUser();
+  }, [])
+
+  const getUser = () => {
+    axios({
+      method: 'GET',
+      url: `${API_URL}/user`,
+      headers: authHeader(),
+    })
+    .then( (response) => {
+      if(response.status === 200) {
+      const user = response.data;
+      setUserName(user.username);
+      setRewards(user.reward);
+      setFileImg(user.profileImage);
+      }
+    }
+    ).catch((e) => {console.log(e.response.data)})
+  }
 
   return (
     <div className="container mx-auto px-8 w-screen h-screen">
@@ -19,8 +43,6 @@ function UserPage() {
         </div>
         <div className="text-center">{userName}</div>
       </div>
-      
-      
       
       <hr />
       <div className='flex justify-between mx-5 my-3'>
