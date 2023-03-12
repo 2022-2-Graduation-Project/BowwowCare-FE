@@ -1,27 +1,15 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import Header from '../../components/Header'
 import Lens from '../../assets/images/lens.png'
 import dayjs from 'dayjs';
 import styled from "styled-components";
 import { behaviorType, colorVariants } from '../../utils/Dictionary';
+import { ThemeContext } from '../../context/ThemeProvider';
 
 function CarePage({ type="aggression" }) {
     const [cards, setCards] = useState([]);
     const today = dayjs().format("YYYY-MM-DD");
-
-    // TODO: 수정 후 따로 빼기
-    let CardTitle = styled.div`
-    background: ${({theme}) => theme.primary};
-    border-radius: 12px 12px 0 0;
-    `
-
-    let Card = styled.div`
-    background: ${({theme}) => theme.secondary};
-    padding: 16px 24px 24px 16px;
-    position: relative;
-    border-radius: 6px;
-    box-shadow: 6px;
-    `
+    const [themeMode, setThemeMode] = useContext(ThemeContext);
 
     useEffect(() => {
         // TODO: GET cards
@@ -72,28 +60,26 @@ function CarePage({ type="aggression" }) {
     return (
         <div className="container mx-auto px-8 w-screen h-screen">
             <Header />
-            <Card>
+            {/* <Card>
                 <div className="flex flex-col gap-2">
                     <span>솔루션 수행 후에 오늘 미션 도전을 눌러주세요!</span>
                     <span>지정된 횟수만큼 미션을 수행하면</span>
                     <span>리워드를 드립니다!️</span>
                 </div>
                 <img src={Lens} width="120px" className="absolute bottom-0 right-0" />
-            </Card>
-            {/* <div className="shadow-md rounded-md bg-secondary px-4 py-6 relative">
+            </Card> */}
+            <div className={`shadow-md rounded-md ${colorVariants['bg'+themeMode+'s']} px-4 py-6 relative`}>
                 <div className="flex flex-col gap-2">
                     <span>솔루션 수행 후에 오늘 미션 도전을 눌러주세요!</span>
                     <span>지정된 횟수만큼 미션을 수행하면</span>
                     <span>리워드를 드립니다!️</span>
                 </div>
                 <img src={Lens} width="120px" className="absolute bottom-0 right-0" />
-            </div> */}
+            </div>
             <div className="flex flex-col gap-6 mt-8">
                 {cards?.length ? cards.map(card => 
                     <div className="shadow-md rounded-md">
-                        <CardTitle>
-                            <div className="px-4 py-2 rounded-t-md shadow-t-md text-white">{card.modifiedAt}</div>
-                        </CardTitle>
+                        <div className={`px-4 py-2 ${colorVariants['bg'+themeMode]} rounded-t-md shadow-t-md text-white`}>{card.modifiedAt}</div>
                         
                         <div className="p-4">
                             <div className="flex justify-between items-center">
@@ -101,7 +87,7 @@ function CarePage({ type="aggression" }) {
                                 {today === card.missionDate ? (
                                     <button className="bg-gray-200 py-2 px-4 rounded-md" disabled>오늘 미션 성공</button>
                                 ) : (
-                                    <button className="bg-secondary py-2 px-4 rounded-md" onClick={handleMission}>오늘 미션 도전</button>
+                                    <button className={`${colorVariants['bg'+themeMode+'s']} py-2 px-4 rounded-md`} onClick={handleMission}>오늘 미션 도전</button>
                                 )}
                             </div>
                             <div className="py-4">{card.solution}</div>
