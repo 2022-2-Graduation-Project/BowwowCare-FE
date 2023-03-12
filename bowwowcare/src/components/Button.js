@@ -1,9 +1,17 @@
-function Button ({size, bgColor="main-color", textColor="white", borderColor="none", children, onClick}) {
+import styled from "styled-components";
+import { colorVariants } from '../utils/Dictionary';
+
+function Button ({size, bgColor="primary", textColor="white", borderColor="none", children, onClick, disabled}) {
+    const bgColorVariant = "bg"+bgColor;
+    const textColorVariant = "text"+textColor;
+    const borderColorVariant = "border"+borderColor;
+
     return (
-        <button onClick={onClick} className={`h-12 w-full font-bold rounded-md bg-${bgColor} border border-${borderColor} text-${textColor} text-center`}>
+        <button disabled={disabled} onClick={onClick} className={`h-12 w-full font-bold rounded-md  ${colorVariants[bgColorVariant]} border ${colorVariants[borderColorVariant]} ${colorVariants[textColorVariant]} text-center`}>
             {children}
         </button>
     )
 };
+
 
 export default Button;

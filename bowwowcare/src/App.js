@@ -17,6 +17,7 @@ import PetInfoPage from "./views/PetInfoPage/PetInfoPage";
 import SelectionPage from './views/SelectionPage/SelectionPage';
 import EmotionPage from "./views/EmotionPage/EmotionPage";
 import CarePage from "./views/CarePage/CarePage";
+import UserPage from "./views/UserPage/UserPage";
 
 import PrivateRoute from "./PrivateRoute";
 
@@ -60,6 +61,7 @@ function App() {
 			<Route path="/selection" element={<SelectionPage />} />
 			<Route path="/emotion" element={<EmotionPage />} />
 			<Route path="/care" element={<CarePage />} />
+			<Route path="/user" element={<UserPage />} />
 		</Routes>
   	);
 }

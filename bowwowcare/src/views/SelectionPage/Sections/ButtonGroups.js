@@ -1,10 +1,8 @@
-import React from 'react'
+import React from 'react';
+import { behaviorType, colorVariants } from '../../../utils/Dictionary';
 
 
 function ButtonGroups({ behaviors, selectedBehaviors, setSelectedBehaviors, abnormal }) {
-    const colors = ["#FFC329", "#FF9029", "#FF1192"];
-    const behaviorType = ["행동 준비 단계 : 스트레스 반응", "행동 준비 단계 : 집중하기", "극단적 행동 단계 : 방어준비"];
-
     const handleSelected = (behavior) => (e) => {
         if (!abnormal) {
             let arr = [...selectedBehaviors];
@@ -20,11 +18,13 @@ function ButtonGroups({ behaviors, selectedBehaviors, setSelectedBehaviors, abno
         <div className="shadow-md rounded-md p-4">
             {behaviors?.map(behavior =>
                 <span key={behavior?.aggressionId}>
-                    <div className={abnormal && (behavior?.aggressionId-1) % 4 == 0 ? "block" : "hidden"}>
-                        <span className={`text-sm font-bold ml-2 text-[${colors[behavior?.aggressionType]}]`}>{behaviorType[behavior?.aggressionType]}</span>
+                    <div className={abnormal && (behavior?.aggressionId-1) % 4 === 0 ? "block" : "hidden"}>
+                        <span className={`text-sm font-bold ml-2 ${colorVariants['text'+behavior?.aggressionType]}`}>
+                            {behaviorType[behavior?.aggressionType]}
+                        </span>
                     </div>
                     <button 
-                        className={`px-4 py-1 m-2 border-2 rounded-md border-[${colors[behavior?.aggressionType]}] ${selectedBehaviors[behavior.aggressionId-1]?.isDeleted===false ? 'bg-['+colors[behavior?.aggressionType]+'] text-white' : null}`}
+                        className={`px-4 py-1 m-2 border-2 rounded-md ${colorVariants['border'+behavior?.aggressionType]} ${selectedBehaviors[behavior.aggressionId-1]?.isDeleted===false ? colorVariants['bg'+behavior?.aggressionType] +' text-white' : null}`}
                         onClick={handleSelected(behavior)}    
                     >
                         <span>{behavior?.content}</span>

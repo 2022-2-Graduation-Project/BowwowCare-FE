@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { CiCircleAlert } from "react-icons/ci";
+import { ThemeContext } from '../context/ThemeProvider';
 import Button from "./Button";
 
 function Alert({ open, handleOpen, content, handleSubmit }) {
+    const [themeMode, setThemeMode] = useContext(ThemeContext);
     return (
         <div>
             {open ? (
@@ -16,12 +18,12 @@ function Alert({ open, handleOpen, content, handleSubmit }) {
                                 <Button onClick={handleOpen} borderColor="gray" textColor="main-color" bgColor="none">
                                     취소
                                 </Button>
-                                <Button onClick={handleSubmit}>
+                                <Button onClick={handleSubmit} bgColor={themeMode}>
                                     확인
                                 </Button>
                             </div>
                         ) : (
-                            <Button onClick={handleOpen}>
+                            <Button onClick={handleOpen} bgColor={themeMode}>
                                 확인
                             </Button>
                         )}

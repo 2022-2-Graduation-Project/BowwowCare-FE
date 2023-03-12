@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
 import { IoAlertCircleOutline } from "react-icons/io5";
@@ -7,8 +7,10 @@ import { IconContext } from "react-icons";
 import { signup } from "../../slices/auth";
 import { clearMessage } from "../../slices/message";
 import Header from "../../components/Header";
+import Button from "../../components/Button";
+import { ThemeContext } from "../../context/ThemeProvider";
 import { emailValidator, passwordValidator, nameValidator } from '../../utils/Validator';
-
+import { colorVariants } from "../../utils/Dictionary";
 
 const SignupPage = () => {
     let navigate = useNavigate();
@@ -22,6 +24,7 @@ const SignupPage = () => {
     const [emailValid, setEmailValid] = useState("");
     const [passwordValid, setPasswordValid] = useState("");
     const [confirmPasswordValid, setConfirmPasswordValid] = useState(false);
+    const [themeMode, setThemeMode] = useContext(ThemeContext);
 
     const { isLoggedIn } = useSelector((state) => state.auth);
     const { message } = useSelector((state) => state.message);
@@ -151,32 +154,38 @@ const SignupPage = () => {
                     <form>
                         <div className="mb-6">
                             <label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">이름</label>
-                            <input type="username" id="username" value={username} onChange={(e) => setUsername(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:outline-none focus:border-2 focus:border-main-color block w-full p-2.5" required />
+                            <input type="username" id="username" value={username} onChange={(e) => setUsername(e.target.value)} className={`bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:outline-none focus:border-2 focus:${colorVariants['border'+themeMode]} block w-full p-2.5`} required />
                         </div> 
                         <div className="mb-6">
                             <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">이메일</label>
-                            <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:outline-none focus:border-2 focus:border-main-color block w-full p-2.5" required />
+                            <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} className={`bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:outline-none focus:border-2 focus:${colorVariants['border'+themeMode]} block w-full p-2.5`} required />
                         </div> 
                         <div className="mb-6">
                             <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">비밀번호</label>
-                            <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:outline-none focus:border-2 focus:border-main-color block w-full p-2.5" required />
+                            <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} className={`bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:outline-none focus:border-2 focus:${colorVariants['border'+themeMode]} block w-full p-2.5`} required />
                         </div>
                         <div className="mb-8">
                             <label htmlFor="confirm-password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">비밀번호 확인</label>
-                            <input type="password" id="confirm-password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:outline-none focus:border-2 focus:border-main-color block w-full p-2.5" required />
+                            <input type="password" id="confirm-password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} className={`bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:outline-none focus:border-2 focus:${colorVariants['border'+themeMode]} block w-full p-2.5`} required />
                         </div> 
                         <div className="mb-6">
-                            <button onClick={handleSignup} className="h-12 w-full font-bold rounded-md bg-main-color text-white text-center" disabled={loading || !confirmPasswordValid}>
+                            <Button onClick={handleSignup} disabled={loading} bgColor={themeMode}>
                                 {loading && (
                                     <span className="spinner-border spinner-border-sm"></span>
                                 )}
                                 <span>회원가입</span>
-                            </button>
+                            </Button>
+                            {/* <button onClick={handleSignup} className="h-12 w-full font-bold rounded-md bg-main-color text-white text-center" disabled={loading || !confirmPasswordValid}>
+                                {loading && (
+                                    <span className="spinner-border spinner-border-sm"></span>
+                                )}
+                                <span>회원가입</span>
+                            </button> */}
                         </div>
                     </form>
                     <div className="flex justify-end">
                         <div className="mr-2">이미 멍멍케어에 가입했나요? </div>
-                        <button className="text-main-color font-bold" onClick={handleLogin}>로그인</button>
+                        <button className={`${colorVariants['text'+themeMode]}`} onClick={handleLogin}><span className="font-bold">로그인</span></button>
                     </div>
                     {/* {message && (
                         <div className="alert alert-danger">

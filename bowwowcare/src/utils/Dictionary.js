@@ -71,4 +71,39 @@ export const solutions = {
     ]
 };
 
-export const behaviorType = ["행동 준비 단계 : 스트레스 반응", "행동 준비 단계 : 집중하기", "극단적 행동 단계 : 방어준비"];
+export const behaviorType = [
+    "행동 준비 단계 : 스트레스 반응", 
+    "행동 준비 단계 : 집중하기", 
+    "극단적 행동 단계 : 방어준비"
+];
+
+export const colorVariants = {
+    text0: 'text-aggression0',
+    bg0: 'bg-aggression0',
+    border0: 'border-aggression0',
+    text1: 'text-aggression1',
+    bg1: 'bg-aggression1',
+    border1: 'border-aggression1',
+    text2: 'text-aggression2',
+    bg2: 'bg-aggression2',
+    border2: 'border-aggression2',
+    textprimary:'text-primary-theme',
+    textsecondary:'text-secondary-theme',
+    textthird:'text-third-theme',
+    bgprimary:'bg-primary-theme',
+    bgprimarys:'bg-primary-theme-s',
+    bgsecondary:'bg-secondary-theme',
+    bgsecondarys:'bg-secondary-theme-s',
+    bgthird:'bg-third-theme',
+    bgthirds:'bg-third-theme-s',
+    borderprimary:'border-primary-theme',
+    bordersecondary:'border-secondary-theme',
+    borderthird:'border-third-theme',
+    ringprimary:'ring-primary-theme',
+    ringsecondary:'ring-secondary-theme',
+    ringthird:'ring-third-theme',
+    accentprimary:'accent-primary-theme',
+    accentsecondary:'accent-secondary-theme',
+    accentthird:'accent-third-theme',
+    textwhite: 'text-white'
+}

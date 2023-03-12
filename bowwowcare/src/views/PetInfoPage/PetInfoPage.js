@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { API_URL } from '../../Config';
 import { useLocation, useNavigate, useParams} from "react-router-dom";
@@ -6,6 +6,7 @@ import { useLocation, useNavigate, useParams} from "react-router-dom";
 import Header from '../../components/Header';
 import Button from '../../components/Button';
 import lens from '../../assets/images/lens.png'
+import { ThemeContext } from "../../context/ThemeProvider";
 
 function PetInfoPage() {
   const navigate = useNavigate();
@@ -16,7 +17,8 @@ function PetInfoPage() {
   const [gender, setGender] = useState('')
   const [birthDate, setBirthDate] = useState('');
   const [adoptDate, setAdoptDate] = useState('');
-  const [fileImg, setFileImg] = useState('')
+  const [fileImg, setFileImg] = useState('');
+  const [themeMode, setThemeMode] = useContext(ThemeContext)
 
   const pet = location.state.pet;
 
@@ -96,7 +98,7 @@ function PetInfoPage() {
         <div className="flex justify-center">
             <img src={lens} width="100px"></img>
         </div>
-        <Button children="멍멍케어 시작하기" ></Button>
+        <Button children="멍멍케어 시작하기" bgColor={themeMode}></Button>
       </div>
     </div>
     </div>

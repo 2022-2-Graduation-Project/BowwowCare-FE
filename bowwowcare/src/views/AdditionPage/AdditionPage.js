@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import { API_URL } from "../../Config";
@@ -9,6 +9,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import { ko } from "date-fns/esm/locale";
 import Header from "../../components/Header";
 import Button from "../../components/Button";
+import { ThemeContext } from "../../context/ThemeProvider";
+import { colorVariants } from "../../utils/Dictionary";
 
 function AdditionPage() {
   let navigate = useNavigate();
@@ -26,6 +28,7 @@ function AdditionPage() {
   const [fileImg, setFileImg] = useState(pet ? pet.petImg : null);
 
   const fileInput = React.useRef();
+  const [themeMode, setThemeMode] = useContext(ThemeContext)
 
   const changeFormat = (date) => {
     return (
@@ -125,7 +128,7 @@ function AdditionPage() {
         <div className="mb-10">
           <div className="mb-2">이름</div>
           <input
-            className="w-full outline-none border-b-2 border-main-color"
+            className={`w-full outline-none border-b-2 ${colorVariants['border'+themeMode]}`}
             value={petname}
             onChange={(e) => {
               setPetName(e.target.value);
@@ -142,7 +145,7 @@ function AdditionPage() {
                 value={"male"}
                 name={"gender"}
                 onChange={() => setGender("male")}
-                className="mr-2 accent-main-color"
+                className={`mr-2 ${colorVariants['accent'+themeMode]}`}
                 checked={gender === "male"}
               />
               남
@@ -153,7 +156,7 @@ function AdditionPage() {
                 value={"female"}
                 name={"gender"}
                 onChange={() => setGender("female")}
-                className="mr-2 accent-main-color"
+                className={`mr-2 ${colorVariants['accent'+themeMode]}`}
                 checked={gender === "female"}
               />
               여
@@ -164,7 +167,7 @@ function AdditionPage() {
                 value={"other"}
                 name={"gender"}
                 onChange={() => setGender("other")}
-                className="mr-2 accent-main-color"
+                className={`mr-2 ${colorVariants['accent'+themeMode]}`}
                 checked={gender === "other"}
               />
               중성
@@ -180,7 +183,8 @@ function AdditionPage() {
             selected={birthDate}
             onChange={(date) => setBirthDate(date)}
             maxDate={new Date()}
-            className="outline-none border-b-2 border-main-color w-full"
+            className={`w-full outline-none border-b-2 ${colorVariants['border'+themeMode]}`}
+            
           />
         </div>
 
@@ -192,12 +196,12 @@ function AdditionPage() {
             selected={adoptDate}
             onChange={(date) => setAdoptDate(date)}
             maxDate={new Date()}
-            className="outline-none border-b-2 border-main-color w-full"
+            className={`w-full outline-none border-b-2 ${colorVariants['border'+themeMode]}`}
           />
         </div>
       </div>
       <div className="absolute bottom-8 w-5/6">
-        <Button onClick={handleSubmit}>{pet ? "변경" : "추가"}</Button>
+        <Button onClick={handleSubmit} bgColor={themeMode}>{pet ? "변경" : "추가"}</Button>
       </div>
     </div>
   );

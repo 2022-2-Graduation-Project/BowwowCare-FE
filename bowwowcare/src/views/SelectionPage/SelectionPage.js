@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { API_URL } from "../../Config";
@@ -8,6 +8,7 @@ import SelectPet from "../../components/SelectPet";
 import ButtonGroups from "./Sections/ButtonGroups";
 import HAPPY from "../../assets/images/happy.png";
 import Button from "../../components/Button";
+import { ThemeContext } from '../../context/ThemeProvider';
 
 
 function SelectionPage() {  
@@ -19,6 +20,7 @@ function SelectionPage() {
     const [selectedBehaviors, setSelectedBehaviors] = useState([]);
     const [abnormal, setAbnormal] = useState(false);
     const [aggressionType, setAggressionType] = useState([]);
+    const [themeMode, setThemeMode] = useContext(ThemeContext);
 
     useEffect(() => {
         // TEST: Mockup Data
@@ -130,11 +132,11 @@ function SelectionPage() {
                                     <span>솔루션을 얻어볼까요?</span>
                                 </div>
                             ) : null}
-                            <Button onClick={!abnormal ? showBehaviors : handleExamination}>다음</Button>
+                            <Button onClick={!abnormal ? showBehaviors : handleExamination} bgColor={themeMode}>다음</Button>
                         </div>
                     ) : (
                         location.state.type==="anxiety" ? (
-                            <Button onClick={handleExamination}>다음</Button>
+                            <Button onClick={handleExamination} bgColor={themeMode}>다음</Button>
                         ) : null
                     )}
                 </div>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
 import { IoAlertCircleOutline } from "react-icons/io5";
@@ -8,7 +8,9 @@ import { login } from "../../slices/auth";
 import { clearMessage } from "../../slices/message";
 import Header from "../../components/Header";
 import { emailValidator, passwordValidator } from '../../utils/Validator';
-
+import Button from "../../components/Button";
+import { ThemeContext } from "../../context/ThemeProvider";
+import { colorVariants } from "../../utils/Dictionary";
 
 const LoginPage = () => {
     let navigate = useNavigate();
@@ -18,6 +20,7 @@ const LoginPage = () => {
     const [password, setPassword] = useState("");
     const [emailValid, setEmailValid] = useState("");
     const [passwordValid, setPasswordValid] = useState("");
+    const [themeMode, setThemeMode] = useContext(ThemeContext);
 
     const { isLoggedIn } = useSelector((state) => state.auth);
     const { message } = useSelector((state) => state.message);
@@ -58,7 +61,7 @@ const LoginPage = () => {
         }
 
         setLoading(true);
-
+console.log("ff")
         dispatch(login(dataToSubmit))
         .unwrap()
         .then(() => {
@@ -111,26 +114,27 @@ const LoginPage = () => {
                     <form>
                         <div className="mb-8">
                             <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">이메일</label>
-                            <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:outline-none focus:border-2 focus:border-main-color block w-full p-2.5" required />
+                            <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} className={`bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:outline-none focus:border-2 focus:${colorVariants['border'+themeMode]} block w-full p-2.5`} required />
                         </div> 
                         <div className="mb-8">
                             <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">비밀번호</label>
-                            <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:outline-none focus:border-2 focus:border-main-color block w-full p-2.5" required />
+                            <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} className={`bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:outline-none focus:border-2 focus:${colorVariants['border'+themeMode]} block w-full p-2.5`} required />
                         </div> 
                         <div className="mb-8">
-                            <button onClick={handleLogin} className="h-12 w-full font-bold rounded-md bg-main-color text-white text-center" disabled={loading}>
+                            <Button onClick={handleLogin} disabled={loading} bgColor={themeMode}>
                                 {loading && (
                                     <span className="spinner-border spinner-border-sm"></span>
                                 )}
                                 <span>로그인</span>
-                            </button>
+                            </Button>
                         </div>
                     </form>
                     <div className="flex justify-end">
                         <div className="mr-2">멍멍케어가 처음이세요? </div>
-                        <button className="text-main-color font-bold" onClick={handleSignup}>회원가입</button>
+                        <button className={`${colorVariants['text'+themeMode]}`} onClick={handleSignup}>
+                            <span className="font-bold">회원가입</span>
+                        </button>
                     </div>
-
                     {/* {message && (
                         <div className="alert alert-danger">
                             {message}
