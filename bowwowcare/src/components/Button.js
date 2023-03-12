@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import { colorVariants } from '../utils/Dictionary';
 
 function Button ({size, bgColor="primary", textColor="white", borderColor="none", children, onClick, disabled}) {
