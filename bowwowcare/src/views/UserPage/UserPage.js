@@ -8,9 +8,10 @@ import authHeader from "../../services/auth-header";
 
 function UserPage() {
   const [rewards, setRewards] = useState(0);
+  const [user, setUser] = useState();
   const [fileImg, setFileImg] = useState("");
   const [userName, setUserName] = useState("");
-  const [availableTheme, setAvailableTheme] = useState([])
+  const [availableThemes, setAvailableThemes] = useState([])
 
   useEffect(() => {
     getUser();
@@ -29,7 +30,7 @@ function UserPage() {
       setUserName(user.username);
       setRewards(user.reward);
       setFileImg(user.profileImage);
-      setAvailableTheme(user.availableTheme);
+      setAvailableThemes(user.availableTheme);
       }
     }
     ).catch((e) => {console.log(e.response.data)})
@@ -52,7 +53,7 @@ function UserPage() {
         <span>내 리워드</span>
         <span>{rewards}</span>
       </div>
-      <ThemeSwitcher availableTheme={availableTheme}></ThemeSwitcher>
+      <ThemeSwitcher availableTheme={availableThemes} reward={rewards}></ThemeSwitcher>
     </div>
   );
 }

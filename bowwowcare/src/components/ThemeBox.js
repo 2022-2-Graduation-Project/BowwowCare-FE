@@ -2,13 +2,13 @@ import { useContext } from 'react'
 import { ThemeContext } from './../context/ThemeProvider.js';
 import { colorVariants } from "../utils/Dictionary";
 
-function ThemeBox({onClick, title, status, rewards, mainColor, subColor, disabled, id}) {
+function ThemeBox({onClick, title, status, rewards, mainColor, subColor, disabled, locked}) {
   const [themeMode, setThemeMode] = useContext(ThemeContext);
   return (
-    <button onClick={onClick} disabled={disabled} className={`shadow-lg px-6 py-3 rounded-lg border disabled:bg-gray-100 ${status ? colorVariants['border'+themeMode] : null}`}>
+    <button onClick={onClick} disabled={disabled} className={`shadow-lg px-6 py-3 rounded-lg border ${locked && "bg-gray-100"} ${status ? colorVariants['border'+themeMode] : null}`}>
         <div className='flex justify-between mb-4'>
           <span>{title}</span>
-          <span>{disabled && '🔒'}</span>
+          <span>{locked && '🔒'}</span>
           {status && <span className="text-gray-500">{status}</span>}
         </div>
         <div className='w-full flex justify-between content-center mb-2'>
