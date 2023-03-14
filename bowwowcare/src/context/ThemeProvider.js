@@ -1,10 +1,26 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
+import userService from "../services/user.service";
 
 export const ThemeContext = createContext({});
 
 function ThemeProvider({ children }) {
-  const localTheme = window.localStorage.getItem("theme") || "primary"
-  const [ThemeMode, setThemeMode] = useState(localTheme);
+  const theme = ["primary", "secondary", "third"];
+  const [myTheme, setMyTheme] = useState(0);
+  const [ThemeMode, setThemeMode] = useState(theme[0]);
+
+  useEffect(() => {
+    userService.getUserBoard().then((response) => {
+      if(response.status === 200) {
+        const user = response.data;
+        setMyTheme(user.theme);
+      }
+    }
+    ).catch((e) => {console.log(e.response.data)})
+  },[]);
+
+  useEffect(() => {
+    setThemeMode(theme[myTheme]);
+  },[myTheme])
   
   return (
     <div>

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import { logout } from "../slices/auth";
@@ -25,6 +25,7 @@ function Header() {
 	const handleLogout = (e) => {
 		dispatch(logout());
 		navigate("/");
+		window.location.reload();
 	}
 
 	const handleUser = (e) => {

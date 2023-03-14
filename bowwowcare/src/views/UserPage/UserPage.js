@@ -1,12 +1,28 @@
-import React ,{ useState }from "react";
+import React ,{ useEffect, useState }from "react";
 import Header from "../../components/Header";
 import ThemeSwitcher from "../../components/ThemeSwitcher";
 import HAPPY from "../../assets/images/happy.png"
+import userService from "../../services/user.service";
 
 function UserPage() {
   const [rewards, setRewards] = useState(0);
-  const [fileImg, setFileImg] = useState("string");
-  const [userName, setUserName] = useState("짱구");
+  const [fileImg, setFileImg] = useState("");
+  const [userName, setUserName] = useState("");
+  const [availableThemes, setAvailableThemes] = useState([]);
+
+  useEffect(() => {
+      userService.getUserBoard().then((response) => {
+      if(response.status === 200) {
+        const user = response.data;
+        console.log(user);
+        setUserName(user.username);
+        setRewards(user.reward);
+        setFileImg(user.profileImage);
+        setAvailableThemes(user.availableTheme);
+      }
+    }
+    ).catch((e) => {console.log(e.response.data)})
+  }, [])
 
   return (
     <div className="container mx-auto px-8 w-screen h-screen">
@@ -20,14 +36,12 @@ function UserPage() {
         <div className="text-center">{userName}</div>
       </div>
       
-      
-      
       <hr />
       <div className='flex justify-between mx-5 my-3'>
         <span>내 리워드</span>
         <span>{rewards}</span>
       </div>
-      <ThemeSwitcher></ThemeSwitcher>
+      <ThemeSwitcher availableTheme={availableThemes} reward={rewards} username={userName} fileImg={fileImg} ></ThemeSwitcher>
     </div>
   );
 }
