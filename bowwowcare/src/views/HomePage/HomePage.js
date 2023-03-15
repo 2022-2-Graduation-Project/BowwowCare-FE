@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { API_URL } from "../../Config";
 import authHeader from "../../services/auth-header";
+import { isLogin } from "../../utils/isLogin";
 
 import Header from "../../components/Header";
 import PetList from "./PetList/PetList";
@@ -39,7 +40,7 @@ function HomePage() {
     };
 
   useEffect(() => {
-    getPetList();
+    isLogin() && getPetList();
   }, []);
 
   return (
