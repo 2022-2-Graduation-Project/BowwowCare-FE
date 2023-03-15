@@ -34,7 +34,6 @@ function Header() {
 
 	const isProfile = () => JSON.parse(localStorage.getItem("userImg"));
 	
-	var regexp = /[a-z]/;
 	return (
 		<div>
 		<div className="flex flex-row justify-between items-center my-10">
