@@ -6,8 +6,10 @@ import { API_URL } from "../../Config";
 import authHeader from "../../services/auth-header";
 
 import dayjs from "dayjs";
+import { MdCelebration } from "react-icons/md";
 
 import Header from "../../components/Header";
+import Alert from "../../components/Alert";
 import Lens from "../../assets/images/lens.png";
 import { behaviorType, colorVariants } from "../../utils/Dictionary";
 import { ThemeContext } from "../../context/ThemeProvider";
@@ -18,6 +20,8 @@ function CarePage() {
   const [cards, setCards] = useState([]);
   const [themeMode, setThemeMode] = useContext(ThemeContext);
   const [careType, setCareType] = useState("aggression");
+  const [open, setOpen] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
 
   useEffect(() => {
     if (location?.state?.type) {
@@ -59,10 +63,11 @@ function CarePage() {
         if (response.status === 200) {
           getCards();
           if (response.data?.message) {
-            alert(response.data.message);
+            setAlertMessage(response.data.message);
           } else {
-            alert("오늘 미션에 성공하였습니다!");
+            setAlertMessage("오늘 미션에 성공하였습니다!");
           }
+          handleOpen();
         }
       });
     }
@@ -74,6 +79,10 @@ function CarePage() {
     } else {
       setCareType("aggression");
     }
+  };
+
+  const handleOpen = (e) => {
+    setOpen(!open);
   };
 
   return (
@@ -187,6 +196,12 @@ function CarePage() {
             ))
           : null}
       </div>
+      <Alert
+        open={open}
+        handleOpen={handleOpen}
+        content={alertMessage}
+        icon={<MdCelebration size="3rem" />}
+      />
     </div>
   );
 }
