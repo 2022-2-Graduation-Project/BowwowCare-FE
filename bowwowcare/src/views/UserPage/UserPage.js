@@ -5,10 +5,11 @@ import ThemeSwitcher from "../../components/ThemeSwitcher";
 import userService from "../../services/user.service";
 import { API_URL } from "../../Config";
 import authHeader from "../../services/auth-header";
+import HAPPY from "../../assets/images/happy.png"
 
 function UserPage() {
   const [rewards, setRewards] = useState(0);
-  const [fileImg, setFileImg] = useState("");
+  const [fileImg, setFileImg] = useState(null);
   const [userName, setUserName] = useState("");
   const [availableThemes, setAvailableThemes] = useState([]);
   const fileInput = React.useRef();
@@ -71,7 +72,7 @@ function UserPage() {
           <div className="rounded-full w-12 h-12 border" >
             <label htmlFor="profileImg">
               <img 
-              src={typeof fileImg === "string" ? fileImg : URL.createObjectURL(fileImg)} 
+              src={!fileImg ? HAPPY : typeof fileImg === "string" ? fileImg : URL.createObjectURL(fileImg)} 
               className="rounded-full w-12 h-12" alt="유저 이미지">
               </img>
             </label>

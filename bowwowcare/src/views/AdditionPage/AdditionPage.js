@@ -12,6 +12,7 @@ import Button from "../../components/Button";
 import Alert from "../../components/Alert";
 import { ThemeContext } from "../../context/ThemeProvider";
 import { colorVariants } from "../../utils/Dictionary";
+import HAPPY from "../../assets/images/happy.png"
 
 function AdditionPage() {
   let navigate = useNavigate();
@@ -85,7 +86,6 @@ function AdditionPage() {
           }
         });
       } else {
-        // TODO: 수정 API 추가
       }
     } else {
       handleOpen();
@@ -101,27 +101,18 @@ function AdditionPage() {
     <div className="container mx-auto px-8 w-screen h-screen">
       <Header />
       <div className="flex flex-col justify-center m-12">
-        <div className="w-full mb-10 flex justify-center">
+        <div className="w-full mb-6 flex justify-center">
           <div className="flex flex-col ">
-            <div className="rounded-full border w-20 h-20 ml-4">
-              {fileImg && (
-                <img
-                  src={
-                    typeof fileImg === "string"
-                      ? fileImg
-                      : URL.createObjectURL(fileImg)
-                  }
+          <label className="font-bold " htmlFor="profileImg">
+            <div className="rounded-full w-20 h-20 ml-4">
+            <img
+                src={!fileImg ? HAPPY : typeof fileImg === "string" ? fileImg : URL.createObjectURL(fileImg)} 
                   alt="프로필 이미지"
                   className="rounded-full w-20 h-20"
                 ></img>
-              )}
             </div>
-
-            <div className="mt-3">
-              <label className="font-bold " htmlFor="profileImg">
-                프로필 이미지 {pet ? "변경" : "추가"}
-              </label>
-              <input
+            </label>
+            <input
                 type="file"
                 id="profileImg"
                 name="avatar"
@@ -130,7 +121,6 @@ function AdditionPage() {
                 onChange={handleChange}
                 style={{ display: "none" }}
               />
-            </div>
           </div>
         </div>
 
@@ -141,6 +131,7 @@ function AdditionPage() {
               colorVariants["border" + themeMode]
             }`}
             value={petname}
+            placeholder="반려견의 이름을 입력해주세요."
             onChange={(e) => {
               setPetName(e.target.value);
             }}

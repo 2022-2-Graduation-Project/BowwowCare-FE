@@ -7,7 +7,7 @@ function PetList(props) {
   const user = JSON.parse(localStorage.getItem("user"));
   const navigate = useNavigate();
   return user ? (
-    <div className="flex overflow-x-scroll">
+    <div className="flex overflow-x-auto">
       {props.pets.map((pet, i) => {
         return (
           <div key={i}>
@@ -27,14 +27,15 @@ function PetList(props) {
       </div>
     </div>
   ) : (
-    <div>
+    <div className="w-full">
       <button
-        className="w-80 h-28 shadow m-1 rounded-lg border-gray-300 hover:border-main-color text-gray-300 bg-transparent pl-4"
+        className="w-full h-28 shadow m-1 rounded-lg border-gray-300 hover:border-main-color text-gray-300 bg-transparent pl-4"
         onClick={() => navigate("/addition")}
       >
         <p>+</p>가족을 추가해주세요
       </button>
     </div>
+    
   );
 }
 
