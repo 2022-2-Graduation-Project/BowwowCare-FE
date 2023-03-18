@@ -18,7 +18,9 @@ function Alert({
         <div className="fixed top-0 left-0 w-full h-screen bg-neutral-500/50 flex justify-center items-center">
           <div className="px-4 pt-8 pb-6 w-11/12 bg-white rounded-md flex flex-col items-center">
             {icon}
-            <div className="text-center py-4 whitespace-pre">{content}</div>
+            <div className="text-center py-4 whitespace-pre-wrap w-full">
+              {content}
+            </div>
             {handleSubmit ? (
               <div className="flex justify-between space-x-4 w-full">
                 <Button

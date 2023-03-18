@@ -38,6 +38,30 @@ function SolutionPage() {
         .catch((error) => {
           console.log(error?.response);
         });
+
+      if (location?.state?.petId && location?.state?.type === "anxiety") {
+        axios({
+          method: "POST",
+          url: `${API_URL}/progress/anxiety/${location.state.petId}`,
+          headers: authHeader(),
+          data: location.state.responses,
+        }).then((response) => {
+          if (response.status === 200) {
+            handleOpen();
+            setAlertMessage(
+              <div>
+                {response.data.message.map((m) => (
+                  <div className="my-1">
+                    {m}
+                    <br />
+                  </div>
+                ))}
+                <br />
+              </div>
+            );
+          }
+        });
+      }
     }
   }, []);
 
@@ -110,7 +134,7 @@ function SolutionPage() {
         open={open}
         handleOpen={handleOpen}
         content={alertMessage}
-        handleSubmit={handleLogin}
+        handleSubmit={localStorage.getItem("user") ? null : handleLogin}
       />
     </div>
   );
