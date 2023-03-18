@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useCallback } from "react";
 import { useLocation } from "react-router-dom";
 
 import axios from "axios";
@@ -24,14 +24,14 @@ function CarePage() {
   const [alertMessage, setAlertMessage] = useState("");
 
   useEffect(() => {
-    if (location?.state?.type) {
+    if (location?.state?.type !== "aggression") {
       setCareType(location.state.type);
     }
   }, [location?.state?.type]);
 
-  const getCards = () => {
+  const getCards = useCallback(async () => {
     if (location?.state?.petId) {
-      axios({
+      await axios({
         method: "GET",
         url: `${API_URL}/care/${careType}/${location.state.petId}`,
         headers: authHeader(),
@@ -41,15 +41,15 @@ function CarePage() {
         }
       });
     }
-  };
+  });
 
   useEffect(() => {
-    if (careType) {
-      getCards();
-    }
-  }, [careType]);
+    getCards();
+  }, [careType, getCards]);
 
   const handleMission = (cardId) => (e) => {
+    e.preventDefault();
+
     if (careType && location?.state?.petId) {
       axios({
         method: "POST",
@@ -74,6 +74,7 @@ function CarePage() {
   };
 
   const handleChangeCareType = (e) => {
+    e.preventDefault();
     if (careType === "aggression") {
       setCareType("anxiety");
     } else {
