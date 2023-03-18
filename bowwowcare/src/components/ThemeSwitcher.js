@@ -16,12 +16,10 @@ function ThemeSwitcher({ availableTheme, reward, username, fileImg }) {
 
   const handleEditUser = (theme) => {
     axios({
-      url: `${API_URL}/user`,
+      url: `${API_URL}/user/theme`,
       method: "PUT",
       headers: authHeader(),
       data: {
-        username: `${username}`,
-        profileImage: `${fileImg}`,
         theme: theme,
       },
     })
