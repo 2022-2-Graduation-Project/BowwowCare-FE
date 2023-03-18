@@ -9,7 +9,6 @@ function ThemeProvider({ children }) {
   const [myTheme, setMyTheme] = useState(0);
   const [ThemeMode, setThemeMode] = useState(theme[0]);
 
-  
   useEffect(() => {
     if(isLogin()){
       userService.getUserBoard().then((response) => {
