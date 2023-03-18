@@ -95,7 +95,7 @@ function ResultsPage() {
   };
 
   const handleHome = () => {
-    navigate("/home");
+    navigate("/");
   };
 
   return (
