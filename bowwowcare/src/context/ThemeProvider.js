@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect } from "react";
 import userService from "../services/user.service";
-import { isLogin } from "../utils/isLogin";
+import { isLogin } from "../utils/Status";
 
 export const ThemeContext = createContext({});
 
