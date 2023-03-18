@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { API_URL } from "../../Config";
+import { API_URL, FAST_API_URL } from "../../Config";
 import { en2koDictEmotionVerb } from "../../utils/Dictionary";
 import Header from "../../components/Header";
 import HAPPY from "../../assets/images/happy.png";
@@ -33,7 +33,7 @@ function ResultsPage() {
 
       axios({
         method: "post",
-        url: `http://127.0.0.1:8000/api/v1/predict`, // fastapi
+        url: `${FAST_API_URL}/predict`,
         data: formData,
       })
         .then((response) => {
@@ -95,7 +95,7 @@ function ResultsPage() {
   };
 
   const handleHome = () => {
-    navigate("/home");
+    navigate("/");
   };
 
   return (
