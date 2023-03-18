@@ -10,8 +10,10 @@ import PetList from "./PetList/PetList";
 
 import anxiety from "../../assets/images/anxiety.png";
 import aggression from "../../assets/images/aggression.png";
+import { useMediaQuery } from "react-responsive";
 
 function HomePage() {
+  const isDesktopOrMobile = useMediaQuery({query: '(max-width:768px)'});
   const [petList, setPetList] = useState([]);
   const navigate = useNavigate();
 
@@ -46,7 +48,7 @@ function HomePage() {
   return (
     <div className="container mx-auto px-8 w-screen h-screen">
       <Header />
-      <div className="flex">{<PetList pets={petList} />}</div>
+      <div className="flex w-full">{<PetList pets={petList} />}</div>
 
       <div className="mt-14 py-8 shadow-lg rounded-lg">
 
@@ -55,16 +57,32 @@ function HomePage() {
         <p className=" text-xs">간단한 진단을 통해 솔루션을 확인해보세요</p>
         </div>
 
-      <div className="flex justify-center mt-6 text-gray-500 text-center text-sm">
-        <button onClick={() => handleNavigation("aggression")} className=" border-r">
-          <img src={aggression}></img>
-          <p>공격적인 아이</p>
-        </button>
+      <div>
+      {isDesktopOrMobile !== true ? 
+        <div className="flex justify-center mt-6 text-gray-500 text-center text-sm">
+          <button onClick={() => handleNavigation("aggression")} className=" border-r">
+            <img src={aggression} style={{width:"250px"}}></img>
+            <p>공격적인 아이</p>
+          </button>
 
-        <button onClick={() => handleNavigation("anxiety")}>
-          <img src={anxiety}></img>
-          <p>불안해보이는 아이</p>
-        </button>
+          <button onClick={() => handleNavigation("anxiety")}>
+            <img src={anxiety} style={{width:"250px"}}></img>
+            <p>불안해보이는 아이</p>
+          </button>
+        </div>
+       : 
+        <div className="flex justify-center mt-6 text-gray-500 text-center text-sm">
+          <button onClick={() => handleNavigation("aggression")} className=" border-r">
+            <img src={aggression}></img>
+            <p>공격적인 아이</p>
+          </button>
+
+          <button onClick={() => handleNavigation("anxiety")}>
+            <img src={anxiety}></img>
+            <p>불안해보이는 아이</p>
+          </button>
+        </div>
+      }
       </div>
       </div>
 

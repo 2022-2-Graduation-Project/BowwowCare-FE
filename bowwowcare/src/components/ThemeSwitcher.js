@@ -86,7 +86,7 @@ function ThemeSwitcher({ availableTheme, reward, username, fileImg }) {
         return (
           <ThemeBox
             onClick={() => switchTheme(theme)}
-            title={`Theme ${theme}`}
+            title={`Theme ${theme+1}`}
             status={themeMode === mode[theme] ? "적용중" : null}
             rewards={bones[theme]}
             mainColor={`${mode[theme]}-theme`}
