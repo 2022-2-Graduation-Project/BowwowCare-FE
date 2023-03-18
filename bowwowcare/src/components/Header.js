@@ -8,6 +8,7 @@ import "../font.css";
 
 import { ThemeContext } from './../context/ThemeProvider.js';
 import { colorVariants } from '../utils/Dictionary';
+import { isProfile } from '../utils/Status';
 
 function Header() {
 	const [themeMode, setThemeMode] = useContext(ThemeContext);
@@ -29,10 +30,8 @@ function Header() {
 	}
 
 	const handleUser = (e) => {
-		navigate("user");
+		navigate("/user");
 	}
-
-	const isProfile = () => JSON.parse(localStorage.getItem("userImg"));
 	
 	return (
 		<div>
