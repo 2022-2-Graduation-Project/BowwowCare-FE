@@ -9,7 +9,7 @@ import HAPPY from "../../assets/images/happy.png"
 
 function UserPage() {
   const [rewards, setRewards] = useState(0);
-  const [fileImg, setFileImg] = useState("");
+  const [fileImg, setFileImg] = useState(null);
   const [userName, setUserName] = useState("");
   const [availableThemes, setAvailableThemes] = useState([]);
   const fileInput = React.useRef();
