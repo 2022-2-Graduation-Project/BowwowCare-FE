@@ -7,7 +7,7 @@ function PetList(props) {
   const user = JSON.parse(localStorage.getItem("user"));
   const navigate = useNavigate();
   return user ? (
-    <div className="flex overflow-x-scroll">
+    <div className="flex overflow-x-auto">
       {props.pets.map((pet, i) => {
         return (
           <div key={i}>
