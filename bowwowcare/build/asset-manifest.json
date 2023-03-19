@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/static/css/main.6a5ed664.css",
+    "main.js": "/static/js/main.d9041fdb.js",
+    "static/media/Tenada.ttf": "/static/media/Tenada.0cfe8963fde304575974.ttf",
+    "static/media/aggression.png": "/static/media/aggression.67a930471b4b7a38c1d3.png",
+    "static/media/angry.png": "/static/media/angry.67a930471b4b7a38c1d3.png",
+    "static/media/happy.png": "/static/media/happy.860bb53b6aa3a7ba5376.png",
+    "static/media/lens.png": "/static/media/lens.ded00a765681393f4e87.png",
+    "static/media/sad.png": "/static/media/sad.33b8ff6df2026e6377f3.png",
+    "static/media/anxiety.png": "/static/media/anxiety.c6977684fadc7ca5692f.png",
+    "service-worker.js": "/service-worker.js",
+    "static/media/kakaotalk.png": "/static/media/kakaotalk.ec339df712f88bd4ba51.png",
+    "index.html": "/index.html",
+    "main.6a5ed664.css.map": "/static/css/main.6a5ed664.css.map",
+    "main.d9041fdb.js.map": "/static/js/main.d9041fdb.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6a5ed664.css",
+    "static/js/main.d9041fdb.js"
+  ]
+}
