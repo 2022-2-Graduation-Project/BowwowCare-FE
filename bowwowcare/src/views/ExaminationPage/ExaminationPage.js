@@ -49,12 +49,12 @@ function ExaminationPage() {
       {location?.state?.type ? (
         <div>
           {location.state.type === "aggression" ? (
-            <div className="mt-20 mb-6">
+            <div className="mt-8 mb-2">
               아이가 어떤 상황에서 <span className="font-bold">앞의 행동</span>
               을 보이나요?
             </div>
           ) : (
-            <div className="mt-20 mb-6">
+            <div className="mt-8 mb-2">
               아이가 어떤 <span className="font-bold">행동</span>을 보이고
               있나요?
             </div>

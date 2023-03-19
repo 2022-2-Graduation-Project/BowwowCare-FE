@@ -122,12 +122,12 @@ function SolutionPage() {
           })}
         </div>
         <div className="flex flex-col items-center">
-          <img src={lens} width="200px" />
-        </div>
-        <div className="w-full">
-          <Button onClick={handleSaveResults} bgColor={themeMode}>
-            멍멍케어 시작하기
-          </Button>
+          <img src={lens} width="120px" className="mb-24" />
+          <div className="absolute bottom-8 w-5/6">
+            <Button onClick={handleSaveResults} bgColor={themeMode}>
+              멍멍케어 시작하기
+            </Button>
+          </div>
         </div>
       </div>
       <Alert

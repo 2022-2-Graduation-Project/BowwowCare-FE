@@ -121,7 +121,7 @@ function AdditionPage() {
                       : URL.createObjectURL(fileImg)
                   }
                   alt="프로필 이미지"
-                  className="rounded-full w-20 h-20"
+                  className="rounded-full w-20 h-20 object-cover"
                 ></img>
               </div>
             </label>

@@ -105,12 +105,14 @@ function ResultsPage() {
       {file && emotion ? (
         <div className="h-5/6 flex flex-col justify-between">
           <div>
-            <img
-              className="rounded-md"
-              src={URL.createObjectURL(file)}
-              width="100%"
-              alt="Uploaded File"
-            />
+            <div className="w-full h-[240px] overflow-hidden">
+              <img
+                className="rounded-md w-[full] h-[300px] mt-[-35px]"
+                src={URL.createObjectURL(file)}
+                width="100%"
+                alt="Uploaded File"
+              />
+            </div>
             <div className="text-center pt-8">
               <div className="mt-1 text-lg">
                 아이가
@@ -124,11 +126,11 @@ function ResultsPage() {
           <div className="w-full">
             <div className="flex justify-center">
               {emotion === "POSITIVE" ? (
-                <img src={HAPPY} width="280px" alt="Happy Dog" />
+                <img src={HAPPY} width="200px" alt="Happy Dog" />
               ) : emotion === "SAD" ? (
-                <img src={SAD} width="280px" alt="Sad Dog" />
+                <img src={SAD} width="200px" alt="Sad Dog" />
               ) : emotion === "ANGRY" ? (
-                <img src={ANGRY} width="280px" alt="Angry Dog" />
+                <img src={ANGRY} width="200px" alt="Angry Dog" />
               ) : null}
             </div>
             {emotion === "SAD" || emotion === "ANGRY" ? (
@@ -147,7 +149,7 @@ function ResultsPage() {
                 <p>...</p>
               </div>
             ) : (
-              <div className="flex justify-between items-center gap-4 w-full mt-8">
+              <div className="flex justify-between items-center gap-4 w-full my-8">
                 <button
                   className={`flex-1 h-12 font-bold rounded-md border-2 ${
                     colorVariants["border" + themeMode]

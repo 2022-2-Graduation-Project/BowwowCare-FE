@@ -113,7 +113,7 @@ function SelectionPage() {
     <div className="container mx-auto w-screen h-screen px-8">
       <Header />
       {location?.state?.type ? (
-        <div className="h-5/6 flex flex-col justify-between">
+        <div className="h-5/6 flex flex-col justify-between pb-6">
           <div className="h-2/3">
             <div className="mt-4 mb-2">
               어떤 아이의 이상행동을 확인하는 건가요?
@@ -126,7 +126,7 @@ function SelectionPage() {
             />
             {location.state.type === "aggression" ? (
               <div>
-                <div className="mt-4 mb-2">
+                <div className="my-4">
                   아이가 어떤 <span className="font-bold">행동</span>을 보이고
                   있나요?
                 </div>
