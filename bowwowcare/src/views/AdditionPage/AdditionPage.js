@@ -107,7 +107,7 @@ function AdditionPage() {
   return (
     <div className="container mx-auto px-8 w-screen h-screen">
       <Header />
-      <div className="flex flex-col justify-center m-12">
+      <div className="flex flex-col justify-center relative w-6/7 m-1.5">
         <div className="w-full mb-6 flex justify-center">
           <div className="flex flex-col ">
             <label className="font-bold " htmlFor="profileImg">
