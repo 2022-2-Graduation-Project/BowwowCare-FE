@@ -88,7 +88,7 @@ function ResultsPage() {
     await window.Kakao.Share.sendCustom({
       templateId: 89326,
       templateArgs: {
-        PROFILE_NAME: `아이가 ${en2koDictEmotionVerb[emotion]} 있어요 💕`,
+        PROFILE_NAME: `아이가 ${en2koDictEmotionVerb[emotion]} 있어요 🐶`,
         THUMBNAIL: thumbnail,
       },
     });
