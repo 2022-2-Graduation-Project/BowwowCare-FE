@@ -149,7 +149,7 @@ function ResultsPage() {
                 <p>...</p>
               </div>
             ) : (
-              <div className="flex justify-between items-center gap-4 w-full my-8">
+              <div className="flex justify-between items-center gap-4 w-full mt-8 mb-6">
                 <button
                   className={`flex-1 h-12 font-bold rounded-md border-2 ${
                     colorVariants["border" + themeMode]

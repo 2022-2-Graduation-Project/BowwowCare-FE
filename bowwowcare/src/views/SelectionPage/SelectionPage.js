@@ -115,9 +115,7 @@ function SelectionPage() {
       {location?.state?.type ? (
         <div className="h-5/6 flex flex-col justify-between pb-6">
           <div className="h-2/3">
-            <div className="mt-4 mb-2">
-              어떤 아이의 이상행동을 확인하는 건가요?
-            </div>
+            <div className="mb-2">어떤 아이의 이상행동을 확인하는 건가요?</div>
             <SelectPet
               abnormal={abnormal}
               pets={pets}
@@ -126,7 +124,7 @@ function SelectionPage() {
             />
             {location.state.type === "aggression" ? (
               <div>
-                <div className="my-4">
+                <div className="my-3">
                   아이가 어떤 <span className="font-bold">행동</span>을 보이고
                   있나요?
                 </div>
@@ -142,11 +140,8 @@ function SelectionPage() {
           {location.state.type === "aggression" ? (
             <div className="w-full">
               {abnormal ? (
-                <div className="text-center mb-4">
-                  <span>
-                    문진을 통해 공격 행동 교정을 위한 <br />
-                  </span>
-                  <span>솔루션을 얻어볼까요?</span>
+                <div className="text-center mb-3">
+                  문진을 통해 공격 행동 교정 솔루션을 얻어볼까요?
                 </div>
               ) : null}
               <Button

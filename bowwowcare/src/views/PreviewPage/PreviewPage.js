@@ -36,7 +36,7 @@ function PreviewPage() {
       <Header />
 
       {file ? (
-        <div className="h-5/6 flex flex-col justify-between">
+        <div className="h-5/6 flex flex-col justify-between pb-6">
           <div>
             {/* <div className="my-4 flex justify-between items-center">
                             <button onClick={handleGoBack}>
@@ -55,7 +55,7 @@ function PreviewPage() {
           </div>
           <div className="w-full">
             <div className="flex justify-center pb-8">
-              <img src={lens} width="180x" />
+              <img src={lens} width="160x" />
             </div>
 
             {/* <button 

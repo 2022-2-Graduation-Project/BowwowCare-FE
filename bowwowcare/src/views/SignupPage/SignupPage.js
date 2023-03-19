@@ -239,7 +239,7 @@ const SignupPage = () => {
             </div>
           </form>
           <div className="flex justify-end">
-            <div className="mr-2">이미 멍멍케어에 가입했나요? </div>
+            <div className="mr-1">이미 멍멍케어에 가입했나요?</div>
             <button
               className={`${colorVariants["text" + themeMode]}`}
               onClick={handleLogin}
