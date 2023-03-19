@@ -105,9 +105,9 @@ function ResultsPage() {
       {file && emotion ? (
         <div className="h-5/6 flex flex-col justify-between">
           <div>
-            <div className="w-full h-[240px] overflow-hidden">
+            <div className="w-full h-[240px] overflow-hidden flex items-center justify-center">
               <img
-                className="rounded-md w-[full] h-[300px] mt-[-35px]"
+                className="rounded-md w-[full] sm:w-[480px] h-[300px] sm:h-[360px] mt-[-35px]"
                 src={URL.createObjectURL(file)}
                 width="100%"
                 alt="Uploaded File"

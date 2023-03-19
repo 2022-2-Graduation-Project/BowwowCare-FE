@@ -66,8 +66,8 @@ function PetInfoPage() {
                   <img
                     src={fileImg}
                     alt="프로필 이미지"
-                    className="rounded-full w-14 h-14"
-                  ></img>
+                    className="rounded-full w-14 h-14 object-cover"
+                  />
                 )}
               </div>
             </div>

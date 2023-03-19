@@ -17,11 +17,10 @@ function PetInfo(props) {
 
   const getPetDetail = () => {
     axios({
-      method: 'get',
-      url: `${API_URL}/pets/${props.pet.petId}`
-    })
-    .then(response => {
-      if (response.status===200) {
+      method: "get",
+      url: `${API_URL}/pets/${props.pet.petId}`,
+    }).then((response) => {
+      if (response.status === 200) {
         const pet = response.data;
         setPetName(pet.name);
         setPetImg(pet.petImg);
@@ -30,7 +29,7 @@ function PetInfo(props) {
         setAge(getAge(birthDate));
         setDay(getDurationDate(adoptionDate));
       }
-    })
+    });
   };
 
   return (
@@ -40,7 +39,7 @@ function PetInfo(props) {
           <img
             src={petImg}
             alt="프로필 이미지"
-            className="rounded-full w-14 h-14"
+            className="rounded-full w-14 h-14 object-cover"
           ></img>
         )}
       </div>
