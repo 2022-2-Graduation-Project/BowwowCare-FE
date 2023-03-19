@@ -97,8 +97,8 @@ function PetInfoPage() {
           </div>
 
           <div className=" absolute bottom-8 w-5/6">
-            <div className="flex justify-center">
-              <img src={lens} width="100px"></img>
+            <div className="flex justify-center pb-8">
+              <img src={lens} width="140px"></img>
             </div>
             <Button
               children="멍멍케어 시작하기"
