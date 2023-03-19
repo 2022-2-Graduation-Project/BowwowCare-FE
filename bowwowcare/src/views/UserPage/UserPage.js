@@ -14,9 +14,9 @@ function UserPage() {
   const [availableThemes, setAvailableThemes] = useState([]);
   const fileInput = React.useRef();
 
-  const handleEditUserImg = () => {
+  const handleEditUserImg = (profileImg) => {
     const formData = new FormData();
-    formData.append("file", fileImg);
+    formData.append("file", profileImg);
     axios({
       method: "POST",
       url: `${API_URL}/image`,
@@ -26,6 +26,7 @@ function UserPage() {
         let image = {
           profileImage: response.data.url,
         };
+        localStorage.setItem("userImg", image.profileImage)
         axios({
           method: "PUT",
           url: `${API_URL}/user/image`,
@@ -46,8 +47,9 @@ function UserPage() {
   };
 
   const handleChange = (e) => {
-    setFileImg(e.target.files[0]);
-    fileImg && handleEditUserImg(fileImg);
+    const profileImg = e.target.files[0];
+    setFileImg(profileImg);
+    handleEditUserImg(profileImg);
   };
 
   useEffect(() => {
