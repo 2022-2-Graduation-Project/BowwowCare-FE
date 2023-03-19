@@ -1,18 +1,16 @@
 import axios from "axios";
 import React, { useContext, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import DatePicker from "react-datepicker";
+import { RainbowThemeContainer, DatePicker } from "react-rainbow-components";
 import { API_URL } from "../../Config";
 import authHeader from "../../services/auth-header";
 
-import "react-datepicker/dist/react-datepicker.css";
-import { ko } from "date-fns/esm/locale";
 import Header from "../../components/Header";
 import Button from "../../components/Button";
 import Alert from "../../components/Alert";
 import { ThemeContext } from "../../context/ThemeProvider";
 import { colorVariants } from "../../utils/Dictionary";
-import HAPPY from "../../assets/images/happy.png"
+import HAPPY from "../../assets/images/happy.png";
 
 function AdditionPage() {
   let navigate = useNavigate();
@@ -34,6 +32,15 @@ function AdditionPage() {
 
   const fileInput = React.useRef();
   const [themeMode, setThemeMode] = useContext(ThemeContext);
+  const colors = { primary: "#38A8AC", secondary: "#7E57C2", third: "#424242" };
+
+  const theme = {
+    rainbow: {
+      palette: {
+        brand: colors[themeMode],
+      },
+    },
+  };
 
   const changeFormat = (date) => {
     return (
@@ -103,24 +110,30 @@ function AdditionPage() {
       <div className="flex flex-col justify-center m-12">
         <div className="w-full mb-6 flex justify-center">
           <div className="flex flex-col ">
-          <label className="font-bold " htmlFor="profileImg">
-            <div className="rounded-full w-20 h-20 ml-4">
-            <img
-                src={!fileImg ? HAPPY : typeof fileImg === "string" ? fileImg : URL.createObjectURL(fileImg)} 
+            <label className="font-bold " htmlFor="profileImg">
+              <div className="rounded-full w-20 h-20 ml-4">
+                <img
+                  src={
+                    !fileImg
+                      ? HAPPY
+                      : typeof fileImg === "string"
+                      ? fileImg
+                      : URL.createObjectURL(fileImg)
+                  }
                   alt="프로필 이미지"
                   className="rounded-full w-20 h-20"
                 ></img>
-            </div>
+              </div>
             </label>
             <input
-                type="file"
-                id="profileImg"
-                name="avatar"
-                accept="image/*"
-                ref={fileInput}
-                onChange={handleChange}
-                style={{ display: "none" }}
-              />
+              type="file"
+              id="profileImg"
+              name="avatar"
+              accept="image/*"
+              ref={fileInput}
+              onChange={handleChange}
+              style={{ display: "none" }}
+            />
           </div>
         </div>
 
@@ -179,30 +192,28 @@ function AdditionPage() {
 
         <div className="mb-10">
           <div className="mb-2">태어난 날</div>
-          <DatePicker
-            locale={ko}
-            dateFormat="yyyy년 MM월 dd일"
-            selected={birthDate}
-            onChange={(date) => setBirthDate(date)}
-            maxDate={new Date()}
-            className={`w-full outline-none border-b-2 ${
-              colorVariants["border" + themeMode]
-            }`}
-          />
+          <RainbowThemeContainer theme={theme}>
+            <DatePicker
+              formatStyle="large"
+              value={birthDate}
+              onChange={(date) => setBirthDate(date)}
+              maxDate={new Date()}
+              borderRadius="semi-square"
+            />
+          </RainbowThemeContainer>
         </div>
 
         <div className="mb-10">
           <div className="mb-2">가족이 된 날</div>
-          <DatePicker
-            locale={ko}
-            dateFormat="yyyy년 MM월 dd일"
-            selected={adoptDate}
-            onChange={(date) => setAdoptDate(date)}
-            maxDate={new Date()}
-            className={`w-full outline-none border-b-2 ${
-              colorVariants["border" + themeMode]
-            }`}
-          />
+          <RainbowThemeContainer theme={theme}>
+            <DatePicker
+              formatStyle="large"
+              value={adoptDate}
+              onChange={(date) => setAdoptDate(date)}
+              maxDate={new Date()}
+              borderRadius="semi-square"
+            />
+          </RainbowThemeContainer>
         </div>
       </div>
       <div className="absolute bottom-8 w-5/6">
