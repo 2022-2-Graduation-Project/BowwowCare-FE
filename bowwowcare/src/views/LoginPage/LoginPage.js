@@ -112,7 +112,7 @@ const LoginPage = () => {
             <div className="mb-8">
               <label
                 htmlFor="email"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                className="block mb-2 text-sm font-medium text-gray-900"
               >
                 이메일
               </label>
@@ -130,7 +130,7 @@ const LoginPage = () => {
             <div className="mb-8">
               <label
                 htmlFor="password"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                className="block mb-2 text-sm font-medium text-gray-900"
               >
                 비밀번호
               </label>

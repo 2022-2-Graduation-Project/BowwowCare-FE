@@ -150,7 +150,7 @@ const SignupPage = () => {
             <div className="mb-6">
               <label
                 htmlFor="username"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                className="block mb-2 text-sm font-medium text-gray-900"
               >
                 이름
               </label>
@@ -168,7 +168,7 @@ const SignupPage = () => {
             <div className="mb-6">
               <label
                 htmlFor="email"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                className="block mb-2 text-sm font-medium text-gray-900"
               >
                 이메일
               </label>
@@ -186,7 +186,7 @@ const SignupPage = () => {
             <div className="mb-6">
               <label
                 htmlFor="password"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                className="block mb-2 text-sm font-medium text-gray-900"
               >
                 비밀번호
               </label>
@@ -204,7 +204,7 @@ const SignupPage = () => {
             <div className="mb-8">
               <label
                 htmlFor="confirm-password"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                className="block mb-2 text-sm font-medium text-gray-900"
               >
                 비밀번호 확인
               </label>
