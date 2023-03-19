@@ -80,7 +80,7 @@ function SelectPet({ pets, selectedPet, setSelectedPet, abnormal }) {
               >
                 <div class="flex items-center">
                   <img
-                    src={selectedPet.petImage}
+                    src={pet.petImage}
                     alt=""
                     class="h-6 w-6 flex-shrink-0 rounded-full"
                   />

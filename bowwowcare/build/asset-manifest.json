@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.5dcb37d5.css",
-    "main.js": "/static/js/main.1fce222b.js",
+    "main.js": "/static/js/main.49e1dca1.js",
     "static/media/Tenada.ttf": "/static/media/Tenada.0cfe8963fde304575974.ttf",
     "static/media/aggression.png": "/static/media/aggression.67a930471b4b7a38c1d3.png",
     "static/media/angry.png": "/static/media/angry.67a930471b4b7a38c1d3.png",
@@ -13,10 +13,10 @@
     "static/media/kakaotalk.png": "/static/media/kakaotalk.ec339df712f88bd4ba51.png",
     "index.html": "/index.html",
     "main.5dcb37d5.css.map": "/static/css/main.5dcb37d5.css.map",
-    "main.1fce222b.js.map": "/static/js/main.1fce222b.js.map"
+    "main.49e1dca1.js.map": "/static/js/main.49e1dca1.js.map"
   },
   "entrypoints": [
     "static/css/main.5dcb37d5.css",
-    "static/js/main.1fce222b.js"
+    "static/js/main.49e1dca1.js"
   ]
 }
