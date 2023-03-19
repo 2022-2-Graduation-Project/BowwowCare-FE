@@ -15,6 +15,7 @@ function ThemeProvider({ children }) {
         if(response.status === 200) {
           const user = response.data;
           setMyTheme(user.theme);
+          localStorage.setItem("userImg", user.profileImage);
         }
       }
       ).catch((e) => {console.log(e.response.data)})

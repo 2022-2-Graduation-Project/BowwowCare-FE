@@ -47,14 +47,13 @@ function UserPage() {
 
   const handleChange = (e) => {
     setFileImg(e.target.files[0]);
-    handleEditUserImg(fileImg);
+    fileImg && handleEditUserImg(fileImg);
   };
 
   useEffect(() => {
       userService.getUserBoard().then((response) => {
       if(response.status === 200) {
         const user = response.data;
-        console.log(user);
         setUserName(user.username);
         setRewards(user.reward);
         setFileImg(user.profileImage);
