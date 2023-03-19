@@ -20,11 +20,11 @@ function Solution({ solution, emotion }) {
     <div>
         <div
           key={solution}
-          className="w-72 h-full text-center shadow-lg rounded-2xl flex flex-col justify-between px-10 pt-12 pb-8 mx-2"
+          className="w-72 h-full text-center shadow-lg rounded-2xl flex flex-col justify-between px-8 pt-10 pb-8 mx-2"
         >
-          <div className="font-bold pb-2">{solution.situation}</div>
-          <div className="h-1/2 overflow-y-auto">{solution.solution}</div>
-          <Button
+          <div className="font-bold">{solution.situation}</div>
+          <div className="h-5/6 overflow-y-auto">{solution.solution}</div>
+          {/* <Button
             onClick={() => setPopup(true)}
             bgColor="white" borderColor={themeMode} textColor={themeMode}
           >
@@ -36,7 +36,7 @@ function Solution({ solution, emotion }) {
             solution={solution.solution}
           >
             <YoutubeEmbed embedId="w7aE4ihj7Ao" />
-          </Modal>
+          </Modal> */}
         </div>
     </div>
   );
