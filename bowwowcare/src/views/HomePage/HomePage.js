@@ -10,12 +10,11 @@ import PetList from "./PetList/PetList";
 
 import anxiety from "../../assets/images/anxiety.png";
 import aggression from "../../assets/images/aggression.png";
-import { useMediaQuery } from "react-responsive";
 
 function HomePage() {
-  const isDesktopOrMobile = useMediaQuery({query: '(max-width:768px)'});
   const [petList, setPetList] = useState([]);
   const navigate = useNavigate();
+
 
   const handleNavigation = (type) => {
     if (type) {
@@ -58,31 +57,17 @@ function HomePage() {
         </div>
 
       <div>
-      {isDesktopOrMobile !== true ? 
         <div className="flex justify-center mt-6 text-gray-500 text-center text-sm">
           <button onClick={() => handleNavigation("aggression")} className=" border-r">
-            <img src={aggression} style={{width:"250px"}}></img>
+            <img src={aggression} style={{ width:"250px" }}></img>
             <p>공격적인 아이</p>
           </button>
 
           <button onClick={() => handleNavigation("anxiety")}>
-            <img src={anxiety} style={{width:"250px"}}></img>
+            <img src={anxiety} style={{ width:"250px" }}></img>
             <p>불안해보이는 아이</p>
           </button>
         </div>
-       : 
-        <div className="flex justify-center mt-6 text-gray-500 text-center text-sm">
-          <button onClick={() => handleNavigation("aggression")} className=" border-r">
-            <img src={aggression}></img>
-            <p>공격적인 아이</p>
-          </button>
-
-          <button onClick={() => handleNavigation("anxiety")}>
-            <img src={anxiety}></img>
-            <p>불안해보이는 아이</p>
-          </button>
-        </div>
-      }
       </div>
       </div>
 
