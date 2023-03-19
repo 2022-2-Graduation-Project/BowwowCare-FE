@@ -25,6 +25,7 @@ function Header() {
 
 	const handleLogout = (e) => {
 		dispatch(logout());
+		localStorage.removeItem("userImg")
 		navigate("/");
 		window.location.reload();
 	}
