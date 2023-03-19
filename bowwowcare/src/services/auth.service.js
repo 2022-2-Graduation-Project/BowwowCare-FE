@@ -30,6 +30,7 @@ const login = (data) => {
 
 const logout = () => {
     localStorage.removeItem("user");
+    localStorage.removeItem("userImg");
 };
 
 const authService = {
