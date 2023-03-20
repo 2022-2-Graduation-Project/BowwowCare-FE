@@ -38,32 +38,19 @@ function PreviewPage() {
       {file ? (
         <div className="h-5/6 flex flex-col justify-between pb-6">
           <div>
-            {/* <div className="my-4 flex justify-between items-center">
-                            <button onClick={handleGoBack}>
-                                <IoIosArrowBack size="2rem" />
-                            </button>
-                            <div>
-                                미리보기
-                            </div>
-                            <div className="w-8"></div>
-                        </div> */}
-            <img
-              className="rounded-md"
-              src={URL.createObjectURL(file)}
-              width="100%"
-            />
+            <div className="rounded-md w-full h-[280px] overflow-hidden flex items-center justify-center">
+              <img
+                className="w-[full] sm:w-[480px] h-[320px] sm:h-[480px] object-cover"
+                src={URL.createObjectURL(file)}
+                width="100%"
+                alt="Uploaded File"
+              />
+            </div>
           </div>
           <div className="w-full">
             <div className="flex justify-center pb-8">
-              <img src={lens} width="160x" />
+              <img src={lens} width="160x" alt="Lens" />
             </div>
-
-            {/* <button 
-                            className="h-12 w-full font-bold rounded-md bg-main-color text-white text-center" 
-                            onClick={handleAnalysis}
-                        >
-                            분석하기
-                        </button> */}
             <Button onClick={handleAnalysis} bgColor={themeMode}>
               분석하기
             </Button>
