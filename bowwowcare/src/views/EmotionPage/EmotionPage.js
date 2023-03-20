@@ -34,19 +34,21 @@ function EmotionPage() {
             <p>확인해볼까요?</p>
         </div>
         <span>사진을 선택하거나 바로 찍어보세요</span>
-        <div className="flex justify-around gap-3 mx-3">
-          <Button onClick={handleButtonClick} bgColor={themeMode}>사진 선택</Button>
-              <input
-                type="file"
-                id="avatar"
-                name="avatar"
-                accept="image/jpg, image/png, image/jpeg"
-                ref={fileInput}
-                onChange={handleChange}
-                style={{ display: "none" }}
-              />
-          <Button onClick={() => navigate("/camera")} bgColor={themeMode}>사진 찍기</Button>  
-        </div>              
+        <div className="flex">
+          <div className="w-1/3"></div>
+          <div className="w-1/3">
+            <Button onClick={handleButtonClick} bgColor={themeMode}>사진 선택</Button>
+                <input
+                  type="file"
+                  id="avatar"
+                  name="avatar"
+                  accept="image/jpg, image/png, image/jpeg"
+                  ref={fileInput}
+                  onChange={handleChange}
+                  style={{ display: "none" }}
+                />
+          </div>
+        </div>
       </div>
     </div>
     </div>
