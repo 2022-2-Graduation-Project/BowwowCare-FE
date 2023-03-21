@@ -3,6 +3,9 @@ import React, { useState, useEffect, useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { API_URL, FAST_API_URL } from "../../Config";
+
+import FadeLoader from "react-spinners/FadeLoader";
+
 import { en2koDictEmotionVerb } from "../../utils/Dictionary";
 import Header from "../../components/Header";
 import HAPPY from "../../assets/images/happy.png";
@@ -17,8 +20,10 @@ function ResultsPage() {
   const navigate = useNavigate();
   const [file, setFile] = useState();
   const [emotion, setEmotion] = useState();
-  const [loading, setLoading] = useState(true);
+  const [kakaoLoading, setKakaoLoading] = useState(true);
+  const [predictionLoading, setPredictionLoading] = useState(true);
   const [themeMode, setThemeMode] = useContext(ThemeContext);
+  const colors = { primary: "#38A8AC", secondary: "#7E57C2", third: "#424242" };
 
   useEffect(() => {
     if (location?.state?.file) {
@@ -39,6 +44,7 @@ function ResultsPage() {
         .then((response) => {
           if (response.status === 200 && response.data?.emotion) {
             setEmotion(response.data.emotion);
+            setPredictionLoading(false);
           }
         })
         .catch((error) => {
@@ -52,7 +58,7 @@ function ResultsPage() {
 
     script.src = "https://t1.kakaocdn.net/kakao_js_sdk/2.1.0/kakao.min.js";
     script.async = true;
-    script.onload = () => setLoading(false);
+    script.onload = () => setKakaoLoading(false);
 
     document.body.appendChild(script);
 
@@ -62,12 +68,12 @@ function ResultsPage() {
   }, [emotion]);
 
   useEffect(() => {
-    if (!loading) {
+    if (!kakaoLoading) {
       if (!window.Kakao.isInitialized()) {
         window.Kakao.init(process.env.REACT_APP_KAKAO_JAVASCRIPT_KEY);
       }
     }
-  }, [loading]);
+  }, [kakaoLoading]);
 
   const shareKakao = async () => {
     let thumbnail = "";
@@ -102,7 +108,7 @@ function ResultsPage() {
     <div className="container mx-auto px-8 w-screen h-screen">
       <Header />
 
-      {file && emotion ? (
+      {file && emotion && !predictionLoading ? (
         <div className="h-5/6 flex flex-col justify-between">
           <div>
             <div className="rounded-md w-full h-[280px] overflow-hidden flex items-center justify-center">
@@ -144,7 +150,7 @@ function ResultsPage() {
                 ✨
               </div>
             )}
-            {loading ? (
+            {kakaoLoading ? (
               <div>
                 <p>...</p>
               </div>
@@ -173,7 +179,17 @@ function ResultsPage() {
             )}
           </div>
         </div>
-      ) : null}
+      ) : (
+        <div className="h-2/3 flex items-center justify-center">
+          <FadeLoader
+            color={colors[themeMode]}
+            kakaoLoading={kakaoLoading}
+            size={50}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+          />
+        </div>
+      )}
     </div>
   );
 }
