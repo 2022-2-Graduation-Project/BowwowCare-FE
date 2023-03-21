@@ -74,10 +74,10 @@ function HomePage() {
         </div>
       </div>
 
-      <div className="mt-8 p-8 shadow-lg rounded-lg">
-        <button onClick={() => navigate("/emotion")}>
-          <p className=" text-lg">우리 아이의 감정을 확인해보세요</p>
-          <p className=" text-xs text-left">
+      <div className="mt-8 shadow-lg rounded-lg">
+        <button className="p-8 w-full" onClick={() => navigate("/emotion")}>
+          <p className="text-lg text-left">우리 아이의 감정을 확인해보세요</p>
+          <p className="text-xs text-left">
             사진 한 장으로 간편하게 알아보세요
           </p>
         </button>
