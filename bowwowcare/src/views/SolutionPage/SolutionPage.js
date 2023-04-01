@@ -122,7 +122,7 @@ function SolutionPage() {
           })}
         </div>
         <div className="flex flex-col items-center">
-          <img src={lens} width="120px" className="mb-40" alt="Lens" />
+          <img src={lens} width="120px" className="mb-32" alt="Lens" />
           <div className="absolute bottom-8 w-5/6">
             <Button onClick={handleSaveResults} bgColor={themeMode}>
               멍멍케어 시작하기
