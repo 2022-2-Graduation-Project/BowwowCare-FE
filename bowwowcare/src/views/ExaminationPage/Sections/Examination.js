@@ -70,7 +70,7 @@ function Examination({ type, petId, aggressionType = undefined }) {
   return (
     <div className="flex flex-wrap h-screen w-full">
       <form onSubmit={handleSubmit} className="w-full">
-        <div className="shadow-lg h-3/5 rounded-2xl px-6 pt-8 pb-4 overflow-y-auto">
+        <div className="shadow-lg h-1/2 rounded-2xl px-6 pt-8 pb-4 overflow-y-auto">
           {responses?.length === questions?.length &&
             questions?.map((question, index) => {
               return (

@@ -110,7 +110,7 @@ function SolutionPage() {
     <div className="container mx-auto px-8 w-screen h-screen">
       <Header />
       <div className="h-5/6 flex flex-col justify-between">
-        <div className="h-2/3 overflow-x-auto flex px-2 py-4">
+        <div className="h-1/2 overflow-x-auto flex px-2 py-4">
           {solutions?.map((solution) => {
             return (
               <Solution
